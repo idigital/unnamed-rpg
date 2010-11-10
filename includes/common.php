@@ -5,8 +5,8 @@
 */
 
 //  Define the project relative root, no trailing slash
-define ('relroot', '/websitesframework');
-define ('sitename', 'Site Name');
+define ('relroot', '/unnamedrpg');
+define ('sitename', 'Unnamed RPG');
 
 /**
 * Checks if there's a user currently logged in

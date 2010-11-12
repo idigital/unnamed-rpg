@@ -30,16 +30,18 @@ class Database {
 	* @return Resource mysqllink that can be used on queries
 	*/
 	private function connect () {
-		//  Connect to the server
-		$connection = mysql_connect ($this->server, $this->user, $this->password);
+		if (empty ($this->connection)) {
+			//  Connect to the server
+			$this->connection = mysql_connect ($this->server, $this->user, $this->password, false);
+			
+			//  If the connection is false, it means we couldn't connect for some reason. Since this is a database
+			//  driven site, we should do a fatal error, not just the warning that we usually get.
+			if ($this->connection === false) trigger_error ("Database connection could not be established", E_USER_ERROR);
+			
+			mysql_select_db ($this->database);
+		}
 		
-		//  If the connection is false, it means we couldn't connect for some reason. Since this is a database
-		//  driven site, we should do a fatal error, not just the warning that we usually get.
-		if ($connection === false) trigger_error ("Database connection could not be established", E_USER_ERROR);
-		
-		mysql_select_db ($this->database);
-		
-		return $connection;
+		return $this->connection;
 	}
 	
 	/**
@@ -52,7 +54,13 @@ class Database {
 	* @return Resource Can be passed to mysql_fetch_array, or whatever
 	*/
 	public function query ($sql) {
-		return mysql_query ($sql, $this->connect());
+		$return = @mysql_query ($sql, $this->connect());
+	
+		if (mysql_errno() !== 0) {
+			$this->SQLDebug ($sql);
+		}
+		
+		return $return;
 	}
 	
 	/**
@@ -78,12 +86,17 @@ class Database {
 	* @return mixed Whatever the result of the query is
 	*/
 	public function getSingleValue ($query) {
-		$tmp_value = mysql_fetch_row ($this->query ($query));
+		$tmp_value = @mysql_fetch_row ($this->query ($query));
+		
+		if (mysql_errno() !== 0) {
+			$this->SQLDebug ($query);
+		}
 		return $tmp_value[0];
 	}
 	
-	public function getLastInsertId () { return mysql_insert_id ($this->connect()); }
-	public function getLastId () { return $this->getLastInsertId(); }
+	public function getLastInsertId () { return mysql_insert_id ($this->connect());	}
+	public function getLastId () { return $this->getLastInsertId($this->connect()); }
+	public function affectedRows () { return mysql_affected_rows ($this->connect()); }
 
 	/**
 	* Echos the SQL given to it, and the error message it may have caused
@@ -94,10 +107,21 @@ class Database {
 	* @return void. It does echo though
 	*/
 	public function SQLDebug ($qry) {
-		echo "<p>The SQL query that was just run was: <b>".$qry."</b></p>\n";
+		// get the file and line information on where this error happened (experimental)
+		$debug = debug_backtrace ();
+
+		echo "<div class=\"error\"><p>An error occured on with your query. The query run was: <b>".$qry."</b><br /><br />\n";
 		// was there an error message?
 		$error_message = mysql_error ();
-		if (!empty ($error_message)) echo "<p>The error message we were given was: <b>".$error_message."</b>. Remember that that could be an old error message, from a previous query though.</p>\n";
+		if (!empty ($error_message)) echo "The error message we were given was: <b>".$error_message."</b>.<br /><br />\n";
+		
+		echo "Here's the error backtrace:</p>\n<ul>";
+		foreach ($debug as $error) {
+			echo "<li>".$error['file']." on ".$error['line']."</li>\n";
+		}
+		echo "</ul>\n";
+		
+		echo "</div>\n";
 	}
 }
 

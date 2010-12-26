@@ -4,10 +4,6 @@
 * Holds common functions that're used throughout this website
 */
 
-//  Define the project relative root, no trailing slash
-define ('relroot', '/unnamedrpg');
-define ('sitename', 'Unnamed RPG');
-
 /**
 * Checks if there's a user currently logged in
 *

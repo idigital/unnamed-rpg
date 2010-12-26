@@ -1,20 +1,19 @@
 <?php
 
 /**
-* Manages a user
+* Gets the data about the user's current map area
 */
 
-class User {
+class UserMap {
 	private $user_id = null, $Database;
 	
 	public function __construct ($user_id) {
 		//  We'll need a database.. Fortunately, constants stick around even inside private scope!
 		$this->Database = new Database (database_server, database_user, database_password, database_name);
-	
 		$this->user_id = (int) $user_id;
 		
 		// set all its attributes by nabbing them from the database
-		$data = mysql_fetch_assoc ($this->Database->query ("SELECT * FROM `user` WHERE `user_id` = ".$this->user_id));
+		$data = mysql_fetch_assoc ($this->Database->query ("SELECT * FROM `user_map` WHERE `user_id` = ".$this->user_id));
 		// if nothing was set (meaning nothing was found) then set a flag to say the item doesn't exist
 		$this->user_exists = true;
 		if (empty ($data)) {
@@ -25,20 +24,6 @@ class User {
 		}
 	}
 	
-	public function getUserId () { return $this->user_id; }	public function getId () { return $this->user_id; }
-	
-	/**
-	* Kind of lazy accessor. Give it an attribute name and it'll return what the database has. The properties list
-	* is kept in sync with the database so this function doesn't actually need to talk to the database each time.
-	*
-	* You should bare in mind thought that this type of caching can only be done where you're not expecting any data
-	* to change by concurrent users. If there's a single field that's likely to change, just add an exception and you'll
-	* still get the benefits of certain cached data.
-	*
-	* @param string Attribute name
-	* @return mixed Whatever the value of $detail is. If $detail isn't an attribute it'll return null, but null could
-	* 				also be a valid value
-	*/
 	public function getDetail ($detail) {
 		return $this->properties[$detail];
 	}
@@ -59,7 +44,7 @@ class User {
 		}
 	
 		// try update the database first. capture the result
-		$result = $this->getDatabase->query ("UPDATE `user` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `user_id` = ".$this->getId());
+		$result = $this->getDatabase()->query ("UPDATE `user_map` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `user_id` = ".$this->getId());
 		
 		// if the database updated well, then updated our local property
 		if ($result) $this->properties[$detail] = $value;
@@ -67,17 +52,11 @@ class User {
 		return $this;
 	}
 	
+	public function getId () { return $this->getDetail ('map_id'); }
+	public function getUser () { return new User ($this->getDetail ('user_id')); }
+	public function getX () { return $this->getDetail ('x_co'); }
+	public function getY () { return $this->getDetail ('y_co'); }
 	public function getDatabase () { return $this->Database; }
-	public function getMapData () { return new UserMap ($this->getId()); }
-	
-	/**
-	* Works out the stored version of the user's password
-	*
-	* @return String Encoded password
-	*/
-	public static function password_hash ($password) {
-		return md5 (md5 ($password));
-	}
 }
 
 ?>

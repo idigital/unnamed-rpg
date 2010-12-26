@@ -65,13 +65,8 @@ if ($moved) {
 }
 
 $ext_title = "The World";
+$ext_css[] = "map.css";
 require_once ('includes/header.php');
-echo "<h2>".$ext_title."</h2>\n";
-
-echo "<div id=\"mapnav\">\n";
-echo "<div class=\"right\"><p><img src=\"".relroot."/images/map_images/compass.png\" usemap=\"#navigation_image\" alt=\"Compass\"/></p></div>";
-echo "<map name=\"navigation_image\" id=\"navigation_image\">\n<area shape=\"poly\" coords=\"47,47,81,89,87,87,89,79\" href=\"?nw\" alt=\"North west\"/>\n<area shape=\"poly\" coords=\"1,99,87,109,84,99,83,90\" href=\"?left\" alt=\"West\" />\n<area shape=\"poly\" coords=\"49,148,95,113,88,111,81,109\" href=\"?sw\" alt=\"South west\" />\n<area shape=\"poly\" coords=\"100,195,108,111,91,117\" href=\"?down\" alt=\"South\" />\n<area shape=\"poly\" coords=\"149,149,113,103,108,116\" href=\"?se\" alt=\"South east\" />\n<area shape=\"poly\" coords=\"195,99,118,107,113,99,111,87\" href=\"?right\" alt=\"East\" />\n<area shape=\"poly\" coords=\"150,46,103,83,115,89\" href=\"?ne\" alt=\"North east\" />\n<area shape=\"poly\" coords=\"99,1,89,83,108,82\" href=\"?up\" alt=\"North\" />\n<area shape=\"poly\" coords=\"47,46,83,91,89,79\" href=\"?nw\" alt=\"North west\" />\n</map>\n";
-echo "</div>\n";
 
 // what range do we want to be showing the user? this is also the width and height of the map. Because
 // of that, it makes sense for it to be odd so that there's a centre point to the map, which we can put
@@ -154,6 +149,11 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 }
 
 echo "</table></div>\n</div>\n";
+
+echo "<div id=\"mapnav\">\n";
+echo "<div class=\"right\"><p><img src=\"".relroot."/images/map_images/compass.png\" usemap=\"#navigation_image\" alt=\"Compass\"/></p></div>";
+echo "<map name=\"navigation_image\" id=\"navigation_image\">\n<area shape=\"poly\" coords=\"47,47,81,89,87,87,89,79\" href=\"?nw\" alt=\"North west\"/>\n<area shape=\"poly\" coords=\"1,99,87,109,84,99,83,90\" href=\"?left\" alt=\"West\" />\n<area shape=\"poly\" coords=\"49,148,95,113,88,111,81,109\" href=\"?sw\" alt=\"South west\" />\n<area shape=\"poly\" coords=\"100,195,108,111,91,117\" href=\"?down\" alt=\"South\" />\n<area shape=\"poly\" coords=\"149,149,113,103,108,116\" href=\"?se\" alt=\"South east\" />\n<area shape=\"poly\" coords=\"195,99,118,107,113,99,111,87\" href=\"?right\" alt=\"East\" />\n<area shape=\"poly\" coords=\"150,46,103,83,115,89\" href=\"?ne\" alt=\"North east\" />\n<area shape=\"poly\" coords=\"99,1,89,83,108,82\" href=\"?up\" alt=\"North\" />\n<area shape=\"poly\" coords=\"47,46,83,91,89,79\" href=\"?nw\" alt=\"North west\" />\n</map>\n";
+echo "</div>\n";
 
 require_once ('includes/footer.php');
 ?>

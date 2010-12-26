@@ -5,6 +5,7 @@ if (isset ($ext_title)) echo $ext_title . " - ".sitename;
 echo "</title>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"".relroot."/styles/reset.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"".relroot."/styles/default.css\" />\n";
 if (is_array ($ext_css)) foreach ($ext_css as $css) echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"".relroot."/styles/".$css."\" />\n";
 
+echo "<script src=\"".relroot."/js/config.js\" type=\"text/javascript\"></script>\n";
 echo "<script src=\"".relroot."/js/jquery.js\" type=\"text/javascript\"></script>\n";
 if (is_array ($ext_js)) foreach ($ext_js as $js) echo "<script src=\"".$js."\" type=\"text/javascript\"></script>\n";
 

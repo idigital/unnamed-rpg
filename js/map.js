@@ -18,7 +18,10 @@ function move (direction) {
 function bindArrowKeys () {
 	$(window).keyup (function (e) {
 		var direction;
-		var code = e.keyCode || e.which;
+		// nab the key code rather than the charCode. We can't access charCode anyway in .keyup, but
+		// keyCode - which has a code for each key - is what we can't rather than an ascii value for
+		// each key (charCode)
+		var code = e.keyCode;
 
 		switch (code) {
 			case 72:

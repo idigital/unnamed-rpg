@@ -16,33 +16,33 @@ function move (direction) {
 }
 
 function bindArrowKeys () {
-	$(document).keypress (function (e) {
+	$(window).keyup (function (e) {
 		var direction;
 		var code = e.keyCode || e.which;
-		
+
 		switch (code) {
-			case 104:
+			case 72:
 				direction = "west";
 				break;
-			case 106:
+			case 74:
 				direction = "south";
 				break;
-			case 107:
+			case 75:
 				direction = "north";
 				break;
-			case 108:
+			case 76:
 				direction = "east";
 				break;
-			case 121:
+			case 89:
 				direction = "nw";
 				break;
-			case 117:
+			case 85:
 				direction = "ne";
 				break;
-			case 98:
+			case 66:
 				direction = "sw";
 				break;
-			case 110:
+			case 78:
 				direction = "se";
 				break;
 		}

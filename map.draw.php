@@ -2,6 +2,15 @@
 
 /**
 * Draws the map which is loaded with javascript. Also handles movement.
+*
+* Concept:
+* Each row in the map database is a coordinate of the world.
+*
+* `type`:
+*   1 - normal passable square
+*   2 - forest area
+*   4 - special square that can be entered. A URL to take the player to is in the map_special table
+*   5 - impassable square
 */
 
 define ('LOGIN', true);

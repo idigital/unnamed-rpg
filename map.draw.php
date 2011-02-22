@@ -123,7 +123,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 	// output image
 	echo "\t\t<td style=\"margin:0; background-color: #00FF01; border-style:none;\"><img src=\"".relroot."/images/map_images/".$image.".jpg\" ";
 	//  if this is a dev-serv, then show the map's coordinants
-	if (STATUS != LIVE) echo " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
+	if (STATUS != "LIVE") echo " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
 	echo "alt=\"Map square\" style=\" width: 40px; height: 40px; \" /></td>\n";
 
 	// add one to count

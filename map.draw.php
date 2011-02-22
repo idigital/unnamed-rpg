@@ -11,36 +11,36 @@ require_once ('includes/notextinc.php');
 $old_x = $User->getMapData()->getX();
 $old_y = $User->getMapData()->getY();
 // Sort out user directions
-if (isset ($_GET['left'])) {
+if ($_POST['move'] == "west") {
 	// work out new location
 	$new_x = $old_x - 1;
 	$new_y = $old_y;
 	$moved = 1;
-} elseif (isset ($_GET['right'])) {
+} elseif ($_POST['move'] == "east") {
 	$new_x = $old_x + 1;
 	$new_y = $old_y;
 	$moved = 1;
-} elseif (isset ($_GET['up'])) {
+} elseif ($_POST['move'] == "north") {
 	$new_x = $old_x;
 	$new_y = $old_y - 1;
 	$moved = 1;
-} elseif (isset ($_GET['down'])) {
+} elseif ($_POST['move'] == "south") {
 	$new_x = $old_x;
 	$new_y = $old_y + 1;
 	$moved = 1;
-} elseif (isset ($_GET['nw'])) {
+} elseif ($_POST['move'] == "nw") {
 	$new_x = $old_x - 1;
 	$new_y = $old_y - 1;
 	$moved = 1;
-} elseif (isset ($_GET['ne'])) {
+} elseif ($_POST['move'] == "ne") {
 	$new_x = $old_x + 1;
 	$new_y = $old_y - 1;
 	$moved = 1;
-} elseif (isset ($_GET['sw'])) {
+} elseif ($_POST['move'] == "sw") {
 	$new_x = $old_x - 1;
 	$new_y = $old_y + 1;
 	$moved = 1;
-} elseif (isset ($_GET['se'])) {
+} elseif ($_POST['move'] == "se") {
 	$new_x = $old_x + 1;
 	$new_y = $old_y + 1;
 	$moved = 1;

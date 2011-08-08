@@ -4,4 +4,10 @@
 
 #map {
 	float: left;
+	/*background-color: #8CDE21;*/
+}
+
+#map_table>div {
+	margin: -2px;
+	padding: 0px;
 }

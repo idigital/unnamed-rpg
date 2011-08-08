@@ -14,8 +14,8 @@ $ext_css[] = "map.css";
 $ext_js[] = relroot."/js/map.js";
 require_once ('includes/header.php');
 
-echo "<div id=\"map\"><div class=\"left\">\n<table cellpadding=\"0\" cellspacing=\"0\" id=\"map_table\">\n";
-echo "</table></div>\n</div>\n";
+echo "<div id=\"map\"><div class=\"left\">\n<div id=\"map_table\">\n";
+echo "</div>\n</div>\n";
 
 echo "<div id=\"mapnav\">\n";
 echo "</div>\n";

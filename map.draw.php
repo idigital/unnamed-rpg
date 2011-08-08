@@ -140,7 +140,7 @@ if ($y_largest > $map_y_max) {
 // nab all the coords that we've decided we can show on the map that the user is on
 $qry_mapgrid = $Database->query ("SELECT * FROM `map` WHERE `x_co` >= ".$x_smallest." AND `x_co` <= ".$x_largest." AND `y_co` >= ".$y_smallest." AND `y_co` <= ".$y_largest." AND `map_id` = ".$User->getMapData()->getId());
 
-$map_data_output = "\t\t<tr>\n";
+$map_data_output = "<div>";
 
 // draw map
 $in_row = 0; $rows = 0;
@@ -157,17 +157,17 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 		$image = $map_array['image'];
 	}
 
-	$map_data_output .= "\t\t\t<td style=\"margin:0; background-color: #8CDE21; border-style:none;\"><img src=\"".relroot."/images/map_images/".$image."\" ";
+	$map_data_output .= "<span><img src=\"".relroot."/images/map_images/".$image."\" ";
 	//  if this is a dev-serv then show the map's coordinants
 	if (STATUS != "LIVE") $map_data_output .= " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
-	$map_data_output .= "alt=\"Map square\" style=\" width: 40px; height: 40px; background-color: #8CDE21; \" /></td>\n";
+	$map_data_output .= "alt=\"Map square\" style=\"width: 40px; height: 40px; background-color: #8CDE21; \" /></span>";
 
 	// add one to count. this increases with each coord output so we know how many we've gone across the X axis.
 	$in_row++;
 
 	// check to see if it's time to drop down to a new row yet
 	if ($in_row > $map_los*2) {
-		$map_data_output .= "\t\t</tr>\n";
+		$map_data_output .= "</div>";
 		// set the X axis back to zero
 		$in_row = 0;
 		
@@ -175,7 +175,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 		$rows++;
 		
 		// if we've not just output the last row then we'll need to start another
-		if (($map_los*2)+1 != $rows) $map_data_output .= "\t\t<tr>\n";
+		if (($map_los*2)+1 != $rows) $map_data_output .= "<div>";
 	}
 }
 

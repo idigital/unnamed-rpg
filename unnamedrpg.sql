@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2011 at 01:03 PM
+-- Generation Time: Aug 08, 2011 at 01:08 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -3488,7 +3488,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (373, 1, 19, 13, 'grassland.gif', 1),
 (372, 1, 19, 12, 'grassland.gif', 1),
 (371, 1, 19, 11, 'grassland.gif', 1),
-(370, 1, 19, 10, 'treegrass.jpg', 2),
+(370, 1, 19, 10, 'forest.gif', 2),
 (369, 1, 19, 9, 'grassland.gif', 1),
 (368, 1, 19, 8, 'grassland.gif', 1),
 (367, 1, 19, 7, 'grassland.gif', 1),
@@ -3501,7 +3501,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (360, 1, 18, 20, 'grassland.gif', 1),
 (359, 1, 18, 19, 'grassland.gif', 1),
 (358, 1, 18, 18, 'grassland.gif', 1),
-(357, 1, 18, 17, 'treegrass.jpg', 2),
+(357, 1, 18, 17, 'forest.gif', 2),
 (356, 1, 18, 16, 'grassland.gif', 1),
 (355, 1, 18, 15, 'grassland.gif', 1),
 (354, 1, 18, 14, 'grassland.gif', 1),
@@ -3612,7 +3612,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (249, 1, 13, 9, 'grassland.gif', 1),
 (248, 1, 13, 8, 'grassland.gif', 1),
 (247, 1, 13, 7, 'grassland.gif', 1),
-(246, 1, 13, 6, 'treegrass.jpg', 1),
+(246, 1, 13, 6, 'forest.gif', 1),
 (245, 1, 13, 5, 'grassland.gif', 1),
 (244, 1, 13, 4, 'grassland.gif', 1),
 (243, 1, 13, 3, 'grassland.gif', 1),
@@ -3630,7 +3630,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (231, 1, 12, 11, 'grassland.gif', 1),
 (230, 1, 12, 10, 'grassland.gif', 1),
 (229, 1, 12, 9, 'grassland.gif', 1),
-(228, 1, 12, 8, 'treegrass.jpg', 1),
+(228, 1, 12, 8, 'forest.gif', 1),
 (227, 1, 12, 7, 'grassland.gif', 1),
 (226, 1, 12, 6, 'grassland.gif', 1),
 (225, 1, 12, 5, 'grassland.gif', 1),
@@ -3649,7 +3649,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (212, 1, 11, 12, 'grassland.gif', 1),
 (211, 1, 11, 11, 'grassland.gif', 1),
 (210, 1, 11, 10, 'grassland.gif', 1),
-(209, 1, 11, 9, 'treegrass.jpg', 2),
+(209, 1, 11, 9, 'forest.gif', 2),
 (208, 1, 11, 8, 'grassland.gif', 1),
 (207, 1, 11, 7, 'grassland.gif', 1),
 (206, 1, 11, 6, 'grassland.gif', 1),
@@ -3745,14 +3745,14 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (116, 1, 6, 16, 'grassland.gif', 1),
 (115, 1, 6, 15, 'grassland.gif', 1),
 (114, 1, 6, 14, 'grassland.gif', 1),
-(113, 1, 6, 13, 'treegrass.jpg', 1),
+(113, 1, 6, 13, 'forest.gif', 1),
 (112, 1, 6, 12, 'grassland.gif', 1),
 (111, 1, 6, 11, 'grassland.gif', 1),
 (110, 1, 6, 10, 'grassland.gif', 1),
 (109, 1, 6, 9, 'grassland.gif', 1),
 (108, 1, 6, 8, 'grassland.gif', 1),
-(107, 1, 6, 7, 'treegrass.jpg', 2),
-(106, 1, 6, 6, 'treegrass.jpg', 2),
+(107, 1, 6, 7, 'forest.gif', 2),
+(106, 1, 6, 6, 'forest.gif', 2),
 (105, 1, 6, 5, 'grassland.gif', 1),
 (104, 1, 6, 4, 'grassb.jpg', 1),
 (103, 1, 6, 3, 'grassland.gif', 1),
@@ -3771,8 +3771,8 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (90, 1, 5, 10, 'grassland.gif', 1),
 (89, 1, 5, 9, 'grassland.gif', 1),
 (88, 1, 5, 8, 'grassland.gif', 1),
-(87, 1, 5, 7, 'treegrass.jpg', 2),
-(86, 1, 5, 6, 'treegrass.jpg', 2),
+(87, 1, 5, 7, 'forest.gif', 2),
+(86, 1, 5, 6, 'forest.gif', 2),
 (85, 1, 5, 5, 'grassland.gif', 1),
 (84, 1, 5, 4, 'grassland.gif', 1),
 (83, 1, 5, 3, 'grassland.gif', 1),
@@ -3789,9 +3789,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (72, 1, 4, 12, 'grassland.gif', 1),
 (71, 1, 4, 11, 'grassland.gif', 1),
 (70, 1, 4, 10, 'grassland.gif', 1),
-(69, 1, 4, 9, 'treegrass.jpg', 2),
-(68, 1, 4, 8, 'treegrass.jpg', 2),
-(67, 1, 4, 7, 'treegrass.jpg', 2),
+(69, 1, 4, 9, 'forest.gif', 2),
+(68, 1, 4, 8, 'forest.gif', 2),
+(67, 1, 4, 7, 'forest.gif', 2),
 (66, 1, 4, 6, 'grassland.gif', 1),
 (65, 1, 4, 5, 'grassland.gif', 1),
 (64, 1, 4, 4, 'rock.jpg', 5),
@@ -3807,7 +3807,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (54, 1, 3, 14, 'grassland.gif', 1),
 (53, 1, 3, 13, 'grassland.gif', 1),
 (52, 1, 3, 12, 'grassland.gif', 1),
-(51, 1, 3, 11, 'treegrass.jpg', 2),
+(51, 1, 3, 11, 'forest.gif', 2),
 (50, 1, 3, 10, 'grassland.gif', 1),
 (49, 1, 3, 9, 'grassland.gif', 1),
 (48, 1, 3, 8, 'grassland.gif', 1),
@@ -3828,7 +3828,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (33, 1, 2, 13, 'grassland.gif', 1),
 (32, 1, 2, 12, 'grassland.gif', 1),
 (31, 1, 2, 11, 'grassland.gif', 1),
-(30, 1, 2, 10, 'treegrass.jpg', 2),
+(30, 1, 2, 10, 'forest.gif', 2),
 (29, 1, 2, 9, 'grassland.gif', 1),
 (28, 1, 2, 8, 'grassland.gif', 1),
 (27, 1, 2, 7, 'grassland.gif', 1),
@@ -4193,9 +4193,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (4148, 1, 42, 48, 'grassland.gif', 1),
 (4149, 1, 42, 49, 'grassland.gif', 1),
 (4150, 1, 42, 50, 'grassland.gif', 1),
-(4151, 1, 42, 51, 'grassland.gif', 1);
+(4151, 1, 42, 51, 'grassland.gif', 1),
+(4152, 1, 42, 52, 'grassland.gif', 1);
 INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
-(4152, 1, 42, 52, 'grassland.gif', 1),
 (4153, 1, 42, 53, 'grassland.gif', 1),
 (4154, 1, 42, 54, 'grassland.gif', 1),
 (4155, 1, 42, 55, 'grassland.gif', 1),
@@ -5557,9 +5557,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (5511, 1, 56, 11, 'grassland.gif', 1),
 (5512, 1, 56, 12, 'grassb.jpg', 1),
 (5513, 1, 56, 13, 'grassland.gif', 1),
-(5514, 1, 56, 14, 'grassland.gif', 1);
+(5514, 1, 56, 14, 'grassland.gif', 1),
+(5515, 1, 56, 15, 'grassb.jpg', 1);
 INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
-(5515, 1, 56, 15, 'grassb.jpg', 1),
 (5516, 1, 56, 16, 'grassb.jpg', 1),
 (5517, 1, 56, 17, 'grassland.gif', 1),
 (5518, 1, 56, 18, 'grassland.gif', 1),
@@ -6922,9 +6922,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (6875, 1, 69, 75, 'grassland.gif', 1),
 (6876, 1, 69, 76, 'grassland.gif', 1),
 (6877, 1, 69, 77, 'grassland.gif', 1),
-(6878, 1, 69, 78, 'grassland.gif', 1);
+(6878, 1, 69, 78, 'grassland.gif', 1),
+(6879, 1, 69, 79, 'grassland.gif', 1);
 INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
-(6879, 1, 69, 79, 'grassland.gif', 1),
 (6880, 1, 69, 80, 'grassland.gif', 1),
 (6881, 1, 69, 81, 'grassland.gif', 1),
 (6882, 1, 69, 82, 'grassland.gif', 1),
@@ -8288,9 +8288,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (8240, 1, 83, 40, 'grassland.gif', 1),
 (8241, 1, 83, 41, 'grassland.gif', 1),
 (8242, 1, 83, 42, 'grassland.gif', 1),
-(8243, 1, 83, 43, 'grassb.jpg', 1);
+(8243, 1, 83, 43, 'grassb.jpg', 1),
+(8244, 1, 83, 44, 'grassland.gif', 1);
 INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
-(8244, 1, 83, 44, 'grassland.gif', 1),
 (8245, 1, 83, 45, 'grassland.gif', 1),
 (8246, 1, 83, 46, 'grassland.gif', 1),
 (8247, 1, 83, 47, 'grassland.gif', 1),
@@ -9653,9 +9653,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (9604, 1, 97, 4, 'grassland.gif', 1),
 (9605, 1, 97, 5, 'grassland.gif', 1),
 (9606, 1, 97, 6, 'grassland.gif', 1),
-(9607, 1, 97, 7, 'grassland.gif', 1);
+(9607, 1, 97, 7, 'grassland.gif', 1),
+(9608, 1, 97, 8, 'grassland.gif', 1);
 INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
-(9608, 1, 97, 8, 'grassland.gif', 1),
 (9609, 1, 97, 9, 'grassland.gif', 1),
 (9610, 1, 97, 10, 'grassland.gif', 1),
 (9611, 1, 97, 11, 'grassland.gif', 1),

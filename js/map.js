@@ -15,6 +15,7 @@ function generateMap (direction) {
 	$.ajax ({
 		cache: false,
 		success: function (returned) {
+			console.log ("successful ajax call.");
 			$('#map_table').html ($('root>map_data', returned).html());
 			$('#map_nav').html ($('root>navigation_data', returned).html());
 		},

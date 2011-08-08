@@ -140,7 +140,12 @@ if ($y_largest > $map_y_max) {
 // nab all the coords that we've decided we can show on the map that the user is on
 $qry_mapgrid = $Database->query ("SELECT * FROM `map` WHERE `x_co` >= ".$x_smallest." AND `x_co` <= ".$x_largest." AND `y_co` >= ".$y_smallest." AND `y_co` <= ".$y_largest." AND `map_id` = ".$User->getMapData()->getId());
 
-$map_data_output = "<div>";
+// for the first row of the map, put the border around it
+$map_data_output = "<div><span><img src=\"".relroot."/images/map_images/brd_tl.gif\" /></span>";
+for ($i=0;$i <= ($map_los*2); $i++) $map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_t.gif\"></span>";
+$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_tr.gif\"></span></div>";
+
+$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_l.gif\"></span>";
 
 // draw map
 $in_row = 0; $rows = 0;
@@ -167,7 +172,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 
 	// check to see if it's time to drop down to a new row yet
 	if ($in_row > $map_los*2) {
-		$map_data_output .= "</div>";
+		$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_r.gif\"></span></div>";
 		// set the X axis back to zero
 		$in_row = 0;
 		
@@ -175,7 +180,13 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 		$rows++;
 		
 		// if we've not just output the last row then we'll need to start another
-		if (($map_los*2)+1 != $rows) $map_data_output .= "<div>";
+		if (($map_los*2)+1 != $rows) {
+			$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_l.gif\"></span>";
+		} else {
+			$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_bl.gif\"></span>";
+			for ($i=0;$i <= ($map_los*2); $i++) $map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_b.gif\"></span>";
+			$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_br.gif\"></span></div>";
+		}
 	}
 }
 

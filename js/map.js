@@ -16,7 +16,7 @@ function generateMap (direction) {
 		cache: false,
 		success: function (returned) {			
 			$('#map_table').html ($('root>map_data', returned).text());
-			$('#map_nav').html ($('root>navigation_data', returned).text());
+			$('#mapnav').html ($('root>navigation_data', returned).text());
 		},
 		data: { 'move': direction },
 		error: function (jqXHR, textStatus, errorthrown) {

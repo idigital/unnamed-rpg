@@ -193,10 +193,13 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 echo htmlspecialchars ($map_data_output);
 echo "\t</map_data>\n";
 
-// sometimes there are actions that can be done whilst the user is on this coordinate, like enter a special place or town,
-// or pick up an item lying on the floor, or talk to someone. (these special squares have the ID 4.)
 $nav_data_output = "";
 echo "\t<navigation_data>\n";
+
+$nav_data_output .= "<p>You are in ".$user_map_data['locality'].".</p>\n";
+
+// sometimes there are actions that can be done whilst the user is on this coordinate, like enter a special place or town,
+// or pick up an item lying on the floor, or talk to someone. (these special squares have the ID 4.)
 if ($user_map_data['type'] == 4) {
 	// get the special map data, which includes the text to output as the link, and the URL the link should take them to
 	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_map_data['grid_id']);

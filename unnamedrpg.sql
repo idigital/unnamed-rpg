@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 26, 2010 at 03:35 PM
+-- Generation Time: Feb 22, 2011 at 11:07 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -10050,6 +10050,26 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `map_special`
+--
+
+CREATE TABLE IF NOT EXISTS `map_special` (
+  `grid_id` int(11) NOT NULL,
+  `goto_uri` varchar(60) NOT NULL,
+  `goto_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`grid_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `map_special`
+--
+
+INSERT INTO `map_special` (`grid_id`, `goto_uri`, `goto_name`) VALUES
+(131, '/places/birth.php', 'Birth Village');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -10087,4 +10107,4 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`) VALUES
-(1, 1, 10, 6);
+(1, 1, 11, 7);

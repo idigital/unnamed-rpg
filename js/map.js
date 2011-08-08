@@ -1,10 +1,27 @@
 $(function () {
-	loadMap ();
+	generateMap ();
 	bindArrowKeys ();
 });
 
+/**
+* @deprecated
+*/
 function loadMap () {
 	$('#map_table').load (relroot+'/map.draw.php');
+	console.log ("don't use loadMap()");
+}
+
+function generateMap (direction) {
+	$.ajax ({
+		cache: false,
+		success: function (returned) {
+			$('#map_table').html ($('root>map_data', returned).html());
+			$('#map_nav').html ($('root>navigation_data', returned).html());
+		},
+		dataType: "xml",
+		type: "post",
+		url: relroot+'/map.draw.php'
+	});
 }
 
 /**
@@ -50,6 +67,6 @@ function bindArrowKeys () {
 				break;
 		}
 		
-		if (direction != null) move (direction);
+		if (direction != null) generateMap (direction);
 	});
 }

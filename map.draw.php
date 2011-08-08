@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Draws the map which is loaded with javascript. Also handles movement.
+* Ouputs XML document which draws the map which is loaded with javascript. Also handles movement.
 *
 * Concept:
 * Each row in the map database is a coordinate of the world.
@@ -11,6 +11,16 @@
 *   2 - forest area
 *   4 - special square that can be entered. A URL to take the player to is in the map_special table
 *   5 - impassable square
+*
+* It'll output a document like this
+<root>
+	<map_html>
+		<!-- new map data that can just be injected overtop the current map -->
+	</map_html>
+	<navigation_data>
+		<!-- html that's dropped overtop of the navigation section to the right of the map -->
+	</navigation_data>
+</root>
 */
 
 define ('LOGIN', true);
@@ -71,6 +81,10 @@ if ($moved) {
 	}
 }
 
+echo "<root>";
+
+echo "<map_data>";
+
 // what range do we want to be showing the user? this is also the width and height of the map. Because
 // of that, it makes sense for it to be odd so that there's a centre point to the map, which we can put
 // the user in.
@@ -124,6 +138,9 @@ $in_row = 0; $rows = 0;
 while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 	// get data for image
 	if ($User->getMapData()->getX() == $map_array['x_co'] AND $User->getMapData()->getY() == $map_array['y_co']) {
+		// this is the coord the user is on - this data will be helpful later on in the navigation_data
+		$user_map_data = $map_array;
+	
 		$image = "person";
 	} else {
 		$image = $map_array['image'];
@@ -141,13 +158,26 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 	// check how many in row
 	if ($in_row > $map_los*2) {
 		// close row, add one to row count
-		echo "\t</tr>\n";
+		echo "\t</tr>";
 		$rows++;
 
 		// if it isn't the last row, start a new row, and zero count
-		echo "\t<tr>\n";
+		echo "\t<tr>";
 		$in_row = 0;
 	}
 }
+
+echo "</map_data>";
+
+echo "<navigation_data>";
+if ($user_map_data['type'] == 4) {
+	// get the special map data
+	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_map_data['grid_id']);
+
+	echo "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>\n";
+}
+echo "</navigation_data>";
+
+echo "</root>\n";
 
 ?>

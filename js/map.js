@@ -14,13 +14,12 @@ function loadMap () {
 function generateMap (direction) {
 	$.ajax ({
 		cache: false,
-		success: function (returned) {
-			console.log ("successful ajax call.");
-			$('#map_table').html ($('root>map_data', returned).html());
-			$('#map_nav').html ($('root>navigation_data', returned).html());
+		success: function (returned) {			
+			$('#map_table').html ($('root>map_data', returned).text());
+			$('#map_nav').html ($('root>navigation_data', returned).text());
 		},
 		error: function (jqXHR, textStatus, errorthrown) {
-			console.log ("unsuccessful ajax call: "+textStatus+" - "+ errorthrown);
+			console.log ("unsuccessful ajax call whilst trying to generate map: "+textStatus+" - "+ errorthrown);
 		},
 		dataType: "xml",
 		type: "post",

@@ -88,6 +88,10 @@ if ($moved) {
 
 echo "<root>\n";
 
+// inside here needs to be HTML that looks like the map. HTML! Not XML nodes, so the HTML chars need to be escaped.
+// to keep the code looking pretty, and not litering it with &gt;'s and &lt;'s, we'll put all the output that's supposed
+// to be in this node into a variable, and then run it through and escape function later at the end.
+$map_data_output = "";
 echo "\t<map_data>\n";
 
 // what range do we want to be showing the user? this is also the width and height of the map. Because
@@ -136,7 +140,7 @@ if ($y_largest > $map_y_max) {
 // nab all the coords that we've decided we can show on the map that the user is on
 $qry_mapgrid = $Database->query ("SELECT * FROM `map` WHERE `x_co` >= ".$x_smallest." AND `x_co` <= ".$x_largest." AND `y_co` >= ".$y_smallest." AND `y_co` <= ".$y_largest." AND `map_id` = ".$User->getMapData()->getId());
 
-echo "\t\t<tr>\n";
+$map_data_output = "\t\t<tr>\n";
 
 // draw map
 $in_row = 0; $rows = 0;
@@ -153,41 +157,42 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 		$image = $map_array['image'];
 	}
 
-	echo "\t\t\t<td style=\"margin:0; background-color: #00FF01; border-style:none;\"><img src=\"".relroot."/images/map_images/".$image."\" ";
+	$map_data_output .= "\t\t\t<td style=\"margin:0; background-color: #00FF01; border-style:none;\"><img src=\"".relroot."/images/map_images/".$image."\" ";
 	//  if this is a dev-serv then show the map's coordinants
-	if (STATUS != "LIVE") echo " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
-	echo "alt=\"Map square\" style=\" width: 40px; height: 40px; background-color: #4e5545; \" /></td>\n";
+	if (STATUS != "LIVE") $map_data_output .= " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
+	$map_data_output .= "alt=\"Map square\" style=\" width: 40px; height: 40px; background-color: #4e5545; \" /></td>\n";
 
 	// add one to count. this increases with each coord output so we know how many we've gone across the X axis.
 	$in_row++;
 
 	// check to see if it's time to drop down to a new row yet
 	if ($in_row > $map_los*2) {
-		echo "\t\t</tr>\n";
+		$map_data_output .= "\t\t</tr>\n";
 		// set the X axis back to zero
 		$in_row = 0;
 		
 		// we need to count the number of rows we've output so far
 		$rows++;
 		
-		//echo "<!-- rows variable is currently set to: ".$rows." -->";
-		
 		// if we've not just output the last row then we'll need to start another
-		if (($map_los*2)+1 != $rows) echo "\t\t<tr>\n";
+		if (($map_los*2)+1 != $rows) $map_data_output .= "\t\t<tr>\n";
 	}
 }
 
+echo htmlspecialchars ($map_data_output);
 echo "\t</map_data>\n";
 
 // sometimes there are actions that can be done whilst the user is on this coordinate, like enter a special place or town,
 // or pick up an item lying on the floor, or talk to someone. (these special squares have the ID 4.)
+$nav_data_output = "";
 echo "\t<navigation_data>\n";
 if ($user_map_data['type'] == 4) {
 	// get the special map data, which includes the text to output as the link, and the URL the link should take them to
 	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_map_data['grid_id']);
 
-	echo "\t\t<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>\n";
+	$nav_data_output .= "\t\t<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>\n";
 }
+echo htmlspecialchars ($nav_data_output);
 echo "\t</navigation_data>\n";
 
 echo "</root>\n";

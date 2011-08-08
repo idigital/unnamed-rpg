@@ -98,7 +98,7 @@ echo "\t<map_data>\n";
 // of that, it makes sense for it to be odd so that there's a centre point to the map, which we can put
 // the user in.
 # for now, we can just set it in here. later I'll think about adding a better place to store this.
-$map_los = 5;
+$map_los = 3;
 
 // now we can work out what coordinates the user can see
 $x_smallest = $User->getMapData()->getX() - $map_los;

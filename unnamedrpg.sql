@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2011 at 03:28 PM
+-- Generation Time: Aug 08, 2011 at 09:40 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -3727,7 +3727,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`) VALUES
 (134, 1, 7, 14, 'grassland.gif', 1),
 (133, 1, 7, 13, 'grassland.gif', 1),
 (132, 1, 7, 12, 'grassland.gif', 1),
-(131, 1, 7, 11, 'spec_birth.jpg', 4),
+(131, 1, 7, 11, 'city.gif', 4),
 (130, 1, 7, 10, 'grassland.gif', 1),
 (129, 1, 7, 9, 'grassland.gif', 1),
 (128, 1, 7, 8, 'grassland.gif', 1),
@@ -10109,4 +10109,4 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`) VALUES
-(1, 1, 11, 8);
+(1, 1, 11, 7);

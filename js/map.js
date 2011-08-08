@@ -28,14 +28,6 @@ function generateMap (direction) {
 	});
 }
 
-/**
-* Triggered by an onclick, and also by the directional keys
-*/
-function move (direction) {
-	// reload the map...
-	$('#map_table').load (relroot+'/map.draw.php', { move: direction });
-}
-
 function bindArrowKeys () {
 	$(window).keyup (function (e) {
 		var direction;

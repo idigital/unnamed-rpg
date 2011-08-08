@@ -152,7 +152,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 		// this is the coord the user is on - this data will be helpful later on in the navigation_data
 		$user_map_data = $map_array;
 	
-		$image = "person.jpg";
+		$image = "lupe_".$map_array['image'];
 	} else {
 		$image = $map_array['image'];
 	}

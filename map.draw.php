@@ -135,43 +135,48 @@ echo "\t<tr>\n";
 
 // draw map
 $in_row = 0; $rows = 0;
+// loop through all the coords that we've been given. this data will include the image to show.
 while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
-	// get data for image
+	// if the user is on this square then we just want to show the user's avatar here. Otherwise just show the actual
+	// image that belongs to the coord.
 	if ($User->getMapData()->getX() == $map_array['x_co'] AND $User->getMapData()->getY() == $map_array['y_co']) {
 		// this is the coord the user is on - this data will be helpful later on in the navigation_data
 		$user_map_data = $map_array;
 	
-		$image = "person";
+		$image = "person.jpg";
 	} else {
 		$image = $map_array['image'];
 	}
 
-	// output image
 	echo "\t\t<td style=\"margin:0; background-color: #00FF01; border-style:none;\"><img src=\"".relroot."/images/map_images/".$image."\" ";
-	//  if this is a dev-serv, then show the map's coordinants
+	//  if this is a dev-serv then show the map's coordinants
 	if (STATUS != "LIVE") echo " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
-	echo "alt=\"Map square\" style=\" width: 40px; height: 40px; \" /></td>\n";
+	echo "alt=\"Map square\" style=\" width: 40px; height: 40px; background-color: #4e5545; \" /></td>\n";
 
-	// add one to count
+	// add one to count. this increases with each coord output so we know how many we've gone across the X axis.
 	$in_row++;
 
-	// check how many in row
+	// check to see if it's time to drop down to a new row yet
 	if ($in_row > $map_los*2) {
-		// close row, add one to row count
 		echo "\t</tr>";
-		$rows++;
-
-		// if it isn't the last row, start a new row, and zero count
-		echo "\t<tr>";
+		// set the X axis back to zero
 		$in_row = 0;
+		
+		// we need to count the number of rows we've output so far
+		$rows++;
+		
+		// if we've not just output the last row then we'll need to start another
+		if (($map_los*2) != $rows) echo "\t<tr>";
 	}
 }
 
 echo "</map_data>";
 
+// sometimes there are actions that can be done whilst the user is on this coordinate, like enter a special place or town,
+// or pick up an item lying on the floor, or talk to someone. (these special squares have the ID 4.)
 echo "<navigation_data>";
 if ($user_map_data['type'] == 4) {
-	// get the special map data
+	// get the special map data, which includes the text to output as the link, and the URL the link should take them to
 	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_map_data['grid_id']);
 
 	echo "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>\n";

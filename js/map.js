@@ -19,6 +19,9 @@ function generateMap (direction) {
 			$('#map_table').html ($('root>map_data', returned).html());
 			$('#map_nav').html ($('root>navigation_data', returned).html());
 		},
+		error: function (jqXHR, textStatus) {
+			console.log ("unsuccessful ajax call: "+textStatus);
+		},
 		dataType: "xml",
 		type: "post",
 		url: relroot+'/map.draw.php'

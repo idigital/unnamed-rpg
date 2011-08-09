@@ -56,7 +56,7 @@ foreach ($map_blocks as $image) {
 	echo "<option value=\"".$image."\">".$image."</option>\n";
 }
 echo "</select></p>\n";
-echo "<p><input type=\"button\" id=\"create_go\" value=\"Create and edit\" /></p>\n";
+echo "<p><input type=\"button\" id=\"create_go\" value=\"Create and edit\" onclick=\"createMap()\" /></p>\n";
 
 echo "</div>\n";
 

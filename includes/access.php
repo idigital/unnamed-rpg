@@ -54,4 +54,6 @@ if ((defined ('LOGIN') || isset ($_GET['login'])) && !is_logged ()) {
 	}
 }
 
+if (isset ($_SESSION['user'])) $User = $_SESSION['user'];
+
 ?>

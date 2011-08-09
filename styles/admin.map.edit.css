@@ -1,0 +1,21 @@
+#toolbox {
+	float: right;
+	width: 200px;
+	
+	border: 1px solid black;
+	padding: 2px;
+}
+
+#blocks {
+	margin: 0 auto;
+	width: 190px;
+}
+
+#blocks>li {
+	list-style-type: none;
+	display: inline;
+}
+
+#blocks>li>img.selected {
+	border: 1px dashed red;
+}

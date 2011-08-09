@@ -19,7 +19,29 @@ $ext_css[] = "admin.map.edit.css";
 $ext_js[] = relroot."/js/admin.map.edit.js";
 include_once ('../includes/header.php');
 
-echo "<div id=\"toolbox\">\n";
+// the first thing the user should see is this div, which will give them options to load a map, or create a new one.
+echo "<div id=\"dashboard\">\n";
+
+echo "<h1>Load map</h1>\n";
+echo "<p>Be aware that there's no staging area for maps just yet. Any changes you make will be live immediately.</p>\n";
+// make list of maps
+$qry_maps = $Database->query ("SELECT * FROM `map_data`");
+if (mysql_num_rows ($qry_maps)) {
+	echo "<p>Which map do you want to edit? <select name=\"map_id_edit\">\n";
+	while ($map = mysql_fetch_assoc ($qry_maps)) {
+		echo "<option value=\"".$map['map_id']."\">".$map['map_name']."</option>\n";
+	}
+	echo "</select> <input type=\"button\" value=\"Load\" /></p>\n";
+} else {
+	echo "<p>You've no maps yet. Create one with the tools below.</p>\n";
+}
+
+echo "</div>\n";
+
+echo "<div id=\"canvas\">\n";
+echo "</div>\n";
+
+echo "<div id=\"toolbox\" style=\"display:none;\">\n";
 echo "<h1>Tools</h1>\n";
 
 echo "<h2>Select block</h2>\n";

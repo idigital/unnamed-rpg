@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2011 at 10:55 PM
+-- Generation Time: Aug 09, 2011 at 11:49 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -10058,6 +10058,25 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `map_data`
+--
+
+CREATE TABLE IF NOT EXISTS `map_data` (
+  `map_id` int(11) NOT NULL AUTO_INCREMENT,
+  `map_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`map_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `map_data`
+--
+
+INSERT INTO `map_data` (`map_id`, `map_name`) VALUES
+(1, 'Test World');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `map_special`
 --
 
@@ -10085,6 +10104,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) NOT NULL,
   `password` char(32) NOT NULL,
+  `role` enum('player','admin') NOT NULL DEFAULT 'player',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -10093,8 +10113,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
-(1, 'shamess', 'd7daa3fda44b795442405b431ed14883');
+INSERT INTO `user` (`user_id`, `username`, `password`, `role`) VALUES
+(1, 'shamess', 'd7daa3fda44b795442405b431ed14883', 'admin');
 
 -- --------------------------------------------------------
 

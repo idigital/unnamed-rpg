@@ -19,6 +19,18 @@ $ext_css[] = "admin.map.edit.css";
 $ext_js[] = relroot."/js/admin.map.edit.js";
 include_once ('../includes/header.php');
 
+// go through each of the images that are in the images/map_images/ folder. This list is needed for a 
+// few places around this script
+$map_images = scandir ('../images/map_images/');
+foreach ($map_images as $image) {
+	if ($image == '.' || $image == '..') continue;
+	// Valid blocks are all 40x40px
+	$image_sizes = getimagesize ('../images/map_images/'.$image);
+	if ($image_sizes[0] != 40 || $image_sizes[1] != 40) continue;
+	
+	$map_blocks[] = $image;
+}
+
 // the first thing the user should see is this div, which will give them options to load a map, or create a new one.
 echo "<div id=\"dashboard\">\n";
 
@@ -36,6 +48,16 @@ if (mysql_num_rows ($qry_maps)) {
 	echo "<p>You've no maps yet. Create one with the tools below.</p>\n";
 }
 
+echo "<h1>Create map</h1>\n";
+echo "<p>Area name: <input type=\"text\" id=\"create_name\" /></p>\n";
+echo "<p>Height: <input type=\"text\" id=\"create_height\" /> Width: <input type=\"text\" id=\"create_width\" /></p>\n";
+echo "<p>Default block to fill with? <select id=\"create_default\">\n";
+foreach ($map_blocks as $image) {
+	echo "<option value=\"".$image."\">".$image."</option>\n";
+}
+echo "</select></p>\n";
+echo "<p><input type=\"button\" id=\"create_go\" value=\"Create and edit\" /></p>\n";
+
 echo "</div>\n";
 
 echo "<div id=\"canvas\">\n";
@@ -46,16 +68,9 @@ echo "<h1>Tools</h1>\n";
 
 echo "<h2>Select block</h2>\n";
 
-// go through each of the images that are in the images/map_images/ folder, and output them to be selected
-$map_images = scandir ('../images/map_images/');
-
 echo "<ul id=\"blocks\">\n";
-foreach ($map_images as $image) {
-	if ($image == '.' || $image == '..') continue;
-	// Valid blocks are all 40x40px
-	$image_sizes = getimagesize ('../images/map_images/'.$image);
-	if ($image_sizes[0] != 40 || $image_sizes[1] != 40) continue;
-	
+
+foreach ($map_blocks as $image) {
 	echo "<li><img src=\"".relroot."/images/map_images/".$image."\"/></li>\n";
 }
 echo "</ul>\n";

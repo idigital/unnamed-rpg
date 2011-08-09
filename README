@@ -34,3 +34,12 @@ game.
 
 Of course, you *MUST* remove all Neopets related assets before you can even run a free game. That means
 every image and piece of user-facing text that is in this repository.
+
+Some minimum requirements:
+
+Server:
+* MySQL (any version)
+* PHP 5
+
+Client:
+* Same as jQuery's support ( http://docs.jquery.com/Browser_compatibility )

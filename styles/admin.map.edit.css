@@ -1,3 +1,7 @@
+#container {
+	width: 800px;
+}
+
 #toolbox {
 	float: right;
 	width: 200px;

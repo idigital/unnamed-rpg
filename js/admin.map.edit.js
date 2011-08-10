@@ -2,11 +2,20 @@ $(function () {
 	$('#blocks>li>img').click (selectBlock);
 });
 
+/**
+* Changes the block type that the user will 'paint' with.
+*
+* This is done simply by setting the .selected class. You can get the selected block by checking
+* which image has that class - there will only ever be one.
+*/
 function selectBlock () {
 	$('#blocks>li>img').removeClass ('selected');
 	$(this).addClass ('selected');
 }
 
+/**
+* Using the details in the 'Create Map' form, creates a map by sending the data to a script.
+*/
 function createMap () {
 	// check that the form validates first. we need a name, and the height and width.
 	if ($('#create_name').val () == "" || parseInt ($('#create_width').val(), 10) <= 0 || parseInt ($('#create_height').val(), 10) <= 0) {
@@ -28,6 +37,7 @@ function createMap () {
 		success: function (returned) {
 			if (returned['status'] == "complete") {
 				alert ("Map created!");
+				loadMap (returned['map_id']);
 			} else if (returned['status'] == "missing para") {
 				alert ("Some required data was missing.");
 			} else if (returned['status'] == "no auth") {
@@ -39,5 +49,34 @@ function createMap () {
 		dataType: "json",
 		type: "post",
 		url: relroot+'/admin/map.create.php'
+	});
+}
+
+/**
+* Sets up and populates the UI for the map editor.
+*/
+function loadEditor (map_id) {
+	$('#dashboard').hide ();
+	$('#map_editor').show ();
+	
+	// get some data about the map, including it's name, and coord information
+	$.ajax ({
+		cache: false,
+		data: {
+			'map_id': map_id
+		},
+		error: function (jqXHR, textStatus, errorthrown) {
+			console.log ("unsuccessful ajax call whilst trying to create map: "+textStatus+" - "+ errorthrown);
+		},
+		success: function (returned) {
+			if (returned['status'] == 200) {
+				$('#map_editor>h1').html ('Editing '+returned['map_data']['map_name']);
+			} else {
+				console.log ("errored, with "+returned['status']);
+			}
+		},
+		dataType: 'json',
+		type: 'post',
+		url: relroot+'/admin/map.load.php'
 	});
 }

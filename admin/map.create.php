@@ -41,6 +41,7 @@ for ($x=0;$x<(int)$_POST['width'];$x++) {
 }
 
 $return['status'] = "complete";
+$return['map_id'] = $map_id;
 
 echo json_encode ($return);
 

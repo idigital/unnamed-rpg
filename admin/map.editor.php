@@ -60,10 +60,9 @@ echo "<p><input type=\"button\" id=\"create_go\" value=\"Create and edit\" oncli
 
 echo "</div>\n";
 
-echo "<div id=\"canvas\">\n";
-echo "</div>\n";
+echo "<div id=\"map_editor\" style=\"display:none;\">\n";
 
-echo "<div id=\"toolbox\" style=\"display:none;\">\n";
+echo "<div id=\"toolbox\">\n";
 echo "<h1>Tools</h1>\n";
 
 echo "<h2>Select block</h2>\n";
@@ -74,6 +73,12 @@ foreach ($map_blocks as $image) {
 	echo "<li><img src=\"".relroot."/images/map_images/".$image."\"/></li>\n";
 }
 echo "</ul>\n";
+
+echo "</div>\n";
+
+echo "<h1></h1>\n";
+echo "<div id=\"canvas\">\n";
+echo "</div>\n";
 
 echo "</div>\n";
 

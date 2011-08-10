@@ -74,6 +74,10 @@ foreach ($map_blocks as $image) {
 }
 echo "</ul>\n";
 
+echo "<h2>Refine Map Coords</h2>\n";
+echo "<p>Load from X coord <input type=\"text\" id=\"refine_x_from\" style=\"width:30px;\" />, and only <input type=\"text\" id=\"refine_x_num\" style=\"width: 30px;\" /> columns.</p>\n";
+echo "<p>Load from Y coord <input type=\"text\" id=\"refine_y_from\" style=\"width:30px;\" />, and only <input type=\"text\" id=\"refine_y_num\" style=\"width: 30px;\" /> rows.</p>\n";
+
 echo "</div>\n";
 
 echo "<h1></h1>\n";

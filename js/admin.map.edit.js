@@ -63,7 +63,11 @@ function loadEditor (map_id) {
 	$.ajax ({
 		cache: false,
 		data: {
-			'map_id': map_id
+			'map_id': map_id,
+			'refine_x_from': ($('#refine_x_from').val()) ? $('#refine_x_from').val() : -99999,
+			'refine_x_num': ($('#refine_x_num').val()) ? $('#refine_x_num').val() : -99999,
+			'refine_y_from': ($('#refine_y_from').val()) ? $('#refine_y_from').val() : -99999,
+			'refine_y_num': ($('#refine_y_num').val()) ? $('#refine_y_num').val() : -99999,
 		},
 		error: function (jqXHR, textStatus, errorthrown) {
 			console.log ("unsuccessful ajax call whilst trying to create map: "+textStatus+" - "+ errorthrown);
@@ -71,6 +75,11 @@ function loadEditor (map_id) {
 		success: function (returned) {
 			if (returned['status'] == 200) {
 				$('#map_editor>h1').html ('Editing '+returned['map_data']['map_name']);
+				
+				$('#refine_x_from').val (returned['refine']['x']['from']);
+				$('#refine_y_from').val (returned['refine']['y']['from']);
+				$('#refine_x_num').val (returned['refine']['x']['num']);
+				$('#refine_y_num').val (returned['refine']['y']['num']);
 			} else {
 				console.log ("errored, with "+returned['status']);
 			}

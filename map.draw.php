@@ -141,11 +141,11 @@ if ($y_largest > $map_y_max) {
 $qry_mapgrid = $Database->query ("SELECT * FROM `map` WHERE `x_co` >= ".$x_smallest." AND `x_co` <= ".$x_largest." AND `y_co` >= ".$y_smallest." AND `y_co` <= ".$y_largest." AND `map_id` = ".$User->getMapData()->getId());
 
 // for the first row of the map, put the border around it
-$map_data_output = "<div><span><img src=\"".relroot."/images/map_images/brd_tl.gif\" /></span>";
-for ($i=0;$i <= ($map_los*2); $i++) $map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_t.gif\"></span>";
-$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_tr.gif\"></span></div>";
+$map_data_output = "<div><span><img src=\"".relroot."/images/map_images/brd_tl.gif\"/></span>";
+for ($i=0;$i <= ($map_los*2); $i++) $map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_t.gif\"/></span>";
+$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_tr.gif\"/></span></div>";
 
-$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_l.gif\"></span>";
+$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_l.gif\"/></span>";
 
 // draw map
 $in_row = 0; $rows = 0;
@@ -165,14 +165,14 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 	$map_data_output .= "<span><img src=\"".relroot."/images/map_images/".$image."\" ";
 	//  if this is a dev-serv then show the map's coordinants
 	if (STATUS != "LIVE") $map_data_output .= " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
-	$map_data_output .= "alt=\"Map square\" style=\"width: 40px; height: 40px; background-color: #8CDE21; \" /></span>";
+	$map_data_output .= "alt=\"Map square\"/></span>";
 
 	// add one to count. this increases with each coord output so we know how many we've gone across the X axis.
 	$in_row++;
 
 	// check to see if it's time to drop down to a new row yet
 	if ($in_row > $map_los*2) {
-		$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_r.gif\"></span></div>";
+		$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_r.gif\"/></span></div>";
 		// set the X axis back to zero
 		$in_row = 0;
 		
@@ -181,11 +181,11 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 		
 		// if we've not just output the last row then we'll need to start another
 		if (($map_los*2)+1 != $rows) {
-			$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_l.gif\"></span>";
+			$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_l.gif\"/></span>";
 		} else {
-			$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_bl.gif\"></span>";
-			for ($i=0;$i <= ($map_los*2); $i++) $map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_b.gif\"></span>";
-			$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_br.gif\"></span></div>";
+			$map_data_output .= "<div><span><img src=\"".relroot."/images/map_images/brd_bl.gif\"/></span>";
+			for ($i=0;$i <= ($map_los*2); $i++) $map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_b.gif\"/></span>";
+			$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_br.gif\"/></span></div>";
 		}
 	}
 }
@@ -196,7 +196,7 @@ echo "\t</map_data>\n";
 $nav_data_output = "";
 echo "\t<navigation_data>\n";
 
-$nav_data_output .= "<p>You are in ".$user_map_data['locality'].".</p>\n";
+$nav_data_output .= "<p>You are in ".$user_map_data['locality'].".</p>";
 
 // sometimes there are actions that can be done whilst the user is on this coordinate, like enter a special place or town,
 // or pick up an item lying on the floor, or talk to someone. (these special squares have the ID 4.)
@@ -204,7 +204,7 @@ if ($user_map_data['type'] == 4) {
 	// get the special map data, which includes the text to output as the link, and the URL the link should take them to
 	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_map_data['grid_id']);
 
-	$nav_data_output .= "\t\t<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>\n";
+	$nav_data_output .= "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>";
 }
 echo htmlspecialchars ($nav_data_output);
 echo "\t</navigation_data>\n";

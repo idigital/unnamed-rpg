@@ -32,6 +32,8 @@ function createMap () {
 				alert ("Some required data was missing.");
 			} else if (returned['status'] == "no auth") {
 				alert ("Need to be an admin to use this script.");
+			} else {
+				alert ("Unknown response from creation script.");
 			}
 		},
 		dataType: "json",

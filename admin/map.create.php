@@ -30,17 +30,17 @@ if (is_empty ($_POST['name'], $_POST['width'], $_POST['height'], $_POST['image']
 	exit;
 }
 
-$Database->query ("INSERT INTO `map_data` SET `name` = '".$Database->escape ($_POST['name'])."'");
+$Database->query ("INSERT INTO `map_data` SET `map_name` = '".$Database->escape ($_POST['name'])."'");
 $map_id = $Database->getLastId ();
 
 // add each coord
-for ($x=0;$x<$width;$x++) {
-	for ($y=0;$y<$height;$y++) {
+for ($x=0;$x<(int)$_POST['width'];$x++) {
+	for ($y=0;$y<(int)$_POST['height'];$y++) {
 		$Database->query ("INSERT INTO `map` SET `x_co` = ".$x.", `y_co` = ".$y.", `image` = '".$Database->escape ($_POST['image'])."', `map_id` = ".$map_id.", `locality` = '".$Database->escape ($_POST['name'])."', `type` = 1");
 	}
 }
 
-$return['status'] == "complete";
+$return['status'] = "complete";
 
 echo json_encode ($return);
 

@@ -23,3 +23,8 @@
 #blocks>li>img.selected {
 	border: 1px dashed red;
 }
+
+#canvas {
+	width: 590px;
+	overflow: auto;
+}

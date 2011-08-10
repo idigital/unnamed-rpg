@@ -73,6 +73,7 @@ function loadEditor (map_id) {
 			console.log ("unsuccessful ajax call whilst trying to create map: "+textStatus+" - "+ errorthrown);
 		},
 		success: function (returned) {
+			console.log (returned);
 			if (returned['status'] == 200) {
 				$('#map_editor>h1').html ('Editing '+returned['map_data']['map_name']);
 				
@@ -80,6 +81,17 @@ function loadEditor (map_id) {
 				$('#refine_y_from').val (returned['refine']['y']['from']);
 				$('#refine_x_num').val (returned['refine']['x']['num']);
 				$('#refine_y_num').val (returned['refine']['y']['num']);
+				
+				var canvasText = "";
+				
+				// now we need to output all the coords to the #canvas
+				for (x=returned['refine']['x']['from'];x<(returned['refine']['x']['num']+returned['refine']['x']['from']);x++) {
+					canvasText += "<div>";
+					for (y=returned['refine']['y']['from'];y<(returned['refine']['y']['num']+returned['refine']['y']['from']);y++) {
+						canvasText += "<span><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+" /></span>";
+					}
+					canvasText += "</div>";
+				}
 			} else {
 				console.log ("errored, with "+returned['status']);
 			}

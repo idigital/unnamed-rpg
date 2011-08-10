@@ -44,7 +44,7 @@ class UserMap {
 		}
 	
 		// try update the database first. capture the result
-		$result = $this->getDatabase()->query ("UPDATE `user_map` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `user_id` = ".$this->getId());
+		$result = $this->getDatabase()->query ("UPDATE `user_map` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `user_id` = ".$this->getUser()->getId());
 		
 		// if the database updated well, then updated our local property
 		if ($result) $this->properties[$detail] = $value;

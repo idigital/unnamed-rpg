@@ -75,8 +75,8 @@ if ($_POST['refine_y_num'] == -99999) {
 
 // pass back the refine data so that it can populate the form there
 $return['refine'] = array (
-	'x' => array ('from' => $_POST['refine_x_from'], 'num' => $_POST['refine_x_num']),
-	'y' => array ('from' => $_POST['refine_y_from'], 'num' => $_POST['refine_y_num'])
+	'x' => array ('from' => (int) $_POST['refine_x_from'], 'num' => (int) $_POST['refine_x_num']),
+	'y' => array ('from' => (int) $_POST['refine_y_from'], 'num' => (int) $_POST['refine_y_num'])
 );
 
 // the current number (say 1 for the first coord) plus the _num (say 50) will give us one to many if we just add them on

@@ -86,8 +86,13 @@ function loadEditor (map_id) {
 				
 				// now we need to output all the coords to the #canvas
 				for (x=returned['refine']['x']['from'];x<(returned['refine']['x']['num']+returned['refine']['x']['from']);x++) {
+					// check if we've actually been given this coord (we may have requested ['num'], but there's only ['num']-1 to display)
+					if (undefined == returned['coords'][x]) continue;
+					
 					canvasText += "<div>";
 					for (y=returned['refine']['y']['from'];y<(returned['refine']['y']['num']+returned['refine']['y']['from']);y++) {
+						if (undefined == returned['coords'][x][y]) continue;
+						
 						canvasText += "<span><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+"\" title=\""+x+":"+y+"\" /></span>";
 					}
 					canvasText += "</div>";

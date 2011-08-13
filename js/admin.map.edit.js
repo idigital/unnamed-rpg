@@ -85,17 +85,18 @@ function loadEditor (map_id) {
 				var canvasText = "";
 				
 				// now we need to output all the coords to the #canvas
-				console.log ((returned['refine']['x']['num']+returned['refine']['x']['from']));
 				for (x=returned['refine']['x']['from'];x<(returned['refine']['x']['num']+returned['refine']['x']['from']);x++) {
 					canvasText += "<div>";
 					for (y=returned['refine']['y']['from'];y<(returned['refine']['y']['num']+returned['refine']['y']['from']);y++) {
-						canvasText += "<span><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+"\" /></span>";
+						canvasText += "<span><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+"\" title=\""+x+":"+y+"\" /></span>";
 					}
 					canvasText += "</div>";
 				}
 				
 				// now append it to the canvas area
 				$('#canvas').html (canvasText);
+				
+				$('#canvas>div').css ('min-width', returned['refine']['x']['num']*40);
 			} else {
 				console.log ("errored, with "+returned['status']);
 			}

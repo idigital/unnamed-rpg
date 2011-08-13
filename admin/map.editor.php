@@ -77,6 +77,12 @@ echo "</ul>\n";
 echo "<h2>Refine Map Coords</h2>\n";
 echo "<p>Load from X coord <input type=\"text\" id=\"refine_x_from\" style=\"width:30px;\" />, and only <input type=\"text\" id=\"refine_x_num\" style=\"width: 30px;\" /> columns.</p>\n";
 echo "<p>Load from Y coord <input type=\"text\" id=\"refine_y_from\" style=\"width:30px;\" />, and only <input type=\"text\" id=\"refine_y_num\" style=\"width: 30px;\" /> rows.</p>\n";
+echo "<p style=\"text-align:right;\">Map: <select id=\"map_id\">";
+$qry_maps = $Database->query ("SELECT * FROM `map_data`");
+while ($map = mysql_fetch_assoc ($qry_maps)) {
+	echo "<option value=\"".$map['map_id']."\">".$map['map_name']."</option>\n";
+}
+echo "</select> <input type=\"button\" value=\"Load editor\" onclick=\"loadEditor ($('#map_id').val())\" /></p>\n";
 
 echo "</div>\n";
 

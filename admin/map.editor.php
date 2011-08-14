@@ -70,9 +70,15 @@ echo "<h2>Select block</h2>\n";
 echo "<ul id=\"blocks\">\n";
 
 foreach ($map_blocks as $image) {
-	echo "<li><img src=\"".relroot."/images/map_images/".$image."\"/></li>\n";
-}
+	echo "<li><img src=\"".relroot."/images/map_images/".$image."\"";
+	if (!isset ($firstRun)) { echo " class=\"selected\""; $firstRun = true; }
+	echo "/></li>\n";
+} unset ($firstRun);
 echo "</ul>\n";
+
+echo "<h2>Block options</h2>\n";
+echo "<p><select id=\"block_type\"><option value=\"\">Passable</option><option value=\"\">Impassable</option></select></p>\n";
+echo "<p>Locality text: <input type=\"text\" id=\"block_locality\" style=\"width: 50px;\" /></p>\n";
 
 echo "<h2>Refine Map Coords</h2>\n";
 echo "<p>Load from X coord <input type=\"text\" id=\"refine_x_from\" style=\"width:30px;\" />, and only <input type=\"text\" id=\"refine_x_num\" style=\"width: 30px;\" /> columns.</p>\n";

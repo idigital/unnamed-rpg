@@ -39,11 +39,11 @@ echo "<p>Be aware that there's no staging area for maps just yet. Any changes yo
 // make list of maps
 $qry_maps = $Database->query ("SELECT * FROM `map_data`");
 if (mysql_num_rows ($qry_maps)) {
-	echo "<p>Which map do you want to edit? <select name=\"map_id_edit\">\n";
+	echo "<p>Which map do you want to edit? <select id=\"map_id_edit\">\n";
 	while ($map = mysql_fetch_assoc ($qry_maps)) {
 		echo "<option value=\"".$map['map_id']."\">".$map['map_name']."</option>\n";
 	}
-	echo "</select> <input type=\"button\" value=\"Load\" /></p>\n";
+	echo "</select> <input type=\"button\" value=\"Load\" onclick=\"loadEditor ($('#map_id_edit').val())\" /></p>\n";
 } else {
 	echo "<p>You've no maps yet. Create one with the tools below.</p>\n";
 }
@@ -77,7 +77,7 @@ foreach ($map_blocks as $image) {
 echo "</ul>\n";
 
 echo "<h2>Block options</h2>\n";
-echo "<p><select id=\"block_type\"><option value=\"\">Passable</option><option value=\"\">Impassable</option></select></p>\n";
+echo "<p><select id=\"block_type\"><option value=\"1\">Passable</option><option value=\"5\">Impassable</option></select></p>\n";
 echo "<p>Locality text: <input type=\"text\" id=\"block_locality\" style=\"width: 50px;\" /></p>\n";
 
 echo "<h2>Refine Map Coords</h2>\n";

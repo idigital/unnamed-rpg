@@ -117,6 +117,8 @@ function handleClickCanvasBlock () {
 	x = coords[0];
 	y = coords[1];
 	
+	me = this;
+	
 	// send the ajax to update this coord!
 	$.ajax ({
 		data: {
@@ -131,7 +133,9 @@ function handleClickCanvasBlock () {
 			console.log ("unsuccessful ajax call whilst trying to create map: "+textStatus+" - "+ errorthrown);
 		},
 		success: function (returned) {
-			
+			if (returned['status'] == 200) {
+				$(me).children ('img').attr ('src', $('#blocks .selected').attr ('src'));
+			}
 		},
 		dataType: 'json',
 		type: 'post',

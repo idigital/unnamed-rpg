@@ -31,7 +31,7 @@ if (!is_numeric ($_POST['map_id']) || !is_numeric ($_POST['x']) || !is_numeric (
 	exit;
 }
 
-$return['qry_result'] = (bool) $Database->query ("UPDATE `map` SET `image` = '".$Databse->escape ($_POST['image'])."', `locality` = '".$Database->escape ($_POST['locality'])."' WHERE `x_co` = ".(int) $_POST['x']." AND `y_co` = ".(int) $_POST['y']." AND `map_id` = ".$_POST['map_id']);
+$return['qry_result'] = (bool) $Database->query ("UPDATE `map` SET `image` = '".$Database->escape ($_POST['image'])."', `locality` = '".$Database->escape ($_POST['locality'])."', `type` = ".(int) $_POST['type']." WHERE `x_co` = ".(int) $_POST['x']." AND `y_co` = ".(int) $_POST['y']." AND `map_id` = ".$_POST['map_id']);
 $return['status'] = 200;
 
 echo json_encode ($return);

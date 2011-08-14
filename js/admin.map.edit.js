@@ -73,7 +73,6 @@ function loadEditor (map_id) {
 			console.log ("unsuccessful ajax call whilst trying to create map: "+textStatus+" - "+ errorthrown);
 		},
 		success: function (returned) {
-			console.log (returned);
 			if (returned['status'] == 200) {
 				$('#map_editor>h1').html ('Editing '+returned['map_data']['map_name']);
 				
@@ -101,7 +100,7 @@ function loadEditor (map_id) {
 				// now append it to the canvas area
 				$('#canvas').html (canvasText);
 				
-				$('#canvas>div').css ('min-width', returned['refine']['x']['num']*40);
+				$('#canvas>div').css ('min-width', returned['map_data']['num_columns']*40);
 			} else {
 				console.log ("errored, with "+returned['status']);
 			}

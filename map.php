@@ -14,6 +14,10 @@ $ext_css[] = "map.css";
 $ext_js[] = relroot."/js/map.js";
 require_once ('includes/header.php');
 
+echo "<div id=\"character_data\">\n";
+echo "<p>Name: <strong>".$User->getDetail ('username')."</strong></p>\n";
+echo "</div>\n";
+
 echo "<div id=\"map\"><div>\n<div id=\"map_table\">\n";
 echo "</div>\n</div>\n";
 

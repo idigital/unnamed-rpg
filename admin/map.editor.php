@@ -70,7 +70,7 @@ echo "<h2>Select block</h2>\n";
 echo "<ul id=\"blocks\">\n";
 
 foreach ($map_blocks as $image) {
-	echo "<li><img src=\"".relroot."/images/map_images/".$image."\"";
+	echo "<li><img alt=\"".$image."\" src=\"".relroot."/images/map_images/".$image."\"";
 	if (!isset ($firstRun)) { echo " class=\"selected\""; $firstRun = true; }
 	echo "/></li>\n";
 } unset ($firstRun);

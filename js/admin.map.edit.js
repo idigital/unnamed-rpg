@@ -92,7 +92,7 @@ function loadEditor (map_id) {
 					for (y=returned['refine']['y']['from'];y<(returned['refine']['y']['num']+returned['refine']['y']['from']);y++) {
 						if (undefined == returned['coords'][x][y]) continue;
 						
-						canvasText += "<span><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+"\" title=\""+x+":"+y+"\" /></span>";
+						canvasText += "<span id=\"block"+x+":"+y+"\"><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+"\" title=\""+x+":"+y+"\" /></span>";
 					}
 					canvasText += "</div>";
 				}
@@ -101,6 +101,7 @@ function loadEditor (map_id) {
 				$('#canvas').html (canvasText);
 				
 				$('#canvas>div').css ('min-width', returned['map_data']['num_columns']*40);
+				$('#canvas>div>span').click (handleClickCanvasBlock);
 			} else {
 				console.log ("errored, with "+returned['status']);
 			}
@@ -108,5 +109,32 @@ function loadEditor (map_id) {
 		dataType: 'json',
 		type: 'post',
 		url: relroot+'/admin/map.load.php'
+	});
+}
+
+function handleClickCanvasBlock () {
+	coords = $(this).attr ('id').substr (5).split (':');
+	x = coords[0];
+	y = coords[1];
+	
+	// send the ajax to update this coord!
+	$.ajax ({
+		data: {
+			'x': x,
+			'y': y,
+			'image': $('#blocks .selected').attr ('alt'),
+			'type': $('#block_type').val (),
+			'locality': $('#block_locality').val (),
+			'map_id': $('#map_id').val ()
+		},
+		error: function (jqXHR, textStatus, errorthrown) {
+			console.log ("unsuccessful ajax call whilst trying to create map: "+textStatus+" - "+ errorthrown);
+		},
+		success: function (returned) {
+			
+		},
+		dataType: 'json',
+		type: 'post',
+		url: relroot+'/admin/map.save.php'
 	});
 }

@@ -57,6 +57,8 @@ abstract class StandardObject {
 		
 		// Only bother trying if we were successful
 		if ($success) {
+			$this->___Database = $___config['database'];
+		
 			// Get all the item's attributes
 			$data = mysql_fetch_assoc ($___config['database']->query ("SELECT * FROM `".$___config['table']."` WHERE `".$___config['primary_key']."` = ".$___config['item_id']." LIMIT 1"));
 			// Optimistic existance flag
@@ -120,7 +122,7 @@ abstract class StandardObject {
 		}
 	
 		// try update the database first. capture the result
-		$result = $this->getDatabase()->query ("UPDATE `".$this->___config['table']."` SET `".$this->getDatabase->escape ($detail)."` = '".$this->getDatabase->escape ($value)."' WHERE `".$this->___config['primary_key']."` = ".$this->getId());
+		$result = $this->getDatabase()->query ("UPDATE `".$this->___config['table']."` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `".$this->___config['primary_key']."` = ".$this->getId());
 		
 		// if the database updated well, then updated our local property
 		if ($result) $this->properties[$detail] = $value;

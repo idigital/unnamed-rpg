@@ -4,7 +4,7 @@
 * Gets the data about the user's current map area
 */
 
-class UserMap {
+class UserMap extends StandardObject {
 	public function __construct ($user_id) {
 		//  We'll need a database.. Fortunately, constants stick around even inside private scope!
 		$Database = new Database (database_server, database_user, database_password, database_name);

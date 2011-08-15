@@ -29,8 +29,6 @@ require_once ('includes/notextinc.php');
 
 header ('Content-Type: text/xml');
 
-$Character = new Character ($User->getId());
-
 echo "<?xml version=\"1.0\" ?>\n";
 
 // Are we moving?

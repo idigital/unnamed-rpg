@@ -15,7 +15,15 @@ $ext_js[] = relroot."/js/map.js";
 require_once ('includes/header.php');
 
 echo "<div id=\"character_data\">\n";
-echo "<p>Name: <strong>".$User->getDetail ('username')."</strong></p>\n";
+
+// work out the health bar here, to keep the line cleaner
+$health_bar = "<span id=\"health_bar\">";
+// what percent of health does the user have left?
+$percent = ($Character->getDetail ('remaining_hp')/$Character->getMaxHealth()) * 100;
+$health_bar .= "<span style=\"display: inline-block; width: ".$percent."px; background-color: rgb(0, 255, 0);\">&nbsp;</span>";
+$health_bar .= "</span>\n";
+
+echo "<p>Name: <strong>".$User->getDetail ('username')."</strong> | Level: <strong>".$Character->getLevel ()."</strong> | Health: <strong>".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
 echo "</div>\n";
 
 echo "<div id=\"map\"><div>\n<div id=\"map_table\">\n";

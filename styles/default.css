@@ -3,3 +3,11 @@
 	
 	margin: 0 auto;
 }
+
+p {
+	margin: 5px;
+}
+
+strong {
+	font-weight: bold;
+}

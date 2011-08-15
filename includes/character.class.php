@@ -21,6 +21,33 @@ class Character extends StandardObject {
 		parent::__construct ($config);
 	}
 	
+	/**
+	* Gets the current level of the character, based on their character.
+	*
+	* We store the accumulative experience gained for the character, and not their level. The level
+	* can be worked out since we have the experience brackets in a table.
+	*
+	* @return int
+	*/
+	public function getLevel () {
+		$current_level = $this->getDatabase()->getSingleValue ("SELECT `level` FROM `stats_base` WHERE `experience_required` <= ".$this->getDetail ('experience')." ORDER BY `level` DESC LIMIT 1");
+		
+		return $current_level;
+	}
+	
+	/**
+	* Figures, based on the level, what the current max health is
+	*
+	* @return int
+	*/
+	public function getMaxHealth () {
+		// I could have reused the SQL from this::getLevel, which is a fairly quick statement rather than using getLevel (which means we're doing
+		// two database calls), however there may be things other than the experience which affects the level, so we have to use getLevel().
+		$max_hp = $this->getDatabase()->getSingleValue ("SELECT `hp` FROM `stats_base` WHERE `level` = ".$this->getLevel()." LIMIT 1");
+		
+		return $max_hp;
+	}
+	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
 }

@@ -33,7 +33,7 @@ echo "</div>\n";
 
 echo "<div id=\"map_right\">\n";
 
-echo "<img style=\"width:120px; height:120px; border: 0px;\" usemap=\"#navmap\" src=\"".relroot."/images/map_images/navarrows.gif\" />\n";
+echo "<img style=\"width:120px; height:120px; border: 0px;\" usemap=\"#navmap\" src=\"".relroot."/images/map_ui/navarrows.gif\" />\n";
 echo <<<MAPAREA
 <map name="navmap" id="navmap">
   <area alt="Northwest" href="javascript:generateMap ('nw')" coords="6,6,39,6,39,11,11,39,6,39" shape="poly" />

@@ -222,6 +222,7 @@ function minipage ($page_title, $page_body, $wheresincludes) {
 	$ext_title = $page_title;
 	include ($wheresincludes.'includes/header.php');
 	
+	echo "<h1>".$page_title."</h1>\n";
 	echo $page_body;
 	
 	include ($wheresincludes.'includes/footer.php');

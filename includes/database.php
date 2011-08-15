@@ -33,10 +33,12 @@ class Database {
 		if (empty ($this->connection)) {
 			//  Connect to the server
 			$this->connection = mysql_connect ($this->server, $this->user, $this->password, false);
-			
 			//  If the connection is false, it means we couldn't connect for some reason. Since this is a database
 			//  driven site, we should do a fatal error, not just the warning that we usually get.
-			if ($this->connection === false) trigger_error ("Database connection could not be established", E_USER_ERROR);
+			if ($this->connection == false) {
+				$this->SQLDebug();
+				trigger_error ("Database connection could not be established", E_USER_ERROR);
+			}
 			
 			mysql_select_db ($this->database);
 		}
@@ -125,11 +127,7 @@ class Database {
 	}
 }
 
-define ('database_server', 'localhost'); //  You can usually leave this as it is
-define ('database_user', 'root');
-define ('database_password', '');
-define ('database_name', 'unnamedrpg');
-
-$Database = new Database (database_server, database_user, database_password, database_name);
+if (defined ("database_server"))
+	$Database = new Database (database_server, database_user, database_password, database_name);
 
 ?>

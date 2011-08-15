@@ -7,6 +7,8 @@
 
 require_once ('config.php');
 
+require_once ('StandardObject.class.php');
+
 require_once ('database.php');
 require_once ('common.php');
 

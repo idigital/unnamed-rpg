@@ -19,7 +19,14 @@ class User extends StandardObject {
 		parent::__construct ($config);
 	}
 	
-	public function getMapData () { return new UserMap ($this->getId()); }
+	/**
+	* Gets object which holds all the user's game information, like HP and XP.
+	*
+	* @return Character
+	*/
+	public function getCharacter () {
+		return new Character ($this);
+	}
 	
 	/**
 	* Works out the stored version of the user's password

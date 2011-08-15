@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 14, 2011 at 11:55 PM
+-- Generation Time: Aug 15, 2011 at 12:17 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -18,6 +18,26 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `unnamedrpg`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `character_stats`
+--
+
+CREATE TABLE IF NOT EXISTS `character_stats` (
+  `user_id` int(11) NOT NULL,
+  `experience` int(11) NOT NULL,
+  `remaining_hp` int(5) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `character_stats`
+--
+
+INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
+(1, 0, 25);
 
 -- --------------------------------------------------------
 
@@ -12600,6 +12620,29 @@ INSERT INTO `map_special` (`grid_id`, `goto_uri`, `goto_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `stats_base`
+--
+
+CREATE TABLE IF NOT EXISTS `stats_base` (
+  `level_number` int(3) NOT NULL,
+  `experience_required` int(11) NOT NULL,
+  `hp` int(5) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stats_base`
+--
+
+INSERT INTO `stats_base` (`level_number`, `experience_required`, `hp`) VALUES
+(1, 0, 25),
+(2, 600, 30),
+(3, 1400, 35),
+(4, 2400, 40),
+(5, 3400, 45);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -12638,4 +12681,4 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`) VALUES
-(1, 1, 8, 7);
+(1, 1, 11, 7);

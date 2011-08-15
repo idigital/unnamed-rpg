@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 15, 2011 at 12:17 PM
+-- Generation Time: Aug 15, 2011 at 01:35 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -12624,7 +12624,7 @@ INSERT INTO `map_special` (`grid_id`, `goto_uri`, `goto_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `stats_base` (
-  `level_number` int(3) NOT NULL,
+  `level` int(3) NOT NULL,
   `experience_required` int(11) NOT NULL,
   `hp` int(5) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -12633,7 +12633,7 @@ CREATE TABLE IF NOT EXISTS `stats_base` (
 -- Dumping data for table `stats_base`
 --
 
-INSERT INTO `stats_base` (`level_number`, `experience_required`, `hp`) VALUES
+INSERT INTO `stats_base` (`level`, `experience_required`, `hp`) VALUES
 (1, 0, 25),
 (2, 600, 30),
 (3, 1400, 35),
@@ -12681,4 +12681,4 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`) VALUES
-(1, 1, 11, 7);
+(1, 1, 12, 7);

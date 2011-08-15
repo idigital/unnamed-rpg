@@ -36,6 +36,28 @@ class Character extends StandardObject {
 	}
 	
 	/**
+	* Finds out how much experience is needed for the next level.
+	*
+	* This isn't "how much more experience". Use this::nextLevelIn for that.
+	*
+	* @return int
+	*/
+	public function nextLevelAt () {
+		$next_level_at = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` > ".$this->getLevel ()." ORDER BY `level` ASC LIMIT 1");
+		
+		return $this->getDetail ('experience');
+	}
+	
+	/**
+	* How much more experience is required until the next level?
+	*
+	* @return int
+	*/
+	public function nextLevelIn () {
+		return $this->nextLevelAt() - $this->getDetail ('experience');
+	}
+	
+	/**
 	* Figures, based on the level, what the current max health is
 	*
 	* @return int

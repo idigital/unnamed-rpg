@@ -14,7 +14,7 @@
 	padding: 0px;
 }
 
-#health_bar {
+.stat_bar {
 	width: 100px;
 	background-color: rgb(204, 204, 204);
 	display: inline-block;

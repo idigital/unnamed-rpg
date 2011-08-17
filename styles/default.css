@@ -12,6 +12,9 @@ strong {
 	font-weight: bold;
 }
 
+#character_data {
+	text-align: center;
+}
 .stat_bar {
 	width: 100px;
 	background-color: rgb(204, 204, 204);

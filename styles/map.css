@@ -1,3 +1,7 @@
+#container {
+	width: 500px;
+}
+
 #map_right {
 	float: right;
 	

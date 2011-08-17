@@ -1,0 +1,37 @@
+#container {
+	width: 540px;
+}
+
+#player {
+	float: left;
+	width: 270px;
+}
+
+#mob {
+	float: right;
+	width: 270px;
+}
+
+.portrait {
+	min-height: 130px;
+	text-align: center;
+}
+
+.name {
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;
+}
+
+#mob>.name {
+	background-color: rgb(255, 153, 153);
+}
+
+#player>.name {
+	background-color: rgb(0, 255, 0);
+}
+
+#actions {
+	background-color: rgb(153, 153, 255);
+	padding: 2px;
+}

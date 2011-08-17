@@ -17,3 +17,8 @@ strong {
 	background-color: rgb(204, 204, 204);
 	display: inline-block;
 }
+
+.clear {
+	height: 1px;
+	clear: both;
+}

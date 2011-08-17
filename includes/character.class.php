@@ -71,6 +71,7 @@ class Character extends StandardObject {
 	}
 	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
+	public function getFightData () { return new CharacterFight ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
 }
 

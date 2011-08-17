@@ -1,11 +1,19 @@
 <?php
 
+/**
+* The UI for the fight actions.
+*
+* It's safe to assume that if they're on this page, they're in a fight.
+*/
+
 define ('LOGIN', true);
 define ('FORCE_PHASE', true);
 require_once ('includes/notextinc.php');
 $ext_css[] = "fight.css";
 $ext_title = "Fight!";
 include_once ('includes/header.php');
+
+$Mob = $Character->getFightData()->getMob();
 
 include ('stat_bar.php');
 
@@ -21,7 +29,8 @@ echo "</div>\n";
 echo "<div id=\"player\">\n";
 echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/lupe_combat.gif\" /></div>\n";
 echo "<p class=\"name\">".$User->getDetail ('username')."</p>\n";
-echo "<p>Health: <strong>10</strong>/10</p>\n";
+// we still have $health_bar set up from the stat_bar we included!
+echo "<p>Health: <strong>".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
 echo "</div>\n";
 
 echo "<div class=\"clear\">&nbsp;</div>\n";

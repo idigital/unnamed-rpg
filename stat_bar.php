@@ -10,7 +10,7 @@ if (!defined ('LOGIN')) exit;
 
 echo "<div id=\"character_data\">\n";
 
-// work out the health bar here, to keep the line cleaner
+// work out the health bar here, to keep the line cleaner.
 $health_bar = "<span class=\"stat_bar\">";
 // what percent of health does the user have left?
 $percent_health = ($Character->getDetail ('remaining_hp')/$Character->getMaxHealth()) * 100;

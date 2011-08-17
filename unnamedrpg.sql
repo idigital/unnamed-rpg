@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 17, 2011 at 12:33 AM
+-- Generation Time: Aug 17, 2011 at 10:17 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -12620,6 +12620,28 @@ INSERT INTO `map_special` (`grid_id`, `goto_uri`, `goto_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mob`
+--
+
+CREATE TABLE IF NOT EXISTS `mob` (
+  `mob_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `hp` int(3) NOT NULL,
+  `level` int(2) NOT NULL,
+  PRIMARY KEY (`mob_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `mob`
+--
+
+INSERT INTO `mob` (`mob_id`, `name`, `image`, `hp`, `level`) VALUES
+(1, 'snow imp', '400001_asnowimp.gif', 10, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `stats_base`
 --
 
@@ -12682,4 +12704,24 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`) VALUES
-(1, 1, 11, 7, 'map');
+(1, 1, 12, 7, 'fight');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_mob`
+--
+
+CREATE TABLE IF NOT EXISTS `user_mob` (
+  `user_id` int(11) NOT NULL,
+  `mob_id` int(11) NOT NULL,
+  `mob_health` int(3) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_mob`
+--
+
+INSERT INTO `user_mob` (`user_id`, `mob_id`, `mob_health`) VALUES
+(1, 1, 10);

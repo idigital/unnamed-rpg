@@ -16,6 +16,9 @@ require_once ('user.class.php');
 
 require_once ('character.class.php');
 require_once ('character.map.class.php');
+require_once ('character.fight.class.php');
+
+require_once ('mob.class.php');
 
 // session must be started after we include (define) the user class (since we're storing a User in
 // a session.)

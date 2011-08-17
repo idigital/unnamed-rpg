@@ -13,7 +13,8 @@ $ext_css[] = "fight.css";
 $ext_title = "Fight!";
 include_once ('includes/header.php');
 
-$Mob = $Character->getFightData()->getMob();
+$Fight = $Character->getFightData();
+$Mob = $Fight->getMob();
 
 include ('stat_bar.php');
 
@@ -22,8 +23,16 @@ echo "<div id=\"vs_pane\">\n";
 echo "<div id=\"mob\">\n";
 echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/mobs/400001_asnowimp.gif\" /></div>\n";
 echo "<p class=\"name\">A snow imp</p>\n";
-echo "<p>Health: <strong>10</strong>/10</p>\n";
-echo "<p>Level: <strong>1</strong></p>\n";
+
+// work out the health bar here, to keep the line cleaner.
+$mob_health_bar = "<span class=\"stat_bar\">";
+// what percent of health does the user have left?
+$mob_percent_health = ($Fight->getDetail ('mob_health')/$Mob->getDetail ('hp')) * 100;
+$mob_health_bar .= "<span style=\"display: inline-block; width: ".$mob_percent_health."px; background-color: rgb(0, 255, 0);\">&nbsp;</span>";
+$mob_health_bar .= "</span>\n";
+echo "<p>Health: <strong>".$Fight->getDetail ('mob_health')."</strong>/".$Mob->getDetail ('hp')." ".$mob_health_bar."</p>\n";
+
+echo "<p>Level: <strong>".$Mob->getDetail ('level')."</strong></p>\n";
 echo "</div>\n";
 
 echo "<div id=\"player\">\n";

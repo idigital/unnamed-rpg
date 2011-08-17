@@ -1,7 +1,7 @@
 <?php
 
-define ('LOGIN', 1);
-
+define ('LOGIN', true);
+define ('FORCE_PHASE', true);
 require_once ('includes/notextinc.php');
 $ext_title = "Fight!";
 include_once ('includes/header.php');

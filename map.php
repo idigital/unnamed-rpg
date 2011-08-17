@@ -7,6 +7,7 @@
 */
 
 define ('LOGIN', true);
+define ('FORCE_PHASE', true);
 require_once ('includes/notextinc.php');
 
 $ext_title = "The World";

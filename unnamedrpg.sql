@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 15, 2011 at 01:35 PM
+-- Generation Time: Aug 17, 2011 at 12:33 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -12673,6 +12673,7 @@ CREATE TABLE IF NOT EXISTS `user_map` (
   `map_id` int(5) NOT NULL,
   `x_co` int(11) NOT NULL,
   `y_co` int(11) NOT NULL,
+  `phase` enum('map','fight','special') NOT NULL DEFAULT 'map',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -12680,5 +12681,5 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 -- Dumping data for table `user_map`
 --
 
-INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`) VALUES
-(1, 1, 12, 7);
+INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`) VALUES
+(1, 1, 11, 7, 'map');

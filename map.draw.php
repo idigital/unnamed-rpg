@@ -172,7 +172,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 
 	// check to see if it's time to drop down to a new row yet
 	if ($in_row > $map_los*2) {
-		$map_data_output .= "<span><img src=\"".relroot."/images/map_images/brd_r.gif\"/></span></div>";
+		$map_data_output .= "<span><img src=\"".relroot."/images/map_ui/brd_r.gif\"/></span></div>";
 		// set the X axis back to zero
 		$in_row = 0;
 		

@@ -36,3 +36,13 @@
 	background-color: rgb(153, 153, 255);
 	padding: 2px;
 }
+
+#round_feedback {
+	display: none;
+	margin-bottom: 5px;
+}
+
+#round_feedback>ul>li {
+	padding: 5px;
+	margin-bottom: 2px;
+}

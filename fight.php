@@ -46,6 +46,8 @@ echo "</div>\n";
 echo "<div class=\"clear\">&nbsp;</div>\n";
 echo "</div>\n";
 
+echo "<div id=\"round_feedback\">\n<ul></ul>\n</div>\n";
+
 echo "<div id=\"actions\">\n";
 echo "<p><span id=\"act_attack\" class=\"link\">Attack</span></p>\n";
 echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\" class=\"link\">Flee</span></p>\n";

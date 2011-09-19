@@ -10,6 +10,7 @@ define ('LOGIN', true);
 define ('FORCE_PHASE', true);
 require_once ('includes/notextinc.php');
 $ext_css[] = "fight.css";
+$ext_js[] = relroot."/js/fight.js";
 $ext_title = "Fight!";
 include_once ('includes/header.php');
 

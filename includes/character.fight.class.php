@@ -28,6 +28,41 @@ class CharacterFight extends StandardObject {
 		return new Mob ($this->getDetail ('mob_id'));
 	}
 	
+	/**
+	* Handles the player attacking the opponent
+	*
+	* Will return an array, looking somewhat like this:
+	* 	array (	'hit' => true // bool, if the hit connected, or missed
+				'hit_amount' => 3 // int, amount of damage the attack caused. Will be zero if missed. Zero damage can also be dealt, without missing
+		)
+	*
+	* @return array A key-value giving data on result
+	*/
+	public function attack () {
+		# for now lets just make up an attack amount
+		$attack = 3;
+		$accuracy = 40; // percent
+
+		# when this is all working properly, the accuracy will have take into account the mob's evaisiveness
+		// check if the hit
+		if (rand (0, 100) >= $accuracy) {
+			$r['hit'] = true;
+			$r['hit_amount'] = $attack;
+		} else {
+			$r['hit'] = false;
+			$r['hit_amount'] = 0;
+		}
+		
+		return $r;
+	}
+	
+	/**
+	* Handles the behaviour of the opponent
+	*/
+	public function mobAction () {
+	
+	}
+	
 	public function getCharacter () { return new Character ($user_id); }
 }
 

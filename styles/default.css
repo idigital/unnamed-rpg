@@ -1,5 +1,8 @@
 #container {
 	margin: 0 auto;
+	
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 9pt;
 }
 
 p {
@@ -8,6 +11,22 @@ p {
 
 strong {
 	font-weight: bold;
+}
+
+a:visted, a:active, a {
+	color: rgb(35, 87, 147);
+	text-decoration: none;
+}
+.link {
+	color: rgb(35, 87, 147);
+	text-decoration: none;
+}
+
+a:hover, .link:hover {
+	color: #FFB300;
+	
+	cursor: pointer;
+	cursor: hand;
 }
 
 #character_data {

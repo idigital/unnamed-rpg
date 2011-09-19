@@ -46,9 +46,9 @@ echo "<div class=\"clear\">&nbsp;</div>\n";
 echo "</div>\n";
 
 echo "<div id=\"actions\">\n";
-echo "<p><span id=\"act_attack\">Attack</span></p>\n";
-echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\">Flee</span></p>\n";
-echo "<p><span id=\"act_nothing\">Attack</span></p>\n";
+echo "<p><span id=\"act_attack\" class=\"link\">Attack</span></p>\n";
+echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\" class=\"link\">Flee</span></p>\n";
+echo "<p><span id=\"act_nothing\" class=\"link\">Do nothing</span></p>\n";
 echo "</div>\n";
 
 include_once ('includes/footer.php');

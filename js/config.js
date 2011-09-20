@@ -1,1 +1,0 @@
-var relroot = '/unnamed-rpg';

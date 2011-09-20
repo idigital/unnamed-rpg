@@ -1,0 +1,1 @@
+<?php/*** Lets the mob do whatever action they decide to take.* * Needs to be included by one of the user's action scripts. Manipulates the $r response array.*/if (!is_array ($r)) exit;?>

@@ -36,6 +36,7 @@ a:hover, .link:hover {
 	width: 100px;
 	background-color: rgb(204, 204, 204);
 	display: inline-block;
+	text-align: left;
 }
 
 .clear {

@@ -17,6 +17,12 @@ include_once ('includes/header.php');
 $Fight = $Character->getFightData();
 $Mob = $Fight->getMob();
 
+// let the browser know about some of the important stats they should keep track of
+echo "<script type=\"text/javascript\">\n";
+echo "game_state['char'] = {hp: ".$Character->getDetail ('remaining_hp').", max_hp: ".$Character->getMaxHealth()."};";
+echo "game_state['mob'] = {hp: ".$Fight->getDetail ('mob_health').", max_hp: ".$Mob->getDetail ('hp')."};";
+echo "</script>\n";
+
 include ('stat_bar.php');
 
 echo "<div id=\"vs_pane\">\n";
@@ -29,9 +35,9 @@ echo "<p class=\"name\">A snow imp</p>\n";
 $mob_health_bar = "<span class=\"stat_bar\">";
 // what percent of health does the user have left?
 $mob_percent_health = ($Fight->getDetail ('mob_health')/$Mob->getDetail ('hp')) * 100;
-$mob_health_bar .= "<span style=\"display: inline-block; width: ".$mob_percent_health."px; background-color: rgb(0, 255, 0);\">&nbsp;</span>";
+$mob_health_bar .= "<span class=\"mob_health_bar\" style=\"display: inline-block; width: ".$mob_percent_health."px; background-color: rgb(0, 255, 0);\">&nbsp;</span>";
 $mob_health_bar .= "</span>\n";
-echo "<p>Health: <strong>".$Fight->getDetail ('mob_health')."</strong>/".$Mob->getDetail ('hp')." ".$mob_health_bar."</p>\n";
+echo "<p>Health: <strong class=\"mob_health\">".$Fight->getDetail ('mob_health')."</strong>/".$Mob->getDetail ('hp')." ".$mob_health_bar."</p>\n";
 
 echo "<p>Level: <strong>".$Mob->getDetail ('level')."</strong></p>\n";
 echo "</div>\n";
@@ -40,7 +46,7 @@ echo "<div id=\"player\">\n";
 echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/lupe_combat.gif\" /></div>\n";
 echo "<p class=\"name\">".$User->getDetail ('username')."</p>\n";
 // we still have $health_bar set up from the stat_bar we included!
-echo "<p>Health: <strong>".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
+echo "<p>Health: <strong class=\"char_health\">".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
 echo "</div>\n";
 
 echo "<div class=\"clear\">&nbsp;</div>\n";

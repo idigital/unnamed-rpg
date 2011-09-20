@@ -1,3 +1,5 @@
+var game_state = {};
+
 $(function () {
 	$('#act_attack').click (handleAttackClick);
 });
@@ -9,6 +11,10 @@ function handleAttackClick () {
 		
 		if (json['attack']['hit'] == true) {
 			addHistory ("You blast the mob for <strong>"+json['attack']['hit_amount']+"</strong> damage!", "good");
+			
+			// so what are we changing the health to?
+			new_health = game_state['mob']['hp'] - json['attack']['hit_amount'];
+			changeHP ("mob", new_health);
 		} else {
 			addHistory ("You missed the mob.", "bad");
 		}
@@ -37,4 +43,27 @@ function addHistory (content, flag) {
 	}
 
 	$('#round_feedback>ul').append ('<li style="background-color: '+colour+'">'+content+'</li>');
+}
+
+/**
+* Changes the display of health to an amount.
+*
+* Note: This is "change to" not "change by".
+*
+* @param string 'char','mob'
+* @param number Amount to be changed to
+*/
+function changeHP (who, amount) {
+	// validate 'who'. must be either 'char', or 'mob'. default to character
+	subject = (who == "mob") ? "mob" : "char";
+	// amount needs to be a number
+	amount = (isNaN (parseInt (amount, 10))) ? 0 : parseInt (amount, 10);
+	
+	game_state[subject]['hp'] = amount;
+	$('.'+subject+'_health').html (amount);
+	
+	// what percent is amount of the full health?
+	percent_health = (game_state[subject]['hp']/game_state[subject]['max_hp']) * 100;
+	
+	$('.'+subject+'_health_bar').animate ({width: percent_health+"px"});
 }

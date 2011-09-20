@@ -56,13 +56,6 @@ class CharacterFight extends StandardObject {
 		return $r;
 	}
 	
-	/**
-	* Handles the behaviour of the opponent
-	*/
-	public function mobAction () {
-	
-	}
-	
 	public function getCharacter () { return new Character ($user_id); }
 }
 

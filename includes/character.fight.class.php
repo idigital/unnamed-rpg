@@ -48,6 +48,9 @@ class CharacterFight extends StandardObject {
 		if (rand (0, 100) >= $accuracy) {
 			$r['hit'] = true;
 			$r['hit_amount'] = $attack;
+			
+			// adjust the mob's health
+			$this->setDetail ('mob_health', $this->getDetail ('mob_health')-$attack);
 		} else {
 			$r['hit'] = false;
 			$r['hit_amount'] = 0;

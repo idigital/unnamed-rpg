@@ -31,7 +31,7 @@ class Mob extends StandardObject {
 	*
 	* @return array A key-value giving data on result
 	*/
-	public function attack () {
+	public function attack (Character $Character) {
 		# for now lets just make up an attack amount
 		$attack = 2;
 		$accuracy = 40; // percent
@@ -41,6 +41,8 @@ class Mob extends StandardObject {
 		if (rand (0, 100) >= $accuracy) {
 			$r['hit'] = true;
 			$r['hit_amount'] = $attack;
+			
+			$Character->setDetail ('remaining_hp', $Character->getDetail ('remaining_hp')-$attack);
 		} else {
 			$r['hit'] = false;
 			$r['hit_amount'] = 0;

@@ -13,7 +13,7 @@ the early 2000's. Neopet's has been around since 1999, so it may have been in ex
 should probably go and play the original if you're serious about playing it.
 * I've no interest in making money out of this. I just felt like making an open game, and don't have
 much imaginiation.
-* I doubt they'll even notice.
+* I doubt they'll eve notice.
 * I like asparagus too.
 
 Despite all that, the assets, and text, and story line, and names, and pretty much everything that is
@@ -38,8 +38,10 @@ every image and piece of user-facing text that is in this repository.
 Some minimum requirements:
 
 Server:
+
 * MySQL (any version)
 * PHP 5
 
 Client:
+
 * Same as jQuery's support ( http://docs.jquery.com/Browser_compatibility )

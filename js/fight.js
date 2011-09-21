@@ -10,22 +10,18 @@ function handleAttackClick () {
 		clearHistory ();
 		
 		if (json['char']['attack']['hit'] == true) {
-			addHistory ("You blast the mob for <strong>"+json['char']['attack']['hit_amount']+"</strong> damage!", "good");
-			
 			// so what are we changing the health to?
 			new_health = game_state['mob']['hp'] - json['char']['attack']['hit_amount'];
 			changeHP ("mob", new_health);
-		} else {
-			addHistory ("You missed the mob.", "bad");
 		}
 		
 		if (json['mob']['attack']['hit'] == true) {
-			addHistory ("The mob blasts you for <strong>"+json['mob']['attack']['hit_amount']+"</strong> damage.", "bad");
-			
 			new_health = game_state['char']['hp'] - json['mob']['attack']['hit_amount'];
 			changeHP ("char", new_health);
-		} else {
-			addHistory ("The mob attacks you, but misses!", "bad");
+		}
+		
+		for (i=0;i<json['message'].length;i++) {
+			addHistory (json['message'][i]['msg'], json['message'][i]['type']);
 		}
 	}, "json");
 }

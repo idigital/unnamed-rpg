@@ -15,6 +15,8 @@ function handleAttackClick () {
 			changeHP ("mob", new_health);
 		}
 		
+		// I'm a little peeved to put this mob code here. It should probably be in its own function.
+		// I'll remove it once the features get complex enough to warrent it.
 		if (json['mob'] != undefined && json['mob']['attack']['hit'] == true) {
 			new_health = game_state['char']['hp'] - json['mob']['attack']['hit_amount'];
 			changeHP ("char", new_health);
@@ -22,6 +24,14 @@ function handleAttackClick () {
 		
 		for (i=0;i<json['message'].length;i++) {
 			addHistory (json['message'][i]['msg'], json['message'][i]['type']);
+		}
+		
+		// check the game state. other UI changes might be needed.
+		if (json['fight_stage'] == "mob win") {
+			// remove all the actions, and change it with a link back to the map
+			$('#actions').html ("<p><a href=\""+relroot+"/fight_scripts/aftermath.php\"><strong>Click here</strong> to see the aftermath...</a></p>");
+		} else if (json['fight_stage'] == "player win") {
+			$('#actions').html ("<p><a href=\""+relroot+"/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what you found!</a></p>");
 		}
 	}, "json");
 }

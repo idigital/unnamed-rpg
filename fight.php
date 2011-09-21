@@ -55,9 +55,17 @@ echo "</div>\n";
 echo "<div id=\"round_feedback\">\n<ul></ul>\n</div>\n";
 
 echo "<div id=\"actions\">\n";
-echo "<p><span id=\"act_attack\" class=\"link\">Attack</span></p>\n";
-echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\" class=\"link\">Flee</span></p>\n";
-echo "<p><span id=\"act_nothing\" class=\"link\">Do nothing</span></p>\n";
+// depending on what state the game is, depends on what actions are availiable.
+// player dead?
+if ($Character->getDetail ('remaining_hp') <= 0) {
+	echo "<p><a href=\"".relroot."/fight_scripts/aftermath.php\"><strong>Click here</strong> to see the aftermath...</a></p>";
+} elseif ($Fight->getDetail ('mob_health') <= 0) {
+	echo "<p><a href=\"".relroot."/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what you found!</a></p>";
+} else {
+	echo "<p><span id=\"act_attack\" class=\"link\">Attack</span></p>\n";
+	echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\" class=\"link\">Flee</span></p>\n";
+	echo "<p><span id=\"act_nothing\" class=\"link\">Do nothing</span></p>\n";
+}
 echo "</div>\n";
 
 include_once ('includes/footer.php');

@@ -42,7 +42,11 @@ class Mob extends StandardObject {
 			$r['hit'] = true;
 			$r['hit_amount'] = $attack;
 			
-			$Character->setDetail ('remaining_hp', $Character->getDetail ('remaining_hp')-$attack);
+			// don't make the health lower than zero
+			$new_health = $Character->getDetail ('remaining_hp')-$attack;
+			$new_health = ($new_health < 0) ? 0 : $new_health;
+			
+			$Character->setDetail ('remaining_hp', $new_health);
 		} else {
 			$r['hit'] = false;
 			$r['hit_amount'] = 0;

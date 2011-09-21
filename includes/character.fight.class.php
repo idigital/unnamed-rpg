@@ -50,7 +50,11 @@ class CharacterFight extends StandardObject {
 			$r['hit_amount'] = $attack;
 			
 			// adjust the mob's health
-			$this->setDetail ('mob_health', $this->getDetail ('mob_health')-$attack);
+			// make sure it never goes below zero
+			$new_health = $this->getDetail ('mob_health')-$attack;
+			$new_health = ($new_health < 0) ? 0 : $new_health;
+			
+			$this->setDetail ('mob_health', $new_health);
 		} else {
 			$r['hit'] = false;
 			$r['hit_amount'] = 0;

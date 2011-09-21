@@ -125,7 +125,7 @@ abstract class StandardObject {
 		$result = $this->getDatabase()->query ("UPDATE `".$this->___config['table']."` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `".$this->___config['primary_key']."` = ".$this->getId());
 		
 		// if the database updated well, then updated our local property
-		if ($result) $this->properties[$detail] = $value;
+		if ($result) $this->___properties[$detail] = $value;
 		
 		return $this;
 	}

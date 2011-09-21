@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 17, 2011 at 10:17 AM
+-- Generation Time: Sep 21, 2011 at 02:25 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
 --
 
 INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 0, 25);
+(1, 0, 18);
 
 -- --------------------------------------------------------
 
@@ -3613,7 +3613,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (271, 1, 14, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
 (270, 1, 14, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (269, 1, 14, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
-(268, 1, 14, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
+(268, 1, 14, 8, 'hills.gif', 1, 'a hill'),
 (267, 1, 14, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
 (266, 1, 14, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
 (265, 1, 14, 5, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -3630,14 +3630,14 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (254, 1, 13, 14, 'grassland.gif', 1, 'the Plains of Neopia'),
 (253, 1, 13, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
 (252, 1, 13, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
-(251, 1, 13, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
+(251, 1, 13, 11, 'hills.gif', 1, 'hills'),
 (250, 1, 13, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (249, 1, 13, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
 (248, 1, 13, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
 (247, 1, 13, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
 (246, 1, 13, 6, 'forest.gif', 1, 'the Plains of Neopia'),
 (245, 1, 13, 5, 'grassland.gif', 1, 'the Plains of Neopia'),
-(244, 1, 13, 4, 'hills.gif', 1, 'a hill'),
+(244, 1, 13, 4, 'forest.gif', 1, 'hills'),
 (243, 1, 13, 3, 'grassland.gif', 1, 'the Plains of Neopia'),
 (242, 1, 13, 2, 'grassland.gif', 1, 'the Plains of Neopia'),
 (241, 1, 13, 1, 'mountain.gif', 5, 'the Plains of Neopia'),
@@ -3647,9 +3647,9 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (237, 1, 12, 17, 'grassland.gif', 1, 'the Plains of Neopia'),
 (236, 1, 12, 16, 'grassland.gif', 1, 'the Plains of Neopia'),
 (235, 1, 12, 15, 'grassland.gif', 1, 'the Plains of Neopia'),
-(234, 1, 12, 14, 'grassland.gif', 1, 'the Plains of Neopia'),
+(234, 1, 12, 14, 'hills.gif', 1, 'a hill'),
 (233, 1, 12, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
-(232, 1, 12, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
+(232, 1, 12, 12, 'hills.gif', 1, 'hill'),
 (231, 1, 12, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
 (230, 1, 12, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (229, 1, 12, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -3670,16 +3670,16 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (214, 1, 11, 14, 'grassland.gif', 1, 'the Plains of Neopia'),
 (213, 1, 11, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
 (212, 1, 11, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
-(211, 1, 11, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
+(211, 1, 11, 11, 'hills.gif', 1, 'hill'),
 (210, 1, 11, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (209, 1, 11, 9, 'forest.gif', 2, 'the Plains of Neopia'),
 (208, 1, 11, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
 (207, 1, 11, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
-(206, 1, 11, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
+(206, 1, 11, 6, 'grassland.gif', 1, 'a hill'),
 (205, 1, 11, 5, 'grassland.gif', 1, 'the Plains of Neopia'),
-(204, 1, 11, 4, 'grassland.gif', 1, 'the Plains of Neopia'),
-(203, 1, 11, 3, 'grassland.gif', 1, 'the Plains of Neopia'),
-(202, 1, 11, 2, 'grassland.gif', 1, 'the Plains of Neopia'),
+(204, 1, 11, 4, 'mountain.gif', 5, 'hills'),
+(203, 1, 11, 3, 'water_r.gif', 5, 'hills'),
+(202, 1, 11, 2, 'water_r.gif', 5, 'hills'),
 (201, 1, 11, 1, 'mountain.gif', 5, 'the Plains of Neopia'),
 (200, 1, 10, 20, 'grassland.gif', 1, 'the Plains of Neopia'),
 (199, 1, 10, 19, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -3694,12 +3694,12 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (190, 1, 10, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (189, 1, 10, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
 (188, 1, 10, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
-(187, 1, 10, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
-(186, 1, 10, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
+(187, 1, 10, 7, 'forest.gif', 1, 'a hill'),
+(186, 1, 10, 6, 'grassland.gif', 1, 'a hill'),
 (185, 1, 10, 5, 'grassland.gif', 1, 'the Plains of Neopia'),
 (184, 1, 10, 4, 'grassland.gif', 1, 'the Plains of Neopia'),
 (183, 1, 10, 3, 'grassland.gif', 1, 'the Plains of Neopia'),
-(182, 1, 10, 2, 'grassland.gif', 1, 'the Plains of Neopia'),
+(182, 1, 10, 2, 'water_u.gif', 5, 'hills'),
 (181, 1, 10, 1, 'mountain.gif', 5, 'the Plains of Neopia'),
 (180, 1, 9, 20, 'grassland.gif', 1, 'the Plains of Neopia'),
 (179, 1, 9, 19, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -3707,16 +3707,16 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (177, 1, 9, 17, 'grassland.gif', 1, 'the Plains of Neopia'),
 (176, 1, 9, 16, 'grassland.gif', 1, 'the Plains of Neopia'),
 (175, 1, 9, 15, 'grassland.gif', 1, 'the Plains of Neopia'),
-(174, 1, 9, 14, 'grassland.gif', 1, 'the Plains of Neopia'),
+(174, 1, 9, 14, 'hills.gif', 1, 'hill'),
 (173, 1, 9, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
 (172, 1, 9, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
 (171, 1, 9, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
 (170, 1, 9, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
-(169, 1, 9, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
+(169, 1, 9, 9, 'hills.gif', 1, 'hill'),
 (168, 1, 9, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
 (167, 1, 9, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
 (166, 1, 9, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
-(165, 1, 9, 5, 'hills.gif', 1, 'a hill'),
+(165, 1, 9, 5, 'forest.gif', 1, 'hills'),
 (164, 1, 9, 4, 'grassland.gif', 1, 'the Plains of Neopia'),
 (163, 1, 9, 3, 'mountain.gif', 5, 'the Plains of Neopia'),
 (162, 1, 9, 2, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -3737,7 +3737,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (147, 1, 8, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
 (146, 1, 8, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
 (145, 1, 8, 5, 'grassland.gif', 1, 'the Plains of Neopia'),
-(144, 1, 8, 4, 'grassland.gif', 1, 'the Plains of Neopia'),
+(144, 1, 8, 4, 'hills.gif', 1, 'hills'),
 (143, 1, 8, 3, 'grassland.gif', 1, 'the Plains of Neopia'),
 (142, 1, 8, 2, 'grassland.gif', 1, 'the Plains of Neopia'),
 (141, 1, 8, 1, 'mountain.gif', 5, 'the Plains of Neopia'),
@@ -3751,8 +3751,8 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (133, 1, 7, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
 (132, 1, 7, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
 (131, 1, 7, 11, 'city.gif', 4, 'the city'),
-(130, 1, 7, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
-(129, 1, 7, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
+(130, 1, 7, 10, 'mountain.gif', 5, 'mountain'),
+(129, 1, 7, 9, 'mountain.gif', 5, 'mountain'),
 (128, 1, 7, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
 (127, 1, 7, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
 (126, 1, 7, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -3771,7 +3771,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (113, 1, 6, 13, 'forest.gif', 1, 'the Plains of Neopia'),
 (112, 1, 6, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
 (111, 1, 6, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
-(110, 1, 6, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
+(110, 1, 6, 10, 'mountain.gif', 5, 'mountain'),
 (109, 1, 6, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
 (108, 1, 6, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
 (107, 1, 6, 7, 'mountain.gif', 5, 'blah'),
@@ -3789,7 +3789,7 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (95, 1, 5, 15, 'grassland.gif', 1, 'the Plains of Neopia'),
 (94, 1, 5, 14, 'grassland.gif', 1, 'the Plains of Neopia'),
 (93, 1, 5, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
-(92, 1, 5, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
+(92, 1, 5, 12, 'hills.gif', 1, 'a hill'),
 (91, 1, 5, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
 (90, 1, 5, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (89, 1, 5, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -4197,13 +4197,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (4129, 1, 42, 29, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4130, 1, 42, 30, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4131, 1, 42, 31, 'grassland.gif', 1, 'the Plains of Neopia'),
-(4132, 1, 42, 32, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(4132, 1, 42, 32, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4133, 1, 42, 33, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4134, 1, 42, 34, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4135, 1, 42, 35, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4136, 1, 42, 36, 'grassland.gif', 1, 'the Plains of Neopia'),
-(4137, 1, 42, 37, 'grassland.gif', 1, 'the Plains of Neopia'),
+(4137, 1, 42, 37, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (4138, 1, 42, 38, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4139, 1, 42, 39, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4140, 1, 42, 40, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -5017,13 +5017,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (4948, 1, 50, 48, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4949, 1, 50, 49, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4950, 1, 50, 50, 'grassland.gif', 1, 'the Plains of Neopia'),
-(4951, 1, 50, 51, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(4951, 1, 50, 51, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4952, 1, 50, 52, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4953, 1, 50, 53, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4954, 1, 50, 54, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4955, 1, 50, 55, 'grassland.gif', 1, 'the Plains of Neopia'),
-(4956, 1, 50, 56, 'grassland.gif', 1, 'the Plains of Neopia'),
+(4956, 1, 50, 56, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (4957, 1, 50, 57, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4958, 1, 50, 58, 'grassland.gif', 1, 'the Plains of Neopia'),
 (4959, 1, 50, 59, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -5837,13 +5837,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (5767, 1, 58, 67, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5768, 1, 58, 68, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5769, 1, 58, 69, 'grassland.gif', 1, 'the Plains of Neopia'),
-(5770, 1, 58, 70, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(5770, 1, 58, 70, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5771, 1, 58, 71, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5772, 1, 58, 72, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5773, 1, 58, 73, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5774, 1, 58, 74, 'grassland.gif', 1, 'the Plains of Neopia'),
-(5775, 1, 58, 75, 'grassland.gif', 1, 'the Plains of Neopia'),
+(5775, 1, 58, 75, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (5776, 1, 58, 76, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5777, 1, 58, 77, 'grassland.gif', 1, 'the Plains of Neopia'),
 (5778, 1, 58, 78, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -6657,13 +6657,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (6586, 1, 66, 86, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6587, 1, 66, 87, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6588, 1, 66, 88, 'grassland.gif', 1, 'the Plains of Neopia'),
-(6589, 1, 66, 89, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(6589, 1, 66, 89, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6590, 1, 66, 90, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6591, 1, 66, 91, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6592, 1, 66, 92, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6593, 1, 66, 93, 'grassland.gif', 1, 'the Plains of Neopia'),
-(6594, 1, 66, 94, 'grassland.gif', 1, 'the Plains of Neopia'),
+(6594, 1, 66, 94, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (6595, 1, 66, 95, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6596, 1, 66, 96, 'grassland.gif', 1, 'the Plains of Neopia'),
 (6597, 1, 66, 97, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -7477,13 +7477,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (7405, 1, 75, 5, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7406, 1, 75, 6, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7407, 1, 75, 7, 'grassland.gif', 1, 'the Plains of Neopia'),
-(7408, 1, 75, 8, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(7408, 1, 75, 8, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7409, 1, 75, 9, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7410, 1, 75, 10, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7411, 1, 75, 11, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7412, 1, 75, 12, 'grassland.gif', 1, 'the Plains of Neopia'),
-(7413, 1, 75, 13, 'grassland.gif', 1, 'the Plains of Neopia'),
+(7413, 1, 75, 13, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (7414, 1, 75, 14, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7415, 1, 75, 15, 'grassland.gif', 1, 'the Plains of Neopia'),
 (7416, 1, 75, 16, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -8297,13 +8297,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (8224, 1, 83, 24, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8225, 1, 83, 25, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8226, 1, 83, 26, 'grassland.gif', 1, 'the Plains of Neopia'),
-(8227, 1, 83, 27, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(8227, 1, 83, 27, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8228, 1, 83, 28, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8229, 1, 83, 29, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8230, 1, 83, 30, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8231, 1, 83, 31, 'grassland.gif', 1, 'the Plains of Neopia'),
-(8232, 1, 83, 32, 'grassland.gif', 1, 'the Plains of Neopia'),
+(8232, 1, 83, 32, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (8233, 1, 83, 33, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8234, 1, 83, 34, 'grassland.gif', 1, 'the Plains of Neopia'),
 (8235, 1, 83, 35, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -9117,13 +9117,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (9043, 1, 91, 43, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9044, 1, 91, 44, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9045, 1, 91, 45, 'grassland.gif', 1, 'the Plains of Neopia'),
-(9046, 1, 91, 46, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(9046, 1, 91, 46, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9047, 1, 91, 47, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9048, 1, 91, 48, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9049, 1, 91, 49, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9050, 1, 91, 50, 'grassland.gif', 1, 'the Plains of Neopia'),
-(9051, 1, 91, 51, 'grassland.gif', 1, 'the Plains of Neopia'),
+(9051, 1, 91, 51, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (9052, 1, 91, 52, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9053, 1, 91, 53, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9054, 1, 91, 54, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -9937,13 +9937,13 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (9862, 1, 99, 62, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9863, 1, 99, 63, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9864, 1, 99, 64, 'grassland.gif', 1, 'the Plains of Neopia'),
-(9865, 1, 99, 65, 'grassland.gif', 1, 'the Plains of Neopia');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(9865, 1, 99, 65, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9866, 1, 99, 66, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9867, 1, 99, 67, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9868, 1, 99, 68, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9869, 1, 99, 69, 'grassland.gif', 1, 'the Plains of Neopia'),
-(9870, 1, 99, 70, 'grassland.gif', 1, 'the Plains of Neopia'),
+(9870, 1, 99, 70, 'grassland.gif', 1, 'the Plains of Neopia');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (9871, 1, 99, 71, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9872, 1, 99, 72, 'grassland.gif', 1, 'the Plains of Neopia'),
 (9873, 1, 99, 73, 'grassland.gif', 1, 'the Plains of Neopia'),
@@ -11036,15 +11036,15 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (10985, 5, 9, 19, 'forest.gif', 1, 'Test3'),
 (10986, 5, 10, 19, 'forest.gif', 1, 'Test3'),
 (10987, 5, 11, 19, 'forest.gif', 1, 'Test3'),
-(10988, 5, 12, 19, 'forest.gif', 1, 'Test3');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(10988, 5, 12, 19, 'forest.gif', 1, 'Test3'),
 (10989, 5, 13, 19, 'forest.gif', 1, 'Test3'),
 (10990, 5, 14, 19, 'forest.gif', 1, 'Test3'),
 (10991, 5, 15, 19, 'forest.gif', 1, 'Test3'),
 (10992, 5, 16, 19, 'forest.gif', 1, 'Test3'),
 (10993, 5, 17, 19, 'forest.gif', 1, 'Test3'),
 (10994, 5, 18, 19, 'forest.gif', 1, 'Test3'),
-(10995, 5, 19, 19, 'forest.gif', 1, 'Test3'),
+(10995, 5, 19, 19, 'forest.gif', 1, 'Test3');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (10996, 5, 20, 19, 'forest.gif', 1, 'Test3'),
 (10997, 5, 21, 19, 'forest.gif', 1, 'Test3'),
 (10998, 5, 22, 19, 'forest.gif', 1, 'Test3'),
@@ -12176,15 +12176,15 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 (12124, 5, 48, 41, 'forest.gif', 1, 'Test3'),
 (12125, 5, 49, 41, 'forest.gif', 1, 'Test3'),
 (12126, 5, 0, 42, 'forest.gif', 1, 'Test3'),
-(12127, 5, 1, 42, 'forest.gif', 1, 'Test3');
-INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
+(12127, 5, 1, 42, 'forest.gif', 1, 'Test3'),
 (12128, 5, 2, 42, 'forest.gif', 1, 'Test3'),
 (12129, 5, 3, 42, 'forest.gif', 1, 'Test3'),
 (12130, 5, 4, 42, 'forest.gif', 1, 'Test3'),
 (12131, 5, 5, 42, 'forest.gif', 1, 'Test3'),
 (12132, 5, 6, 42, 'forest.gif', 1, 'Test3'),
 (12133, 5, 7, 42, 'forest.gif', 1, 'Test3'),
-(12134, 5, 8, 42, 'forest.gif', 1, 'Test3'),
+(12134, 5, 8, 42, 'forest.gif', 1, 'Test3');
+INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locality`) VALUES
 (12135, 5, 9, 42, 'forest.gif', 1, 'Test3'),
 (12136, 5, 10, 42, 'forest.gif', 1, 'Test3'),
 (12137, 5, 11, 42, 'forest.gif', 1, 'Test3'),
@@ -12704,7 +12704,7 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`) VALUES
-(1, 1, 12, 7, 'fight');
+(1, 1, 3, 10, 'fight');
 
 -- --------------------------------------------------------
 
@@ -12716,6 +12716,7 @@ CREATE TABLE IF NOT EXISTS `user_mob` (
   `user_id` int(11) NOT NULL,
   `mob_id` int(11) NOT NULL,
   `mob_health` int(3) NOT NULL,
+  `flee_success` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -12723,5 +12724,5 @@ CREATE TABLE IF NOT EXISTS `user_mob` (
 -- Dumping data for table `user_mob`
 --
 
-INSERT INTO `user_mob` (`user_id`, `mob_id`, `mob_health`) VALUES
-(1, 1, 10);
+INSERT INTO `user_mob` (`user_id`, `mob_id`, `mob_health`, `flee_success`) VALUES
+(1, 1, 10, 1);

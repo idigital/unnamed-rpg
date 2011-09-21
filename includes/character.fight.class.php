@@ -74,7 +74,55 @@ class CharacterFight extends StandardObject {
 		return;
 	}
 	
-	public function getCharacter () { return new Character ($user_id); }
+	/**
+	* The character attempting to flee a fight.
+	*
+	* Takes into account the mob's speed, and the user's speed, and does a dice roll to see if the user is successful.
+	*
+	* @return bool True on success.
+	*/
+	public function flee () {
+		# these will be dynamic when we get to dealing with stats proper
+		$mob_speed = 4;
+		$user_speed = 2;
+		
+		$roll = rand (1, ($mob_speed+$user_speed));
+		
+		$success = ($roll <= $user_speed);
+		
+		if ($success) $this->setDetail ('flee_success', 1);
+		
+		return $success;
+	}
+	
+	/**
+	* Finds out what state the fight is currently in.
+	*
+	* "States" are flags that have to be set which mark what the fight is going. For instance, the character could have won,
+	* or fled. We need to store this data since the user could come to the fight page and have already won (a fight they won
+	* before closing the browser, or just by refreshing).
+	*
+	* @return string "player win", "mob win", "player flee success", in that priority.
+	*/
+	public function getStage () {
+		// check if the mob has any health left
+		if ($this->getDetail ('mob_health') <= 0) {
+			return "player win";
+		}
+		
+		// player dead?
+		if ($this->getCharacter()->getDetail ('remaining_hp') <= 0) {
+			return "mob win";
+		}
+		
+		if ($this->getDetail ('flee_success') == 1) {
+			return "player flee success";
+		}
+		
+		return null;
+	}
+	
+	public function getCharacter () { return new Character ($this->getId()); }
 }
 
 ?>

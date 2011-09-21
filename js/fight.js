@@ -3,6 +3,7 @@ var game_state = {};
 $(function () {
 	$('#act_attack').click (handleAttackClick);
 	$('#act_nothing').click (handleDoNothingClick);
+	$('#act_flee').click (handleFleeClick);
 });
 
 function handleAttackClick () {
@@ -37,7 +38,25 @@ function handleDoNothingClick () {
 		
 		for (i=0;i<json['message'].length;i++) {
 			addHistory (json['message'][i]['msg'], json['message'][i]['type']);
-		}		
+		}
+	}, "json");
+}
+
+function handleFleeClick () {
+	$.post (relroot+'/fight_scripts/flee.php', function (json) {
+		clearHistory ();
+		
+		if (json['fight_stage'] == "player flee success") {
+			// they succeeded
+			$('#actions').html ("<p><a href=\""+relroot+"/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what happened...</a></p>");
+		} else {
+			// only bother with the mob action if they failed running away
+			doMobAction (json);
+		}
+		
+		for (i=0;i<json['message'].length;i++) {
+			addHistory (json['message'][i]['msg'], json['message'][i]['type']);
+		}
 	}, "json");
 }
 

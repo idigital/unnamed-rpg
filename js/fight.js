@@ -15,7 +15,7 @@ function handleAttackClick () {
 			changeHP ("mob", new_health);
 		}
 		
-		if (json['mob']['attack']['hit'] == true) {
+		if (json['mob'] != undefined && json['mob']['attack']['hit'] == true) {
 			new_health = game_state['char']['hp'] - json['mob']['attack']['hit_amount'];
 			changeHP ("char", new_health);
 		}

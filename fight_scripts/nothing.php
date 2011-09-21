@@ -17,7 +17,7 @@ $r = array ();
 
 $r['fight_stage'] = null;
 
-$r['message'][] = array ('msg' => "You do nothing.", 'type' => 'good');
+$r['message'][] = array ('msg' => "You do nothing.", 'type' => 'green');
 
 $Fight->doNothing ();
 

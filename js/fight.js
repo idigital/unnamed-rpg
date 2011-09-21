@@ -87,9 +87,9 @@ function addHistory (content, flag) {
 	$('#round_feedback').show ();
 
 	switch (flag) {
-		case 'good': colour = "rgb(0, 255, 0)"; break;
-		case 'bad': colour = "rgb(255, 153, 153)"; break;
-		case 'note': colour = "rgb(226, 224, 224)"; break;
+		case 'green': colour = "rgb(0, 255, 0)"; break;
+		case 'red': colour = "rgb(255, 153, 153)"; break;
+		case 'grey': colour = "rgb(226, 224, 224)"; break;
 		default: colour = "rgb(226, 224, 224)"; break;
 	}
 

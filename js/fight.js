@@ -64,6 +64,9 @@ function changeHP (who, amount) {
 	// amount needs to be a number
 	amount = (isNaN (parseInt (amount, 10))) ? 0 : parseInt (amount, 10);
 	
+	// don't let the health drop below zero
+	if (amount < 0) amount = 0;
+	
 	game_state[subject]['hp'] = amount;
 	$('.'+subject+'_health').html (amount);
 	

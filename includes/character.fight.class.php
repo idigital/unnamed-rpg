@@ -63,6 +63,17 @@ class CharacterFight extends StandardObject {
 		return $r;
 	}
 	
+	/**
+	* Handles the 'do nothing' action.
+	*
+	* This is just a place holder function.
+	*
+	* @return void
+	*/
+	public function doNothing () {
+		return;
+	}
+	
 	public function getCharacter () { return new Character ($user_id); }
 }
 

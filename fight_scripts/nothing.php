@@ -17,7 +17,8 @@ $r = array ();
 
 $r['fight_stage'] = null;
 
-$r['message'][] = array ('msg' => "You do nothing.", 'type' => 'green');
+$Message = FightMessage::addMessage (1, $Character->getId(), $Mob->getId());
+$r['message'][] = $Message->getMessageArray ();
 
 $Fight->doNothing ();
 

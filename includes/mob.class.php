@@ -54,6 +54,31 @@ class Mob extends StandardObject {
 		
 		return $r;
 	}
+	
+	/**
+	* Gets a well formatted name of the mob.
+	*
+	* Specifcally useful if we need "(a|an) mob". There's no capitalisation done in here, unless the mob's name has
+	* its own capitalisation.
+	*
+	* @return string
+	*/
+	public function getName ($with_indef_art=false) {
+		// work out how to format their name, with "an" or "a"?
+		$mob_name = $this->getDetail ('name');
+		
+		if ($with_indef_art && $this->getDetail ('requires_indef_art')) {
+			// do we need "a" or "an"?
+			$fc = $mob_name[0];
+			if ($fc == "a" || $fc == "e" || $fc == "i" || $fc == "o" || $fc == "u") {
+				$mob_name = "an ".$mob_name;
+			} else {
+				$mob_name = "a ".$mob_name;
+			}
+		}
+		
+		return $mob_name;
+	}
 }
 
 ?>

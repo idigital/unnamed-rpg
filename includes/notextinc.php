@@ -14,6 +14,8 @@ require_once ('common.php');
 
 require_once ('user.class.php');
 
+require_once ('fightmessage.class.php');
+
 require_once ('character.class.php');
 require_once ('character.map.class.php');
 require_once ('character.fight.class.php');

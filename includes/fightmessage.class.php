@@ -20,7 +20,7 @@ class FightMessage extends StandardObject {
 		$Database = new Database (database_server, database_user, database_password, database_name);
 	
 		$config = array (
-			'table' => "firstmessage_fight",
+			'table' => "fightmessage_fight",
 			'database' => $Database,
 			'item_id' => $fight_msg_id,
 			'primary_key' => "fight_msg_id"
@@ -33,6 +33,10 @@ class FightMessage extends StandardObject {
 		// nab the template string
 		$t_string = $this->getDatabase()->getSingleValue ("SELECT `text` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
 		
+		// swap out any [a_mob_name] tags for the mob who we're currently fighting
+		$fighting_Mob = new mob ($this->getDetail ('mob_id'));
+		$t_string = str_replace ('[a_mob_name]', $fighting_Mob->getName (true), $t_string);
+		
 		// go through each of the variables we have stored
 		$qry_vars = $this->getDatabase()->query ("SELECT `value` FROM `fightmessage_fight_vars` WHERE `fight_msg_id` = ".$this->getId()." ORDER BY `num` ASC");
 		$i = 1;
@@ -40,22 +44,16 @@ class FightMessage extends StandardObject {
 			while ($var = mysql_fetch_assoc ($qry_vars)) {
 				// what's the type of variable is this?
 				$var_type = $this->getDatabase()->getSingleValue ("SELECT `var_type` FROM `fightmessage_vars` WHERE `msg_id` = ".$this->getDetail ('msg_id')." AND `var_num` = ".$i);
-				
+			
 				if ($var_type == "mob_name") {
+					// this is different to [a_mob_name] since this could be the name of *any mob* not just the one we're fighting.
+					// this is a little bit legacy, since [a_mob_name] didn't used to exist, and we'd put it in this varible, and so
+					// is fairly useless. but we'll keep it becuase it's functionality can still be kept around without harming, or
+					// slowing anything down.
+					
 					$Mob = new Mob ($var['value']);
-					
-					// work out how to format their name, with "an" or "a"?
-					$mob_name = $Mob->getDetail ('name');
-					
-					if ($Mob->getDetail ('requires_indef_art')) {
-						// do we need "a" or "an"?
-						$fc = $mob_name[0];
-						if ($fc == "a" || $fc == "e" || $fc == "i" || $fc == "o" || $fc == "u") {
-							$mob_name = "an ".$mob_name;
-						} else {
-							$mob_name = "a ".$mob_name;
-						}
-					}
+					// get the mob name with the indefiniate article
+					$mob_name = $Mob->getName (true);
 					
 					$t_string = str_replace ("[".$i."]", $mob_name, $t_string);
 				} else {
@@ -72,6 +70,19 @@ class FightMessage extends StandardObject {
 	}
 	
 	/**
+	* Gets the formated array for use with passing to the JSON for displaying the history during fights.
+	*
+	* @return array
+	*/
+	public function getMessageArray () {
+		$colour = $this->getDatabase()->getSingleValue ("SELECT `type_colour` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
+	
+		$arr = array ('msg' => $this->getString(), 'type' => $colour);
+		
+		return $arr;
+	}
+	
+	/**
 	* Gets object which holds all the user's game information, like HP and XP.
 	*
 	* @return Character
@@ -84,17 +95,19 @@ class FightMessage extends StandardObject {
 		return new Mob ($this->getDetail ('mob_id'));
 	}
 	
-	public static function addMessage ($msg_id, $user_id, $mob_id, $vars, Database $Database) {
+	public static function addMessage ($msg_id, $user_id, $mob_id, $vars = array()) {
+		$Database = new Database (database_server, database_user, database_password, database_name);
+		
 		$Database->query ("INSERT INTO `fightmessage_fight` SET `msg_id` = ".(int) $msg_id.", `user_id` = ".(int) $user_id.", `mob_id` = ".(int) $mob_id.", `time` = UNIX_TIMESTAMP ()");
 		$f_msg_id = $Database->getLastId();
 		
-		if (count ($vars)) {
-			foreach ($i=0,$num_vars=count ($vars); $i<=$num_vars; $i++) {
-				$Database->query ("INSERT INTO `fightmessage_fight_vars` SET `fight_msg_id` = ".$f_msg_id.", `num` = ".$i.", `value` = '".$vars[$i]."'");
+		if ($num_vars = count ($vars)) {
+			for ($i=0; $i<$num_vars; $i++) {
+				$Database->query ("INSERT INTO `fightmessage_fight_vars` SET `fight_msg_id` = ".$f_msg_id.", `num` = ".($i+1).", `value` = '".$vars[$i]."'");
 			}
 		}
 		
-		return $f_msg_id;
+		return new FightMessage ($f_msg_id);
 	}
 }
 

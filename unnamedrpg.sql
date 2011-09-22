@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 21, 2011 at 02:25 PM
+-- Generation Time: Sep 22, 2011 at 12:52 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -37,7 +37,223 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
 --
 
 INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 0, 18);
+(1, 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fightmessage_fight`
+--
+
+CREATE TABLE IF NOT EXISTS `fightmessage_fight` (
+  `fight_msg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `msg_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `mob_id` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  PRIMARY KEY (`fight_msg_id`),
+  UNIQUE KEY `msg_id` (`msg_id`,`user_id`,`mob_id`,`time`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
+
+--
+-- Dumping data for table `fightmessage_fight`
+--
+
+INSERT INTO `fightmessage_fight` (`fight_msg_id`, `msg_id`, `user_id`, `mob_id`, `time`) VALUES
+(22, 3, 1, 1, 1316693356),
+(21, 7, 1, 1, 1316693349),
+(20, 7, 1, 1, 1316693326),
+(19, 3, 1, 1, 1316693272),
+(18, 7, 1, 1, 1316693164),
+(17, 7, 1, 1, 1316693120),
+(16, 3, 1, 1, 1316693051),
+(23, 3, 1, 1, 1316693659),
+(24, 6, 1, 1, 1316693659),
+(25, 3, 1, 1, 1316693707),
+(26, 3, 1, 1, 1316693761),
+(27, 3, 1, 1, 1316693763),
+(28, 3, 1, 1, 1316693941),
+(29, 7, 1, 1, 1316694443),
+(30, 7, 1, 1, 1316694446),
+(31, 7, 1, 1, 1316694453),
+(32, 3, 1, 1, 1316694460),
+(33, 7, 1, 1, 1316694505),
+(34, 7, 1, 1, 1316694509),
+(35, 3, 1, 1, 1316694515),
+(36, 3, 1, 1, 1316694612),
+(37, 7, 1, 1, 1316694628),
+(38, 7, 1, 1, 1316694641),
+(39, 3, 1, 1, 1316694683),
+(40, 7, 1, 1, 1316694725),
+(41, 3, 1, 1, 1316694729),
+(42, 3, 1, 1, 1316694750),
+(43, 3, 1, 1, 1316694811),
+(44, 7, 1, 1, 1316694944),
+(45, 3, 1, 1, 1316694947),
+(46, 7, 1, 1, 1316694954),
+(47, 3, 1, 1, 1316694955),
+(48, 7, 1, 1, 1316695427),
+(49, 4, 1, 1, 1316695427),
+(50, 3, 1, 1, 1316695429),
+(51, 6, 1, 1, 1316695429),
+(52, 3, 1, 1, 1316695469),
+(53, 2, 1, 1, 1316695469),
+(54, 1, 1, 1, 1316695472),
+(55, 2, 1, 1, 1316695472),
+(56, 7, 1, 1, 1316695473),
+(57, 2, 1, 1, 1316695473),
+(58, 3, 1, 1, 1316695475),
+(59, 4, 1, 1, 1316695475),
+(60, 7, 1, 1, 1316695477),
+(61, 4, 1, 1, 1316695477),
+(62, 3, 1, 1, 1316695479),
+(63, 2, 1, 1, 1316695479),
+(64, 5, 1, 1, 1316695485),
+(65, 2, 1, 1, 1316695485),
+(66, 3, 1, 1, 1316695489),
+(67, 2, 1, 1, 1316695489),
+(68, 7, 1, 1, 1316695493),
+(69, 4, 1, 1, 1316695493),
+(70, 3, 1, 1, 1316695496),
+(71, 2, 1, 1, 1316695496),
+(72, 7, 1, 1, 1316695498),
+(73, 2, 1, 1, 1316695498),
+(74, 7, 1, 1, 1316695500),
+(75, 4, 1, 1, 1316695500),
+(76, 3, 1, 1, 1316695501),
+(77, 2, 1, 1, 1316695501),
+(78, 7, 1, 1, 1316695503),
+(79, 4, 1, 1, 1316695503),
+(80, 3, 1, 1, 1316695504),
+(81, 6, 1, 1, 1316695504);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fightmessage_fight_vars`
+--
+
+CREATE TABLE IF NOT EXISTS `fightmessage_fight_vars` (
+  `fight_msg_id` int(11) NOT NULL,
+  `num` int(11) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`fight_msg_id`,`num`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fightmessage_fight_vars`
+--
+
+INSERT INTO `fightmessage_fight_vars` (`fight_msg_id`, `num`, `value`) VALUES
+(25, 1, '1'),
+(23, 2, '3'),
+(23, 1, '1'),
+(22, 2, '3'),
+(22, 1, '1'),
+(19, 2, '3'),
+(19, 1, '1'),
+(16, 2, '3'),
+(16, 1, '1'),
+(25, 2, '3'),
+(26, 1, '1'),
+(26, 2, '3'),
+(27, 1, '1'),
+(27, 2, '3'),
+(28, 1, '1'),
+(28, 2, '3'),
+(32, 1, '1'),
+(32, 2, '3'),
+(35, 1, '1'),
+(35, 2, '3'),
+(36, 1, '1'),
+(36, 2, '3'),
+(39, 1, '1'),
+(39, 2, '3'),
+(41, 1, '1'),
+(41, 2, '3'),
+(42, 1, '1'),
+(42, 2, '3'),
+(43, 1, '1'),
+(43, 2, '3'),
+(45, 1, '1'),
+(45, 2, '3'),
+(47, 1, '1'),
+(47, 2, '3'),
+(50, 1, '1'),
+(50, 2, '3'),
+(52, 1, '1'),
+(52, 2, '3'),
+(53, 1, '2'),
+(55, 1, '2'),
+(57, 1, '2'),
+(58, 1, '1'),
+(58, 2, '3'),
+(62, 1, '1'),
+(62, 2, '3'),
+(63, 1, '2'),
+(65, 1, '2'),
+(66, 1, '1'),
+(66, 2, '3'),
+(67, 1, '2'),
+(70, 1, '1'),
+(70, 2, '3'),
+(71, 1, '2'),
+(73, 1, '2'),
+(76, 1, '1'),
+(76, 2, '3'),
+(77, 1, '2'),
+(80, 1, '1'),
+(80, 2, '3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fightmessage_text`
+--
+
+CREATE TABLE IF NOT EXISTS `fightmessage_text` (
+  `msg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` text NOT NULL,
+  `num_vars` smallint(6) NOT NULL,
+  `type_colour` enum('green','red','grey') NOT NULL,
+  PRIMARY KEY (`msg_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `fightmessage_text`
+--
+
+INSERT INTO `fightmessage_text` (`msg_id`, `text`, `num_vars`, `type_colour`) VALUES
+(1, 'You do nothing.', 0, 'green'),
+(2, '[a_mob_name] blasts you for <strong>[1]</strong> damage.', 1, 'red'),
+(3, 'You blast [a_mob_name] for <strong>[1]</strong> damage.', 1, 'green'),
+(4, '[a_mob_name] attacks you, but misses!', 0, 'red'),
+(5, 'You tried to escape, but [a_mob_name] blocked the way!', 0, 'green'),
+(6, '<strong>You defeated [a_mob_name]!</strong>', 0, 'green'),
+(7, 'You attack [a_mob_name], but miss!', 0, 'green'),
+(8, 'You succeeded in escaping from [a_mob_name]!', 0, 'green'),
+(9, '[a_mob_name] defeated you!', 0, 'red');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fightmessage_vars`
+--
+
+CREATE TABLE IF NOT EXISTS `fightmessage_vars` (
+  `msg_id` int(11) NOT NULL,
+  `var_num` smallint(6) NOT NULL,
+  `var_type` enum('mob_name','text') NOT NULL,
+  PRIMARY KEY (`msg_id`,`var_num`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fightmessage_vars`
+--
+
+INSERT INTO `fightmessage_vars` (`msg_id`, `var_num`, `var_type`) VALUES
+(2, 1, 'text'),
+(3, 1, 'text');
 
 -- --------------------------------------------------------
 
@@ -12626,6 +12842,7 @@ INSERT INTO `map_special` (`grid_id`, `goto_uri`, `goto_name`) VALUES
 CREATE TABLE IF NOT EXISTS `mob` (
   `mob_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `requires_indef_art` tinyint(1) NOT NULL DEFAULT '1',
   `image` varchar(50) NOT NULL,
   `hp` int(3) NOT NULL,
   `level` int(2) NOT NULL,
@@ -12636,8 +12853,8 @@ CREATE TABLE IF NOT EXISTS `mob` (
 -- Dumping data for table `mob`
 --
 
-INSERT INTO `mob` (`mob_id`, `name`, `image`, `hp`, `level`) VALUES
-(1, 'snow imp', '400001_asnowimp.gif', 10, 1);
+INSERT INTO `mob` (`mob_id`, `name`, `requires_indef_art`, `image`, `hp`, `level`) VALUES
+(1, 'snow imp', 1, '400001_asnowimp.gif', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -12725,4 +12942,4 @@ CREATE TABLE IF NOT EXISTS `user_mob` (
 --
 
 INSERT INTO `user_mob` (`user_id`, `mob_id`, `mob_health`, `flee_success`) VALUES
-(1, 1, 10, 1);
+(1, 1, 10, 0);

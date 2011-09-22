@@ -99,6 +99,14 @@ abstract class StandardObject {
 	*               also be a valid value
 	*/
 	public function getDetail ($detail) {
+		// Make sure this item exists before trying to pull it's data. This is such a harsh error (it will halt the script)
+		// because it should never happen. You should always check if an item exists yourself, and handle the error that way.
+		// Allowing this function to continue whilst the item doesn't exist will through an error in array_key_exists, and
+		// you won't get back what you're expecting.
+		if (!$this->exists ()) {
+			trigger_error ("Item doesn't exist, and so can't find the detail \"".$detail."\"", E_USER_ERROR);
+		}
+		
 		if (array_key_exists ($detail, $this->___properties)) {
 			return $this->___properties[$detail];
 		} else {

@@ -28,8 +28,8 @@ include ('stat_bar.php');
 echo "<div id=\"vs_pane\">\n";
 
 echo "<div id=\"mob\">\n";
-echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/mobs/400001_asnowimp.gif\" /></div>\n";
-echo "<p class=\"name\">A snow imp</p>\n";
+echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/mobs/".$Mob->getDetail ('image')."\" /></div>\n";
+echo "<p class=\"name\">".ucfirst ($Mob->getName (true))."</p>\n";
 
 // work out the health bar here, to keep the line cleaner.
 $mob_health_bar = "<span class=\"stat_bar\">";

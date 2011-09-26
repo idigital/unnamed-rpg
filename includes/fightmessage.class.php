@@ -95,7 +95,7 @@ class FightMessage extends StandardObject {
 		return new Mob ($this->getDetail ('mob_id'));
 	}
 	
-	public static function addMessage ($msg_id, $user_id, $mob_id, $vars = array()) {
+	public static function addMessage ($msg_id, $user_id, $mob_id, $turn_id, &$order, $vars = array()) {
 		$Database = new Database (database_server, database_user, database_password, database_name);
 		
 		$Database->query ("INSERT INTO `fightmessage_fight` SET `msg_id` = ".(int) $msg_id.", `user_id` = ".(int) $user_id.", `mob_id` = ".(int) $mob_id.", `time` = UNIX_TIMESTAMP ()");
@@ -106,6 +106,8 @@ class FightMessage extends StandardObject {
 				$Database->query ("INSERT INTO `fightmessage_fight_vars` SET `fight_msg_id` = ".$f_msg_id.", `num` = ".($i+1).", `value` = '".$vars[$i]."'");
 			}
 		}
+		
+		$order++;
 		
 		return new FightMessage ($f_msg_id);
 	}

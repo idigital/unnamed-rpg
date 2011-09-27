@@ -5,27 +5,18 @@
 */
 
 class CharacterFight extends StandardObject {
-	public function __construct ($user_id) {
+	public function __construct ($fight_id) {
 		//  We'll need a database.. Fortunately, constants stick around even inside private scope!
 		$Database = new Database (database_server, database_user, database_password, database_name);
 	
 		$config = array (
-			'table' => "user_mob",
+			'table' => "user_fight",
 			'database' => $Database,
-			'item_id' => $user_id,
-			'primary_key' => "user_id"
+			'item_id' => $fight_id,
+			'primary_key' => "fight_id"
 		);
 		
 		parent::__construct ($config);
-	}
-	
-	/**
-	* Gets the static data about the mob the user is currently up against
-	*
-	* @return Mob
-	*/
-	public function getMob () {
-		return new Mob ($this->getDetail ('mob_id'));
 	}
 	
 	/**
@@ -100,29 +91,30 @@ class CharacterFight extends StandardObject {
 	*
 	* "States" are flags that have to be set which mark what the fight is going. For instance, the character could have won,
 	* or fled. We need to store this data since the user could come to the fight page and have already won (a fight they won
-	* before closing the browser, or just by refreshing).
+	* before closing the browser, or just by refreshing) and would still need to see the "you've defeated the mob!" page until
+	* they've clicked to move on.
 	*
-	* @return string "player win", "mob win", "player flee success", in that priority.
+	* The default stage is "current".
+	*
+	* @return string "player win", "mob win", "player flee success", "current"
 	*/
 	public function getStage () {
-		// check if the mob has any health left
-		if ($this->getDetail ('mob_health') <= 0) {
-			return "player win";
-		}
-		
-		// player dead?
-		if ($this->getCharacter()->getDetail ('remaining_hp') <= 0) {
-			return "mob win";
-		}
-		
-		if ($this->getDetail ('flee_success') == 1) {
-			return "player flee success";
-		}
-		
-		return null;
+		return $this->getDetail ('stage');
 	}
 	
 	public function getCharacter () { return new Character ($this->getId()); }
+
+	/**
+	* Gets the static data about the mob the user is currently up against.
+	*
+	* By static, I mean data not dynamic to the fight. You should use this to get max health, but
+	* not current health.
+	*
+	* @return Mob
+	*/
+	public function getMob () {
+		return new Mob ($this->getDetail ('mob_id'));
+	}
 }
 
 ?>

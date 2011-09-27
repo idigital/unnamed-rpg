@@ -2,8 +2,8 @@
 
 /**
 * There's a one-to-one relationship between a Character and a User; they both always have each other. The
-* seperate between the two is just because I want to keep functionality of the accounts and the playing character
-* apart.
+* seperatation between the two is just because I want to keep functionality of the accounts and the playing
+* character apart.
 */
 
 class Character extends StandardObject {
@@ -70,8 +70,31 @@ class Character extends StandardObject {
 		return $max_hp;
 	}
 	
+	/**
+	* Gets the data about the fight a user has fought, or is fighting.
+	*
+	* If "current" or no param is passed, then the function will figure out what the current fight is.
+	* If there is no current fight, then false will be returned.
+	*
+	* @param mixed
+	* @return mixed CharacterFight if there's actually a fight, false otherwise
+	*/
+	public function getFightData ($fight_id="current") {
+		if ($fight_id == "current") {
+			// just find the last fought fight to return
+			$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `user_fight` WHERE `user_id` = ".$this->getId()." AND `complete` = 0");
+			
+			if (empty ($fight_id)) {
+				return false;
+			}
+		}
+	
+		$Fight = new CharacterFight ($fight_id);
+		
+		return ($Fight->exists()) ? $Fight : false;
+	}
+	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
-	public function getFightData () { return new CharacterFight ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
 }
 

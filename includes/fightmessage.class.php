@@ -128,8 +128,10 @@ class FightMessage extends StandardObject {
 	* @return int The new ID
 	*/
 	public static function createTurnId ($fight_id) {
-		$this->getDatabase()->query ("INSERT INTO `fightmessage_turn` SET `fight_id` = ".(int) $fight_id);
-		return $this->getDatabase()->getInsertId ();
+		$Database = new Database (database_server, database_user, database_password, database_name);
+	
+		$Database->query ("INSERT INTO `fightmessage_turn` SET `fight_id` = ".(int) $fight_id);
+		return $Database->getLastInsertId ();
 	}
 }
 

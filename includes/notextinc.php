@@ -39,10 +39,12 @@ if (isset ($Character) && defined ('FORCE_PHASE')) {
 	
 	$current_page = basename ($_SERVER['PHP_SELF']);
 	
+	$fight_phase = array ('fight.php', 'aftermath.php');
+	
 	// this if branch will just get skipped over if they are on the correct page.
 	if ($current_page != "map.php" && $current_phase == 'map') {
 		header ('Location: '.relroot.'/map.php');
-	} elseif ($current_page != "fight.php" && $current_phase == 'fight') {
+	} elseif (!in_array ($current_page, $fight_phase) && $current_phase == 'fight') {
 		header ('Location: '.relroot.'/fight.php');
 	} elseif ($current_phase == 'special') {
 		// not developed yet.

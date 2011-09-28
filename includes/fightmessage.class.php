@@ -127,7 +127,7 @@ class FightMessage extends StandardObject {
 	* @param int The ID of the fight we're adding a message to
 	* @return int The new ID
 	*/
-	public function createTurnId ($fight_id) {
+	public static function createTurnId ($fight_id) {
 		$this->getDatabase()->query ("INSERT INTO `fightmessage_turn` SET `fight_id` = ".(int) $fight_id);
 		return $this->getDatabase()->getInsertId ();
 	}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 28, 2011 at 05:42 PM
+-- Generation Time: Sep 28, 2011 at 06:24 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_text` (
   `msg_id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text NOT NULL,
   `num_vars` smallint(6) NOT NULL,
-  `type_colour` enum('green','red','grey') NOT NULL,
+  `rgb_colour` varchar(18) NOT NULL,
   PRIMARY KEY (`msg_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
@@ -57,16 +57,16 @@ CREATE TABLE IF NOT EXISTS `fightmessage_text` (
 -- Dumping data for table `fightmessage_text`
 --
 
-INSERT INTO `fightmessage_text` (`msg_id`, `text`, `num_vars`, `type_colour`) VALUES
-(1, 'You do nothing.', 0, 'green'),
-(2, '[a_mob_name] blasts you for <strong>[1]</strong> damage.', 1, 'red'),
-(3, 'You blast [a_mob_name] for <strong>[1]</strong> damage.', 1, 'green'),
-(4, '[a_mob_name] attacks you, but misses!', 0, 'red'),
-(5, 'You tried to escape, but [a_mob_name] blocked the way!', 0, 'green'),
-(6, '<strong>You defeated [a_mob_name]!</strong>', 0, 'green'),
-(7, 'You attack [a_mob_name], but miss!', 0, 'green'),
-(8, 'You succeeded in escaping from [a_mob_name]!', 0, 'green'),
-(9, '[a_mob_name] defeated you!', 0, 'red');
+INSERT INTO `fightmessage_text` (`msg_id`, `text`, `num_vars`, `rgb_colour`) VALUES
+(1, 'You do nothing.', 0, 'rgb(0, 255, 0)'),
+(2, '[a_mob_name] blasts you for <strong>[1]</strong> damage.', 1, 'rgb(255, 153, 153)'),
+(3, 'You blast [a_mob_name] for <strong>[1]</strong> damage.', 1, 'rgb(0, 255, 0)'),
+(4, '[a_mob_name] attacks you, but misses!', 0, 'rgb(255, 153, 153)'),
+(5, 'You tried to escape, but [a_mob_name] blocked the way!', 0, 'rgb(0, 255, 0)'),
+(6, '<strong>You defeated [a_mob_name]!</strong>', 0, 'rgb(0, 255, 0)'),
+(7, 'You attack [a_mob_name], but miss!', 0, 'rgb(0, 255, 0)'),
+(8, 'You succeeded in escaping from [a_mob_name]!', 0, 'rgb(0, 255, 0)'),
+(9, '[a_mob_name] defeated you!', 0, 'rgb(255, 153, 153)');
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -12811,7 +12811,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
 --
 
 INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`, `complete`, `start_time`) VALUES
-(1, 1, 1, 17, 'current', 0, 0);
+(1, 1, 1, 20, 'current', 0, 0);
 
 -- --------------------------------------------------------
 

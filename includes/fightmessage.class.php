@@ -111,14 +111,7 @@ class FightMessage extends StandardObject {
 	* @return string ie. "rgb(0, 255, 0)"
 	*/
 	function getColour () {
-		$colour_type = $this->getDatabase()->getSingleValue ("SELECT `type_colour` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
-	
-		switch ($colour_type) {
-			case 'green': $colour = "rgb(0, 255, 0)"; break;
-			case 'red': $colour = "rgb(255, 153, 153)"; break;
-			case 'grey': $colour = "rgb(226, 224, 224)"; break;
-			default: $colour = "rgb(226, 224, 224)"; break;
-		}
+		$colour = $this->getDatabase()->getSingleValue ("SELECT `rgb_colour` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
 		
 		return $colour;
 	}

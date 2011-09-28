@@ -20,7 +20,7 @@ class FightMessage extends StandardObject {
 		$Database = new Database (database_server, database_user, database_password, database_name);
 	
 		$config = array (
-			'table' => "fightmessage_turn",
+			'table' => "fightmessage_turn_message",
 			'database' => $Database,
 			'item_id' => array ($turn_id, $msg_id),
 			'primary_key' => array ('turn_id', 'msg_id')

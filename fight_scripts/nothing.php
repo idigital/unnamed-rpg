@@ -15,8 +15,7 @@ $Mob = $Fight->getMob();
 // the reponse will be stored in here, and then json'd and echoed later
 $r = array ();
 
-// we'll be setting messages, so set up a new order.
-$fight_message_order = 1;
+$turn_id = FightMessage::createTurnId ($Fight->getId());
 
 $r['fight_stage'] = null;
 

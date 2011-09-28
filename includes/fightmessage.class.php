@@ -43,7 +43,7 @@ class FightMessage extends StandardObject {
 		if (mysql_num_rows ($qry_vars)) {
 			while ($var = mysql_fetch_assoc ($qry_vars)) {
 				// what's the type of variable is this?
-				$var_type = $this->getDatabase()->getSingleValue ("SELECT `var_type` FROM `fightmessage_vars` WHERE `msg_id` = ".$this->getDetail ('msg_id')." AND `var_num` = ".$i);
+				$var_type = $this->getDatabase()->getSingleValue ("SELECT `var_type` FROM `fightmessage_text_var` WHERE `msg_id` = ".$this->getDetail ('msg_id')." AND `var_num` = ".$i);
 			
 				if ($var_type == "mob_name") {
 					// this is different to [a_mob_name] since this could be the name of *any mob* not just the one we're fighting.

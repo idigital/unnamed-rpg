@@ -117,7 +117,7 @@ class FightMessage extends StandardObject {
 		
 		// the order of messages is sequencial, and are inserted in the correct order. work out what order this message
 		// should have
-		$order = (int) ($Database->getSingleValue ("SELECT `order` FROM `fightmessage_turn_message` WHERE `turn_id` = ".(int) $turn_id." AND `msg_id` = ".(int) $msg_id." ORDER BY `order` DESC LIMIT 1")) + 1;
+		$order = (int) ($Database->getSingleValue ("SELECT `order` FROM `fightmessage_turn_message` WHERE `turn_id` = ".(int) $turn_id." ORDER BY `order` DESC LIMIT 1")) + 1;
 		
 		// assume the turn actually exists - that's not this method's job to control.
 		$Database->query ("INSERT INTO `fightmessage_turn_message` SET `turn_id` = ".(int) $turn_id.", `msg_id` = ".(int) $msg_id.", `order` = ".$order);

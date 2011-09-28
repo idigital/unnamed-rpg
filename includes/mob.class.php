@@ -46,6 +46,9 @@ class Mob extends StandardObject {
 			$new_health = $Character->getDetail ('remaining_hp')-$attack;
 			$new_health = ($new_health < 0) ? 0 : $new_health;
 			
+			// if it's zero, the mob won
+			if ($new_health == 0) $Character->getFightData()->setDetail ('stage', 'mob win');
+			
 			$Character->setDetail ('remaining_hp', $new_health);
 		} else {
 			$r['hit'] = false;

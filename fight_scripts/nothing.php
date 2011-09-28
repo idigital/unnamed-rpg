@@ -17,14 +17,14 @@ $r = array ();
 
 $turn_id = FightMessage::createTurnId ($Fight->getId());
 
-$r['fight_stage'] = $Fight->getStage();
-
 $Message = FightMessage::addMessage ($turn_id, 1);
 $r['message'][] = $Message->getMessageArray ();
 
 $Fight->doNothing ();
 
 include ('mob_action.php');
+
+$r['fight_stage'] = $Fight->getStage();
 
 echo json_encode ($r);
 

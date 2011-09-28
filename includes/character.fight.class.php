@@ -45,6 +45,9 @@ class CharacterFight extends StandardObject {
 			$new_health = $this->getDetail ('mob_health')-$attack;
 			$new_health = ($new_health < 0) ? 0 : $new_health;
 			
+			// if the mob's health is zero, then the player has won
+			if ($new_health == 0) $this->setDetail ('stage', 'player win');
+			
 			$this->setDetail ('mob_health', $new_health);
 		} else {
 			$r['hit'] = false;
@@ -81,7 +84,7 @@ class CharacterFight extends StandardObject {
 		
 		$success = ($roll <= $user_speed);
 		
-		if ($success) $this->setDetail ('flee_success', 1);
+		if ($success) $this->setDetail ('stage', 'player flee success');
 		
 		return $success;
 	}

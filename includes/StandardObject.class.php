@@ -193,6 +193,18 @@ abstract class StandardObject {
 		return $ids;
 	}
 	
+	/**
+	* Returns the part of the SQL which uniquely identifies this object.
+	*
+	* Usually that means the "`user_id` = 12" bit, but this is more helpful when there's more than one
+	* primary key.
+	*
+	* @return string
+	*/
+	public function getSQLWhereClause () {
+		return $this->___config['primary_sql'];
+	}
+	
 	protected function getDatabase () { return $this->___Database; }
 }
 

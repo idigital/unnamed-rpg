@@ -20,7 +20,7 @@ $fight_message_order = 1;
 
 $r['fight_stage'] = null;
 
-$Message = FightMessage::addMessage (1, $Character->getId(), $Mob->getId(), $fight_message_order);
+$Message = FightMessage::addMessage ($turn_id, 1);
 $r['message'][] = $Message->getMessageArray ();
 
 $Fight->doNothing ();

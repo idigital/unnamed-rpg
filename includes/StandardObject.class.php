@@ -59,10 +59,26 @@ abstract class StandardObject {
 		if ($success) {
 			$this->___Database = $___config['database'];
 		
+			// are there more than one attributes that make up the primary key?
+			if (is_array ($___config['primary_key'])) {
+				$___config['primary_sql'] = "";
+				
+				foreach ($___config['primary_key'] as $ele_id => $attr) {
+					$___config['primary_sql'] .= "`".$attr."` = ".$___config['item_id'][$ele_id]." AND ";
+				}
+				$___config['primary_sql'] = trim ($___config['primary_sql'], "' AND '");
+			} else {
+				$___config['primary_sql'] = "`".$___config['primary_key']."` = ".$___config['item_id'];
+			}
+		
 			// Get all the item's attributes
-			$data = mysql_fetch_assoc ($___config['database']->query ("SELECT * FROM `".$___config['table']."` WHERE `".$___config['primary_key']."` = ".$___config['item_id']." LIMIT 1"));
+			$data = mysql_fetch_assoc ($___config['database']->query ("SELECT * FROM `".$___config['table']."` WHERE ".$___config['primary_sql']." LIMIT 1"));
 			// Optimistic existance flag
 			$this->___itemExists = true;
+			
+			// make sure that the primary_sql variable is added into ___config
+			$this->___config['primary_sql'] = $___config['primary_sql'];
+			
 			// Does it actually exist?
 			if (!empty ($data)) {
 				// it does exist, so we can set properties
@@ -130,7 +146,7 @@ abstract class StandardObject {
 		}
 	
 		// try update the database first. capture the result
-		$result = $this->getDatabase()->query ("UPDATE `".$this->___config['table']."` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE `".$this->___config['primary_key']."` = ".$this->getId());
+		$result = $this->getDatabase()->query ("UPDATE `".$this->___config['table']."` SET `".$this->getDatabase()->escape ($detail)."` = '".$this->getDatabase()->escape ($value)."' WHERE ".$this->___config['primary_sql']);
 		
 		// if the database updated well, then updated our local property
 		if ($result) $this->___properties[$detail] = $value;
@@ -138,8 +154,46 @@ abstract class StandardObject {
 		return $this;
 	}
 	
+	/**
+	* Gets the ID of the object we're looking at.
+	*
+	* This is almost always the parameter that was passed to create the object.
+	*
+	* It's not necessarily an INT, but is usually since id's are often autoincremented ints.
+	*
+	* If this is an object created with a multiattribute primary key then don't use this function. Use
+	* this::getIds() instead.
+	*
+	* @return mixed
+	*/
+	public function getId () {
+		// don't bother if this is a multi primary key object
+		if (is_array ($this->___config['primary_key'])) return null;
+	
+		return $this->getDetail ($this->___config['primary_key']);
+	}
+	
+	/**
+	* Returns an array of the attributes made up for the key.
+	*
+	* This'll be in the form of
+	* 	array ('attr_name' => "value", 'attr_name' => "value", ...)
+	*
+	* @return array
+	*/
+	public function getIds () {
+		if (!is_array ($this->___config['primary_key'])) return null;
+		
+		$ids = array ();
+		
+		foreach ($this->___config['primary_key'] as $key) {
+			$ids[$key] = $this->getDetail ($key);
+		}
+		
+		return $ids;
+	}
+	
 	protected function getDatabase () { return $this->___Database; }
-	public function getId () { return $this->getDetail ($this->___config['primary_key']); }
 }
 
 ?>

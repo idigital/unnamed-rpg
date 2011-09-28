@@ -15,15 +15,15 @@
 */
 
 class FightMessage extends StandardObject {
-	public function __construct ($fight_msg_id) {
+	public function __construct ($turn_id, $msg_id) {
 		//  We'll need a database.. Fortunately, constants stick around even inside private scope!
 		$Database = new Database (database_server, database_user, database_password, database_name);
 	
 		$config = array (
-			'table' => "fightmessage_fight",
+			'table' => "fightmessage_turn",
 			'database' => $Database,
-			'item_id' => $fight_msg_id,
-			'primary_key' => "fight_msg_id"
+			'item_id' => array ($turn_id, $msg_id),
+			'primary_key' => array ('turn_id', 'msg_id')
 		);
 		
 		parent::__construct ($config);
@@ -38,7 +38,7 @@ class FightMessage extends StandardObject {
 		$t_string = str_replace ('[a_mob_name]', $fighting_Mob->getName (true), $t_string);
 		
 		// go through each of the variables we have stored
-		$qry_vars = $this->getDatabase()->query ("SELECT `value` FROM `fightmessage_fight_vars` WHERE `fight_msg_id` = ".$this->getId()." ORDER BY `num` ASC");
+		$qry_vars = $this->getDatabase()->query ("SELECT `value` FROM `fightmessage_turn_message_var` WHERE ".$this->getSQLWhereClause()." ORDER BY `num` ASC");
 		$i = 1;
 		if (mysql_num_rows ($qry_vars)) {
 			while ($var = mysql_fetch_assoc ($qry_vars)) {

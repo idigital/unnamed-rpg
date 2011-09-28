@@ -102,6 +102,23 @@ class CharacterFight extends StandardObject {
 		return $this->getDetail ('stage');
 	}
 	
+	public function getPreviousTurnMessages () {
+		$last_turn_id = $this->getDatabase()->getSingleValue ("SELECT `turn_id` FROM `fightmessage_turn` WHERE `fight_id` = ".$this->getId()." ORDER BY `turn_id` DESC LIMIT 1");
+	
+		if ($last_turn_id) {
+			$messages = array ();
+			
+			$qry_messages = $this->getDatabase()->query ("SELECT `msg_id` FROM `fightmessage_turn_message` WHERE `turn_id` = ".$last_turn_id." ORDER BY `order` ASC");
+			while ($message = mysql_fetch_assoc ($qry_messages)) {
+				$messages[] = new FightMessage ($last_turn_id, $message['msg_id']);
+			}
+			
+			return $messages;
+		} else {
+			return array ();
+		}
+	}
+	
 	public function getCharacter () { return new Character ($this->getId()); }
 
 	/**

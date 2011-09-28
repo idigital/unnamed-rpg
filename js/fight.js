@@ -83,15 +83,8 @@ function clearHistory () {
 * @param string String to use as the history
 * @param string 'good','bad','note'
 */
-function addHistory (content, flag) {
+function addHistory (content, colour) {
 	$('#round_feedback').show ();
-
-	switch (flag) {
-		case 'green': colour = "rgb(0, 255, 0)"; break;
-		case 'red': colour = "rgb(255, 153, 153)"; break;
-		case 'grey': colour = "rgb(226, 224, 224)"; break;
-		default: colour = "rgb(226, 224, 224)"; break;
-	}
 
 	$('#round_feedback>ul').append ('<li style="background-color: '+colour+'">'+content+'</li>');
 }

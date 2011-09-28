@@ -75,9 +75,7 @@ class FightMessage extends StandardObject {
 	* @return array
 	*/
 	public function getMessageArray () {
-		$colour = $this->getDatabase()->getSingleValue ("SELECT `type_colour` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
-	
-		$arr = array ('msg' => $this->getString(), 'type' => $colour);
+		$arr = array ('msg' => $this->getString(), 'type' => $this->getColour());
 		
 		return $arr;
 	}
@@ -105,6 +103,24 @@ class FightMessage extends StandardObject {
 		$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `fightmessage_turn` WHERE `turn_id` = ".$this->getDetail ('turn_id'));
 		
 		return new CharacterFight ($fight_id);
+	}
+	
+	/**
+	* Gets the RGB code for the background that should show up on the fight page
+	*
+	* @return string ie. "rgb(0, 255, 0)"
+	*/
+	function getColour () {
+		$colour_type = $this->getDatabase()->getSingleValue ("SELECT `type_colour` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
+	
+		switch ($colour_type) {
+			case 'green': $colour = "rgb(0, 255, 0)"; break;
+			case 'red': $colour = "rgb(255, 153, 153)"; break;
+			case 'grey': $colour = "rgb(226, 224, 224)"; break;
+			default: $colour = "rgb(226, 224, 224)"; break;
+		}
+		
+		return $colour;
 	}
 	
 	/**

@@ -53,6 +53,15 @@ echo "<div class=\"clear\">&nbsp;</div>\n";
 echo "</div>\n";
 
 echo "<div id=\"round_feedback\">\n<ul></ul>\n</div>\n";
+// are there any old messages, from this fight?
+$messages = $Fight->getPreviousTurnMessages ();
+// let javascript handle them. why have two sets of code to do the same thing? browsers are fast enough to rely on
+// javascript these days.
+echo "<script>\n$(function () {\n";
+foreach ($messages as $Message) {
+	echo "addHistory ('".addslashes ($Message->getString())."', '".$Message->getColour()."');\n";
+}
+echo "});\n</script>\n";
 
 echo "<div id=\"actions\">\n";
 // depending on what state the game is, depends on what actions are availiable.

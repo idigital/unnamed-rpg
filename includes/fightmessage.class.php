@@ -95,21 +95,41 @@ class FightMessage extends StandardObject {
 		return new Mob ($this->getDetail ('mob_id'));
 	}
 	
-	public static function addMessage ($msg_id, $user_id, $mob_id, $turn_id, &$order, $vars = array()) {
+	/**
+	* Adds a message
+	*
+	* @return FightMessage
+	*/
+	public static function addMessage ($turn_id, $msg_id, $vars = array()) {
 		$Database = new Database (database_server, database_user, database_password, database_name);
 		
-		$Database->query ("INSERT INTO `fightmessage_fight` SET `msg_id` = ".(int) $msg_id.", `user_id` = ".(int) $user_id.", `mob_id` = ".(int) $mob_id.", `time` = UNIX_TIMESTAMP ()");
-		$f_msg_id = $Database->getLastId();
+		// the order of messages is sequencial, and are inserted in the correct order. work out what order this message
+		// should have
+		$order = (int) ($this->getDatabase()->getSingleValue ("SELECT `order` FROM `fightmessage_turn_message` WHERE `turn_id` = ".(int) $turn_id." AND `msg_id` = ".(int) $msg_id." ORDER BY `order` DESC LIMIT 1") + 1;
+		
+		// assume the turn actually exists - that's not this method's job to control.
+		$Database->query ("INSERT INTO `fightmessage_turn_message` SET `turn_id` = ".(int) $turn_id.", `msg_id` = ".(int) $msg_id.", `order` = ".$order);
 		
 		if ($num_vars = count ($vars)) {
 			for ($i=0; $i<$num_vars; $i++) {
-				$Database->query ("INSERT INTO `fightmessage_fight_vars` SET `fight_msg_id` = ".$f_msg_id.", `num` = ".($i+1).", `value` = '".$vars[$i]."'");
+				$Database->query ("INSERT INTO `fightmessage_turn_message_var` SET `turn_id` = ".(int) $turn_id.", `msg_id` = ".(int) $msg_id.", `num` = ".($i+1).", `value` = '".$vars[$i]."'");
 			}
 		}
 		
-		$order++;
-		
-		return new FightMessage ($f_msg_id);
+		return new FightMessage ($turn_id, $msg_id);
+	}
+	
+	/**
+	* Each turn requires a new ID, this generates it.
+	*
+	* It also creates the row.
+	*
+	* @param int The ID of the fight we're adding a message to
+	* @return int The new ID
+	*/
+	public function createTurnId ($fight_id) {
+		$this->getDatabase()->query ("INSERT INTO `fightmessage_turn` SET `fight_id` = ".(int) $fight_id);
+		return $this->getDatabase()->getInsertId ();
 	}
 }
 

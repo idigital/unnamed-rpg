@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 27, 2011 at 10:17 PM
+-- Generation Time: Sep 28, 2011 at 05:42 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
 --
 
 INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 0, 2);
+(1, 0, 25);
 
 -- --------------------------------------------------------
 
@@ -97,8 +97,9 @@ INSERT INTO `fightmessage_text_var` (`msg_id`, `var_num`, `var_type`) VALUES
 
 CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -131,9 +132,10 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn_message` (
 
 CREATE TABLE IF NOT EXISTS `fightmessage_turn_message_var` (
   `turn_id` int(11) NOT NULL,
-  `message_id` int(11) NOT NULL,
+  `msg_id` int(11) NOT NULL,
   `num` int(11) NOT NULL,
-  `value` text NOT NULL
+  `value` text NOT NULL,
+  PRIMARY KEY (`turn_id`,`msg_id`,`num`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -12809,7 +12811,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
 --
 
 INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`, `complete`, `start_time`) VALUES
-(1, 1, 1, 10, 'current', 0, 0);
+(1, 1, 1, 17, 'current', 0, 0);
 
 -- --------------------------------------------------------
 

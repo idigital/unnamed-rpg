@@ -34,7 +34,7 @@ class FightMessage extends StandardObject {
 		$t_string = $this->getDatabase()->getSingleValue ("SELECT `text` FROM `fightmessage_text` WHERE `msg_id` = ".$this->getDetail ('msg_id'));
 		
 		// swap out any [a_mob_name] tags for the mob who we're currently fighting
-		$fighting_Mob = new mob ($this->getDetail ('mob_id'));
+		$fighting_Mob = $this->getMob();
 		$t_string = str_replace ('[a_mob_name]', $fighting_Mob->getName (true), $t_string);
 		
 		// go through each of the variables we have stored
@@ -92,7 +92,19 @@ class FightMessage extends StandardObject {
 	}
 	
 	public function getMob () {
-		return new Mob ($this->getDetail ('mob_id'));
+		return $this->getFight()->getMob ();
+	}
+	
+	/**
+	* Figures out the fight_id for for fight associated with these messages.
+	*
+	* @return CharacterFight
+	*/
+	function getFight () {
+		// what's the fight ID? we can get this from the turn table
+		$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `fightmessage_turn` WHERE `turn_id` = ".$this->getDetail ('turn_id'));
+		
+		return new CharacterFight ($fight_id);
 	}
 	
 	/**

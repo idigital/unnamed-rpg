@@ -39,13 +39,21 @@ if (isset ($Character) && defined ('FORCE_PHASE')) {
 	
 	$current_page = basename ($_SERVER['PHP_SELF']);
 	
-	$fight_phase = array ('fight.php', 'aftermath.php');
-	
 	// this if branch will just get skipped over if they are on the correct page.
 	if ($current_page != "map.php" && $current_phase == 'map') {
 		header ('Location: '.relroot.'/map.php');
-	} elseif (!in_array ($current_page, $fight_phase) && $current_phase == 'fight') {
-		header ('Location: '.relroot.'/fight.php');
+	} elseif ($current_phase == 'fight') {
+		// they're in some sort of fight page
+		$Fight = $Character->getFightData();
+	
+		// there are two pages a user could be on in a fight.
+		// there's the fight page, which they're on if the fight isn't set to complete
+		if ($current_page != "fight.php" && $Fight->getDetail ('complete') == 0) {
+			header ('Location: '.relroot.'/fight.php');
+		} elseif ($current_page != "aftermath.php" && $Fight->getDetail ('complete') == 1) {
+			// since the fight is complete but we're still in a fight, we're on the aftermath page.
+			header ('Location: '.relroot.'/fight_scripts/aftermath.php');
+		}
 	} elseif ($current_phase == 'special') {
 		// not developed yet.
 	}

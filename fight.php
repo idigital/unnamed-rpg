@@ -9,13 +9,20 @@
 define ('LOGIN', true);
 define ('FORCE_PHASE', true);
 require_once ('includes/notextinc.php');
+
+$Fight = $Character->getFightData();
+$Mob = $Fight->getMob();
+
+// are we done of this page? we may have to just redirect to the aftermath page
+if ($_GET['complete'] == true && $Fight->getStage() != "current") {
+	$Fight->setDetail ('complete', 1);
+	header ('Location: '.relroot.'/fight_scripts/aftermath.php');
+}
+
 $ext_css[] = "fight.css";
 $ext_js[] = relroot."/js/fight.js";
 $ext_title = "Fight!";
 include_once ('includes/header.php');
-
-$Fight = $Character->getFightData();
-$Mob = $Fight->getMob();
 
 // let the browser know about some of the important stats they should keep track of
 echo "<script type=\"text/javascript\">\n";
@@ -67,11 +74,11 @@ echo "<div id=\"actions\">\n";
 // depending on what state the game is, depends on what actions are availiable.
 // player dead?
 if ($Fight->getStage() == "mob win") {
-	echo "<p><a href=\"".relroot."/fight_scripts/aftermath.php\"><strong>Click here</strong> to see the aftermath...</a></p>";
+	echo "<p><a href=\"?complete=true\"><strong>Click here</strong> to see the aftermath...</a></p>";
 } elseif ($Fight->getStage() == "player win") {
-	echo "<p><a href=\"".relroot."/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what you found!</a></p>";
+	echo "<p><a href=\"?complete=true\"><strong>Click here</strong> to see what you found!</a></p>";
 } elseif ($Fight->getStage() == "player flee success") {
-	echo "<p><a href=\"".relroot."/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what happened...</a></p>";
+	echo "<p><a href=\"?complete=true\"><strong>Click here</strong> to see what happened...</a></p>";
 } else {
 	echo "<p><span id=\"act_attack\" class=\"link\">Attack</span></p>\n";
 	echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\" class=\"link\">Flee</span></p>\n";

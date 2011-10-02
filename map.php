@@ -15,7 +15,7 @@ $ext_css[] = "map.css";
 $ext_js[] = relroot."/js/map.js";
 require_once ('includes/header.php');
 
-include ('stat_bar.php');
+include ('fight_scripts/stat_bar.php');
 
 echo "<div id=\"map\"><div>\n<div id=\"map_table\">\n";
 echo "</div>\n</div>\n";

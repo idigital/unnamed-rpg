@@ -25,7 +25,7 @@ function handleAttackClick () {
 		
 		// check the game state. other UI changes might be needed.
 		if (json['fight_stage'] == "player win") {
-			$('#actions').html ("<p><a href=\""+relroot+"/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what you found!</a></p>");
+			$('#actions').html ("<p><a href=\"?complete=true\"><strong>Click here</strong> to see what you found!</a></p>");
 		}
 	}, "json");
 }
@@ -48,7 +48,7 @@ function handleFleeClick () {
 		
 		if (json['fight_stage'] == "player flee success") {
 			// they succeeded
-			$('#actions').html ("<p><a href=\""+relroot+"/fight_scripts/aftermath.php\"><strong>Click here</strong> to see what happened...</a></p>");
+			$('#actions').html ("<p><a href=\"?complete=true\"><strong>Click here</strong> to see what happened...</a></p>");
 		} else {
 			// only bother with the mob action if they failed running away
 			doMobAction (json);
@@ -68,7 +68,7 @@ function doMobAction (json) {
 	
 	if (json['fight_stage'] == "mob win") {
 		// remove all the actions, and change it with a link back to the map
-		$('#actions').html ("<p><a href=\""+relroot+"/fight_scripts/aftermath.php\"><strong>Click here</strong> to see the aftermath...</a></p>");
+		$('#actions').html ("<p><a href=\"?complete=true\"><strong>Click here</strong> to see the aftermath...</a></p>");
 	}
 }
 

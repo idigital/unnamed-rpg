@@ -30,7 +30,7 @@ echo "game_state['char'] = {hp: ".$Character->getDetail ('remaining_hp').", max_
 echo "game_state['mob'] = {hp: ".$Fight->getDetail ('mob_health').", max_hp: ".$Mob->getDetail ('hp')."};";
 echo "</script>\n";
 
-include ('stat_bar.php');
+include ('fight_scripts/stat_bar.php');
 
 echo "<div id=\"vs_pane\">\n";
 

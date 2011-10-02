@@ -12,13 +12,10 @@ require_once ('../includes/notextinc.php');
 
 $ext_css[] = "fight.css";
 $ext_title = "You fled!";
-include_once ('includes/header.php');
+include_once ('../includes/header.php');
 
 $Fight = $Character->getFightData();
 $Mob = $Fight->getMob();
-
-// make sure we're in a fight ending state, else kick them back to the fight.php page
-if ($Fight->getStage() == "current") header ('Location: '.relroot.'/fight.php');
 
 // what condition are we in?
 if ($Fight->getStage() == "player flee success") {
@@ -31,5 +28,5 @@ if ($Fight->getStage() == "player flee success") {
 	echo "<p><input type=\"submit\" value=\"Click here to return to the map\" /></p>\n";
 }
 
-include_once ('includes/footer.php');
+include_once ('../includes/footer.php');
 ?>

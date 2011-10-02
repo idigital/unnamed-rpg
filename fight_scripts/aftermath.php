@@ -21,11 +21,15 @@ $Mob = $Fight->getMob();
 if ($Fight->getStage() == "player flee success") {
 	include ('stat_bar.php');
 	
+	echo "<div id=\"aftermath_flee\">\n";
+	
 	echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/mobs/".$Mob->getDetail ('image')."\" /></div>\n";
-	echo "<p>You escaped from ".$Mob->getName (true)."</p>\n";
+	echo "<p>You escaped from ".$Mob->getName (true)."!</p>\n";
 	echo "<p>".ucfirst ($Mob->getName (true))." at you as you flee!</p>\n";
 	
 	echo "<p><input type=\"submit\" value=\"Click here to return to the map\" /></p>\n";
+	
+	echo "</p>\n";
 }
 
 include_once ('../includes/footer.php');

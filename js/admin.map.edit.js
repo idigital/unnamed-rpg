@@ -135,6 +135,9 @@ function handleClickCanvasBlock () {
 		success: function (returned) {
 			if (returned['status'] == 200) {
 				$(me).children ('img').attr ('src', $('#blocks .selected').attr ('src'));
+			} else if (returned['status'] == 400) {
+				// one of the text boxes haven't been filled in
+				alert ("Some data missing. Make sure you've set a locality text for this placement.");
 			}
 		},
 		dataType: 'json',

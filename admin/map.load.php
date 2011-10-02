@@ -85,7 +85,7 @@ $_POST['refine_y_num']--;
 
 $qry_coords = $Database->query ("SELECT * FROM `map` WHERE `map_id` = ".$_POST['map_id']." AND `x_co` >= ".$_POST['refine_x_from']." AND `x_co` <= ".($_POST['refine_x_from']+$_POST['refine_x_num'])." AND `y_co` >= ".$_POST['refine_y_from']." AND `y_co` <= ".($_POST['refine_y_from']+$_POST['refine_y_num'])." ORDER BY `x_co` ASC, `y_co` ASC");
 while ($coord = mysql_fetch_assoc ($qry_coords)) {
-	$return['coords'][$coord['x_co']][$coord['y_co']] = $coord;
+	$return['coords'][$coord['y_co']][$coord['x_co']] = $coord;
 	
 	$last_x = $coord['x_co'];
 }

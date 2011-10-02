@@ -84,15 +84,15 @@ function loadEditor (map_id) {
 				var canvasText = "";
 				
 				// now we need to output all the coords to the #canvas
-				for (x=returned['refine']['x']['from'];x<(returned['refine']['x']['num']+returned['refine']['x']['from']);x++) {
+				for (y=returned['refine']['y']['from'];y<(returned['refine']['y']['num']+returned['refine']['y']['from']);y++) {
 					// check if we've actually been given this coord (we may have requested ['num'], but there's only ['num']-1 to display)
-					if (undefined == returned['coords'][x]) continue;
+					if (undefined == returned['coords'][y]) continue;
 					
 					canvasText += "<div>";
-					for (y=returned['refine']['y']['from'];y<(returned['refine']['y']['num']+returned['refine']['y']['from']);y++) {
-						if (undefined == returned['coords'][x][y]) continue;
+					for (x=returned['refine']['x']['from'];x<(returned['refine']['x']['num']+returned['refine']['x']['from']);x++) {
+						if (undefined == returned['coords'][y][x]) continue;
 						
-						canvasText += "<span id=\"block"+x+":"+y+"\"><img src=\""+relroot+"/images/map_images/"+returned['coords'][x][y]['image']+"\" title=\""+x+":"+y+"\" /></span>";
+						canvasText += "<span id=\"block"+x+":"+y+"\"><img src=\""+relroot+"/images/map_images/"+returned['coords'][y][x]['image']+"\" title=\""+x+":"+y+"\" /></span>";
 					}
 					canvasText += "</div>";
 				}

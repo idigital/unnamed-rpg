@@ -10,6 +10,11 @@ define ('LOGIN', true);
 define ('FORCE_PHASE', true);
 require_once ('../includes/notextinc.php');
 
+if (isset ($_POST['back_to_map'])) {
+	$Character->getMapData()->setDetail ('phase', 'map');
+	header ('Location: '.relroot.'/map.php');
+}
+
 $ext_css[] = "fight.css";
 $ext_title = "You fled!";
 include_once ('../includes/header.php');
@@ -27,7 +32,9 @@ if ($Fight->getStage() == "player flee success") {
 	echo "<p>You escaped from ".$Mob->getName (true)."!</p>\n";
 	echo "<p>".ucfirst ($Mob->getName (true))." at you as you flee!</p>\n";
 	
-	echo "<p><input type=\"submit\" value=\"Click here to return to the map\" /></p>\n";
+	echo "<form method=\"post\" action=\"\">\n";
+	echo "<p><input type=\"submit\" value=\"Click here to return to the map\" name=\"back_to_map\" /></p>\n";
+	echo "</form>\n";
 	
 	echo "</p>\n";
 }

@@ -7,7 +7,9 @@ $(function () {
 function generateMap (direction) {
 	$.ajax ({
 		cache: false,
-		success: function (returned) {			
+		success: function (returned) {
+			if ($('goto', returned).attr ('page') == 'fight') window.location = relroot+'/fight.php';
+			
 			$('#map_table').html ($('root>map_data', returned).text());
 			$('#mapnav').html ($('root>navigation_data', returned).text());
 		},

@@ -28,11 +28,18 @@
 define ('LOGIN', true);
 require_once ('../includes/notextinc.php');
 
+$CharMap = $Character->getMapData();
+
+// first check if they're movement has caused a mob to spawn and attack
+if (isset ($_POST['move']) && $CharMap->rollSpawnMob()) {
+	// fight started, redirect to fight page
+	echo "<goto page=\"fight\"/>";
+	exit;
+}
+
 header ('Content-Type: text/xml');
 
 echo "<?xml version=\"1.0\" ?>\n";
-
-$CharMap = $Character->getMapData();
 
 // Are we moving?
 $old_x = $CharMap->getX();

@@ -19,6 +19,37 @@ class CharacterMap extends StandardObject {
 		parent::__construct ($config);
 	}
 	
+	/**
+	* Taking the map, user's state and mobs that are in the area into consideration, should we trigger
+	* a fight?
+	*
+	* Will do the test to see if a fight is possible, and then rolls a dice to see if it does start. If
+	* so, it'll put the player into a fight.
+	*
+	* @return bool true on fight start
+	*/
+	public function rollSpawnMob () {
+		// are the actually any mobs around here?
+		$mobs = $this->getGrid()->getMobs();
+		if (count ($mobs)) {
+			// pick on!
+			$Mob = $mobs[rand (0,count ($mobs)-1)];
+			
+			$dice_roll = rand (1, 100);
+			
+			if ($dice_roll < $this->getGrid()->getSpawnChance()) {
+				// start a fight!
+				$this->getCharacter()->startFight($Mob);
+				
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	public function getId () { return $this->getDetail ('map_id'); }
 	public function getGrid () { return MapGrid::byCoord ($this->getId(), $this->getX(), $this->getY()); }
 	public function getCharacter () { return new Character ($this->getDetail ('user_id')); }

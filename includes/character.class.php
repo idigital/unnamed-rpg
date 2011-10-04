@@ -94,6 +94,13 @@ class Character extends StandardObject {
 		return ($Fight->exists()) ? $Fight : false;
 	}
 	
+	public function startFight (Mob $Mob) {
+		$this->getMapData()->setDetail ('phase', 'fight');
+		$this->getDatabase()->query ("INSERT INTO `user_fight` SET `user_id` = ".$this->getId().", `mob_id` = ".$Mob->getId().", `mob_health` = ".$Mob->getDetail ('hp').", `start_time` = UNIX_TIMESTAMP()");
+		
+		return;
+	}
+	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
 }

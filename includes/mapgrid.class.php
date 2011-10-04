@@ -76,6 +76,22 @@ class MapGrid extends StandardObject {
 	}
 	
 	/**
+	* Returns an array of mobs that could spawn here.
+	*
+	* @return array
+	*/
+	public function getMobs () {
+		$mobs = array ();
+		
+		$qry_mobs = $this->getDatabase()->query ("SELECT * FROM `map_mob` WHERE `grid_id` = ".$this->getId());
+		while ($mob = mysql_fetch_assoc ($qry_mobs)) {
+			$mobs[] = new Mob ($mob['mob_id']);
+		}
+		
+		return $mobs;
+	}
+	
+	/**
 	* Gets a MapGrid object via it's coords, rather than grid_id.
 	*
 	* @param int

@@ -8,9 +8,10 @@
 *
 * `type`:
 *   1 - normal passable square
-*   2 - forest area
+*   2 - high risk area
 *   4 - special square that can be entered. A URL to take the player to is in the map_special table
 *   5 - impassable square
+*	6 - low risk area
 *
 * It'll output a document like this
 <?xml version="1.0" ?>

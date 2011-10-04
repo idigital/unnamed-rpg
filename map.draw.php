@@ -32,9 +32,11 @@ header ('Content-Type: text/xml');
 
 echo "<?xml version=\"1.0\" ?>\n";
 
+$CharMap = $Character->getMapData();
+
 // Are we moving?
-$old_x = $Character->getMapData()->getX();
-$old_y = $Character->getMapData()->getY();
+$old_x = $CharMap->getX();
+$old_y = $CharMap->getY();
 // Sort out user directions
 if ($_POST['move'] == "west") {
 	// work out new location
@@ -73,14 +75,14 @@ if ($_POST['move'] == "west") {
 // if user has moved
 if ($moved) {
 	// get map data for new location
-	$new_location = mysql_fetch_assoc ($Database->query ("SELECT * FROM `map` WHERE `x_co` = ".$new_x." AND `y_co` = ".$new_y." AND `map_id` = ".$Character->getMapData()->getId()));
+	$new_location = mysql_fetch_assoc ($Database->query ("SELECT * FROM `map` WHERE `x_co` = ".$new_x." AND `y_co` = ".$new_y." AND `map_id` = ".$CharMap->getId()));
 	$location_type = $new_location['type'];
 
 	// check if new location is passable
 	if ($location_type != 5) {
 		// move to new location
-		$Character->getMapData()->setDetail ('x_co', $new_x);
-		$Character->getMapData()->setDetail ('y_co', $new_y);
+		$CharMap->setDetail ('x_co', $new_x);
+		$CharMap->setDetail ('y_co', $new_y);
 	} else {
 		// tell user it is not passable
 		$status[] = "<p class=\"error\">You can't cross this area.</p>\n";
@@ -102,17 +104,17 @@ echo "\t<map_data>\n";
 $map_los = 3;
 
 // now we can work out what coordinates the user can see
-$x_smallest = $Character->getMapData()->getX() - $map_los;
-$x_largest = $Character->getMapData()->getX() + $map_los;
-$y_smallest = $Character->getMapData()->getY() - $map_los;
-$y_largest = $Character->getMapData()->getY() + $map_los;
+$x_smallest = $CharMap->getX() - $map_los;
+$x_largest = $CharMap->getX() + $map_los;
+$y_smallest = $CharMap->getY() - $map_los;
+$y_largest = $CharMap->getY() + $map_los;
 
 // Make sure that the max/min coordinates don't go other the side of the possible map squares...
 // what's the smallest x?
-$map_x_min = $Database->getSingleValue ("SELECT `x_co` FROM `map` WHERE `map_id` = ".$Character->getMapData()->getId()." ORDER BY `x_co` ASC LIMIT 1");
-$map_y_min = $Database->getSingleValue ("SELECT `y_co` FROM `map` WHERE `map_id` = ".$Character->getMapData()->getId()." ORDER BY `y_co` ASC LIMIT 1");
-$map_x_max = $Database->getSingleValue ("SELECT `x_co` FROM `map` WHERE `map_id` = ".$Character->getMapData()->getId()." ORDER BY `x_co` DESC LIMIT 1");
-$map_y_max = $Database->getSingleValue ("SELECT `y_co` FROM `map` WHERE `map_id` = ".$Character->getMapData()->getId()." ORDER BY `y_co` DESC LIMIT 1");
+$map_x_min = $Database->getSingleValue ("SELECT `x_co` FROM `map` WHERE `map_id` = ".$CharMap->getId()." ORDER BY `x_co` ASC LIMIT 1");
+$map_y_min = $Database->getSingleValue ("SELECT `y_co` FROM `map` WHERE `map_id` = ".$CharMap->getId()." ORDER BY `y_co` ASC LIMIT 1");
+$map_x_max = $Database->getSingleValue ("SELECT `x_co` FROM `map` WHERE `map_id` = ".$CharMap->getId()." ORDER BY `x_co` DESC LIMIT 1");
+$map_y_max = $Database->getSingleValue ("SELECT `y_co` FROM `map` WHERE `map_id` = ".$CharMap->getId()." ORDER BY `y_co` DESC LIMIT 1");
 
 // check left boundary
 if ($x_smallest < $map_x_min) {
@@ -139,7 +141,7 @@ if ($y_largest > $map_y_max) {
 }
 
 // nab all the coords that we've decided we can show on the map that the user is on
-$qry_mapgrid = $Database->query ("SELECT * FROM `map` WHERE `x_co` >= ".$x_smallest." AND `x_co` <= ".$x_largest." AND `y_co` >= ".$y_smallest." AND `y_co` <= ".$y_largest." AND `map_id` = ".$Character->getMapData()->getId());
+$qry_mapgrid = $Database->query ("SELECT * FROM `map` WHERE `x_co` >= ".$x_smallest." AND `x_co` <= ".$x_largest." AND `y_co` >= ".$y_smallest." AND `y_co` <= ".$y_largest." AND `map_id` = ".$CharMap->getId());
 
 // for the first row of the map, put the border around it
 $map_data_output = "<div><span><img src=\"".relroot."/images/map_ui/brd_tl.gif\"/></span>";
@@ -154,7 +156,7 @@ $in_row = 0; $rows = 0;
 while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 	// if the user is on this square then we just want to show the user's avatar here. Otherwise just show the actual
 	// image that belongs to the coord.
-	if ($Character->getMapData()->getX() == $map_array['x_co'] AND $Character->getMapData()->getY() == $map_array['y_co']) {
+	if ($CharMap->getX() == $map_array['x_co'] AND $CharMap->getY() == $map_array['y_co']) {
 		// this is the coord the user is on - this data will be helpful later on in the navigation_data
 		$user_map_data = $map_array;
 	

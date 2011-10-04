@@ -75,11 +75,10 @@ if ($_POST['move'] == "west") {
 // if user has moved
 if ($moved) {
 	// get map data for new location
-	$new_location = mysql_fetch_assoc ($Database->query ("SELECT * FROM `map` WHERE `x_co` = ".$new_x." AND `y_co` = ".$new_y." AND `map_id` = ".$CharMap->getId()));
-	$location_type = $new_location['type'];
+	$new_MapGrid = MapGrid::byCoord ($CharMap->getId(), $new_x, $new_y);
 
 	// check if new location is passable
-	if ($location_type != 5) {
+	if ($new_MapGrid->getDetail ('type') != 5) {
 		// move to new location
 		$CharMap->setDetail ('x_co', $new_x);
 		$CharMap->setDetail ('y_co', $new_y);

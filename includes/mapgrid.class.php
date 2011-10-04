@@ -74,6 +74,22 @@ class MapGrid extends StandardObject {
 
 		return (int) $chance;
 	}
+	
+	/**
+	* Gets a MapGrid object via it's coords, rather than grid_id.
+	*
+	* @param int
+	* @param int
+	* @param int
+	* @return MapGrid
+	*/
+	public static function byCoord ($map_id, $x, $y) {
+		$Database = new Database (database_server, database_user, database_password, database_name);
+		
+		$grid_id = $Database->getSingleValue ("SELECT `grid_id` FROM `map` WHERE `map_id` = ".(int) $map_id." AND `x_co` = ".(int) $x." AND `y_co` = ".(int) $y);
+		
+		return new self ($grid_id);
+	}
 }
 
 ?>

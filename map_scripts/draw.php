@@ -166,7 +166,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 
 	$map_data_output .= "<span><img src=\"".relroot."/images/map_images/".$image."\" ";
 	//  if this is a dev-serv then show the map's coordinants
-	if (STATUS != "LIVE") $map_data_output .= " title=\"x is ".$map_array['x_co'].", y is ".$map_array['y_co']."\" ";
+	if (STATUS != "LIVE") $map_data_output .= " title=\"x: ".$map_array['x_co'].", y: ".$map_array['y_co'].", grid_id: ".$map_array['grid_id']."\" ";
 	$map_data_output .= "alt=\"Map square\"/></span>";
 
 	// add one to count. this increases with each coord output so we know how many we've gone across the X axis.

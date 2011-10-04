@@ -26,7 +26,7 @@
 */
 
 define ('LOGIN', true);
-require_once ('includes/notextinc.php');
+require_once ('../includes/notextinc.php');
 
 header ('Content-Type: text/xml');
 

@@ -8,7 +8,7 @@ $(function () {
 * @deprecated
 */
 function loadMap () {
-	$('#map_table').load (relroot+'/map.draw.php');
+	$('#map_table').load (relroot+'/map_scripts/draw.php');
 	console.log ("don't use loadMap()");
 }
 
@@ -25,7 +25,7 @@ function generateMap (direction) {
 		},
 		dataType: "xml",
 		type: "post",
-		url: relroot+'/map.draw.php'
+		url: relroot+'/map_scripts/draw.php'
 	});
 }
 

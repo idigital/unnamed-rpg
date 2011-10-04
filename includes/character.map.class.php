@@ -20,6 +20,7 @@ class CharacterMap extends StandardObject {
 	}
 	
 	public function getId () { return $this->getDetail ('map_id'); }
+	public function getGrid () { return MapGrid::byCoord ($this->getId(), $this->getX(), $this->getY()); }
 	public function getCharacter () { return new Character ($this->getDetail ('user_id')); }
 	public function getX () { return $this->getDetail ('x_co'); }
 	public function getY () { return $this->getDetail ('y_co'); }

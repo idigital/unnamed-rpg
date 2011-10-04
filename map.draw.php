@@ -108,7 +108,7 @@ $x_largest = $CharMap->getX() + $map_los;
 $y_smallest = $CharMap->getY() - $map_los;
 $y_largest = $CharMap->getY() + $map_los;
 
-// Make sure that the max/min coordinates don't go other the side of the possible map squares...
+// Make sure that the max/min coordinates don't go over the side of the possible map squares...
 // what's the smallest x?
 $map_x_min = $Database->getSingleValue ("SELECT `x_co` FROM `map` WHERE `map_id` = ".$CharMap->getId()." ORDER BY `x_co` ASC LIMIT 1");
 $map_y_min = $Database->getSingleValue ("SELECT `y_co` FROM `map` WHERE `map_id` = ".$CharMap->getId()." ORDER BY `y_co` ASC LIMIT 1");
@@ -157,7 +157,7 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 	// image that belongs to the coord.
 	if ($CharMap->getX() == $map_array['x_co'] AND $CharMap->getY() == $map_array['y_co']) {
 		// this is the coord the user is on - this data will be helpful later on in the navigation_data
-		$user_map_data = $map_array;
+		$user_MapGrid = $CharMap->getGrid ();
 	
 		$image = "lupe_".$map_array['image'];
 	} else {
@@ -198,13 +198,13 @@ echo "\t</map_data>\n";
 $nav_data_output = "";
 echo "\t<navigation_data>\n";
 
-$nav_data_output .= "<p>You are in ".$user_map_data['locality'].".</p>";
+$nav_data_output .= "<p>You are in ".$user_MapGrid->getDetail ('locality').".</p>";
 
 // sometimes there are actions that can be done whilst the user is on this coordinate, like enter a special place or town,
 // or pick up an item lying on the floor, or talk to someone. (these special squares have the ID 4.)
-if ($user_map_data['type'] == 4) {
+if ($user_MapGrid->getDetail ('type') == 4) {
 	// get the special map data, which includes the text to output as the link, and the URL the link should take them to
-	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_map_data['grid_id']);
+	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_MapGrid->getId());
 
 	$nav_data_output .= "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>";
 }

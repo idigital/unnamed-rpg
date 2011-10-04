@@ -206,7 +206,9 @@ if ($user_MapGrid->getDetail ('type') == 4) {
 	// get the special map data, which includes the text to output as the link, and the URL the link should take them to
 	$special_map_data = $Database->query ("SELECT * FROM `map_special` WHERE `grid_id` = ".$user_MapGrid->getId());
 
-	$nav_data_output .= "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>";
+	// it might be special, but it might be lacking data
+	if (!is_empty ($special_map_data['goto_uri'], $special_map_data['goto_name']))
+		$nav_data_output .= "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>";
 }
 echo htmlspecialchars ($nav_data_output);
 echo "\t</navigation_data>\n";

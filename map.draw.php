@@ -83,8 +83,8 @@ if ($moved) {
 		$CharMap->setDetail ('x_co', $new_x);
 		$CharMap->setDetail ('y_co', $new_y);
 	} else {
-		// tell user it is not passable
-		$status[] = "<p class=\"error\">You can't cross this area.</p>\n";
+		// the block they're trying to move into isn't passable, so don't move them.
+		$impassable = true;
 	}
 }
 
@@ -197,6 +197,8 @@ echo "\t</map_data>\n";
 
 $nav_data_output = "";
 echo "\t<navigation_data>\n";
+
+if ($impassable) $nav_data_output .= "<p class=\"error\">You can't move here.</p>";
 
 $nav_data_output .= "<p>You are in ".$user_MapGrid->getDetail ('locality').".</p>";
 

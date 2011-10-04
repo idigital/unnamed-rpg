@@ -17,6 +17,10 @@ require_once ('includes/header.php');
 
 include ('fight_scripts/stat_bar.php');
 
+echo "<div id=\"stat_3\">\n";
+echo "<p>Movement Type: <span class=\"link move\">Normal</span> | <span class=\"link move\">Hunting</span> | <span class=\"link move\">Sneaking</span></p>\n";
+echo "</div>\n";
+
 echo "<div id=\"map\"><div>\n<div id=\"map_table\">\n";
 echo "</div>\n</div>\n";
 

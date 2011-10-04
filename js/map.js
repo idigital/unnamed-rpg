@@ -1,6 +1,7 @@
 $(function () {
 	generateMap ();
 	bindArrowKeys ();
+	bindMovementTypes ();
 });
 
 /**
@@ -64,5 +65,17 @@ function bindArrowKeys () {
 		}
 		
 		if (direction != null) generateMap (direction);
+	});
+}
+
+function bindMovementTypes () {
+	$('.move').click (function () {
+		// let the server know there's been an update
+		$.post (relroot+'/map_scripts/movetype.php', { s: $(this).html() } );
+		
+		// make sure they all have the .link class
+		$('.move').addClass ('link').css ('font-weight', 'normal');
+		// remove it from the one just clicked, and make it bold
+		$(this).removeClass ('link').css ('font-weight', 'bold');
 	});
 }

@@ -18,7 +18,19 @@ require_once ('includes/header.php');
 include ('fight_scripts/stat_bar.php');
 
 echo "<div id=\"stat_3\">\n";
-echo "<p>Movement Type: <span class=\"link move\">Normal</span> | <span class=\"link move\">Hunting</span> | <span class=\"link move\">Sneaking</span></p>\n";
+// decide which classes and styling each .move span needs. the current move type doesn't need .link, and should be
+// bold.
+// default state...
+$move_sneaking = $move_hunting = $move_normal = "class=\"link move\"";
+$move_type = $Character->getMapData()->getDetail ('move_type');
+if ($move_type == "hunt") {
+	$move_hunting = "class=\"move\" style=\"font-weight: bold\"";
+} elseif ($move_type == "normal") {
+	$move_normal = "class=\"move\" style=\"font-weight: bold\"";
+} elseif ($move_type == "sneak") {
+	$move_sneak = "class=\"move\" style=\"font-weight: bold\"";
+}
+echo "<p>Movement Type: <span ".$move_normal.">Normal</span> | <span ".$move_hunting.">Hunting</span> | <span ".$move_sneaking.">Sneaking</span></p>\n";
 echo "</div>\n";
 
 echo "<div id=\"map\"><div>\n<div id=\"map_table\">\n";

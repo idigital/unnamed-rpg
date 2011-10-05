@@ -38,7 +38,7 @@ if ($Fight->getStage() == "player flee success") {
 	echo "<p><input type=\"submit\" value=\"Click here to return to the map\" name=\"back_to_map\" /></p>\n";
 	echo "</form>\n";
 	
-	echo "</p>\n";
+	echo "</div>\n";
 } elseif ($Fight->getStage() == "player win") {
 	$ext_title = "You won!";
 	include_once ('../includes/header.php');
@@ -56,7 +56,25 @@ if ($Fight->getStage() == "player flee success") {
 	echo "<p><input type=\"submit\" value=\"Click here to return to the map\" name=\"back_to_map\" /></p>\n";
 	echo "</form>\n";
 	
-	echo "</p>\n";
+	echo "</div>\n";
+} elseif ($Fight->getStage() == "mob win") {
+	$ext_title = "You passed out!";
+	include_once ('../includes/header.php');
+
+	include ('stat_bar.php');
+	
+	echo "<div id=\"aftermath_win\">\n";
+	
+	echo "<p>You were defeated by ".$Mob->getName (true)."!</p>\n";
+	echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/lupe_lose.gif\" /> <img src=\"".relroot."/images/fight/mobs/".$Mob->getDetail ('image')."\" /></div>\n";
+	echo "<p>".ucfirst ($Mob->getName (true))." roars with satisfaction as you fall to the ground, defeated!</p>\n";
+	echo "<p>You lose 220 experience points for dying, and you have been sent back to Neopia City.</p>\n";
+	
+	echo "<form method=\"post\" action=\"\">\n";
+	echo "<p><input type=\"submit\" value=\"Click here to return to Neopia City\" name=\"back_to_map\" /></p>\n";
+	echo "</form>\n";
+	
+	echo "</div>\n";
 }
 
 include_once ('../includes/footer.php');

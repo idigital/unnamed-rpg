@@ -28,18 +28,10 @@
 define ('LOGIN', true);
 require_once ('../includes/notextinc.php');
 
-$CharMap = $Character->getMapData();
-
-// first check if they're movement has caused a mob to spawn and attack
-if (isset ($_POST['move']) && $CharMap->rollSpawnMob()) {
-	// fight started, redirect to fight page
-	echo "<goto page=\"fight\"/>";
-	exit;
-}
-
 header ('Content-Type: text/xml');
-
 echo "<?xml version=\"1.0\" ?>\n";
+
+$CharMap = $Character->getMapData();
 
 // Are we moving?
 $old_x = $CharMap->getX();
@@ -93,9 +85,16 @@ if ($moved) {
 		// the block they're trying to move into isn't passable, so don't move them.
 		$impassable = true;
 	}
+
+	// first check if they're movement has caused a mob to spawn and attack
+	if ($CharMap->rollSpawnMob()) {
+		// fight started, redirect to fight page
+		echo "<goto page=\"fight\"/>";
+		exit;
+	}
 }
 
-echo "<root>\n";
+echo "<root>";
 
 // inside here needs to be HTML that looks like the map. HTML! Not XML nodes, so the HTML chars need to be escaped.
 // to keep the code looking pretty, and not litering it with &gt;'s and &lt;'s, we'll put all the output that's supposed

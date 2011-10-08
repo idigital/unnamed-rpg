@@ -45,7 +45,7 @@ class Character extends StandardObject {
 	public function nextLevelAt () {
 		$next_level_at = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` > ".$this->getLevel ()." ORDER BY `level` ASC LIMIT 1");
 		
-		return $this->getDetail ('experience');
+		return $next_level_at;
 	}
 	
 	/**
@@ -94,9 +94,35 @@ class Character extends StandardObject {
 		return ($Fight->exists()) ? $Fight : false;
 	}
 	
+	/**
+	* Immediately starts a fight, with the Mob given.
+	*
+	* @param Mob
+	* @return void
+	*/
 	public function startFight (Mob $Mob) {
 		$this->getMapData()->setDetail ('phase', 'fight');
 		$this->getDatabase()->query ("INSERT INTO `user_fight` SET `user_id` = ".$this->getId().", `mob_id` = ".$Mob->getId().", `mob_health` = ".$Mob->getDetail ('hp').", `start_time` = UNIX_TIMESTAMP()");
+		
+		return;
+	}
+	
+	/**
+	* Spawns the user again with full health back at the spawning grid.
+	*
+	* @return void
+	*/
+	public function respawn () {
+		// for now, the spawning grid is grid_id 131
+		$respawn_at = new MapGrid (131);
+		
+		$map_data = $this->getMapData();
+		$map_data->setDetail ('map_id', $respawn_at->getDetail ('map_id'));
+		$map_data->setDetail ('x_co', $respawn_at->getDetail ('x_co'));
+		$map_data->setDetail ('y_co', $respawn_at->getDetail ('y_co'));
+		$map_data->setDetail ('phase', 'map');
+		
+		$this->setDetail ('remaining_hp', $this->getMaxHealth());
 		
 		return;
 	}

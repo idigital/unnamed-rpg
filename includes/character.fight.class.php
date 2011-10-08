@@ -102,7 +102,10 @@ class CharacterFight extends StandardObject {
 	* @return string "player win", "mob win", "player flee success", "current"
 	*/
 	public function getStage () {
-		return $this->getDetail ('stage');
+		// we don't want to just use getDetail, since we want to avoid caching.
+		$stage = $this->getDatabase()->getSingleValue ("SELECT `stage` FROM `user_fight` WHERE ".$this->getSQLWhereClause());
+		
+		return $stage;
 	}
 	
 	public function getPreviousTurnMessages () {

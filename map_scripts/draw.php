@@ -101,7 +101,7 @@ echo "<root>\n";
 // to keep the code looking pretty, and not litering it with &gt;'s and &lt;'s, we'll put all the output that's supposed
 // to be in this node into a variable, and then run it through and escape function later at the end.
 $map_data_output = "";
-echo "\t<map_data>\n";
+echo "<map_data>";
 
 // what range do we want to be showing the user? this is also the width and height of the map. Because
 // of that, it makes sense for it to be odd so that there's a centre point to the map, which we can put
@@ -200,10 +200,10 @@ while ($map_array = mysql_fetch_array ($qry_mapgrid)) {
 }
 
 echo htmlspecialchars ($map_data_output);
-echo "\t</map_data>\n";
+echo "</map_data>";
 
 $nav_data_output = "";
-echo "\t<navigation_data>\n";
+echo "<navigation_data>";
 
 if ($impassable) $nav_data_output .= "<p class=\"error\">You can't move here.</p>";
 
@@ -220,8 +220,8 @@ if ($user_MapGrid->getDetail ('type') == 4) {
 		$nav_data_output .= "<p><a href=\"".relroot.$special_map_data['goto_uri']."\">".$special_map_data['goto_name']."</a></p>";
 }
 echo htmlspecialchars ($nav_data_output);
-echo "\t</navigation_data>\n";
+echo "</navigation_data>";
 
-echo "</root>\n";
+echo "</root>";
 
 ?>

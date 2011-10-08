@@ -10,16 +10,21 @@ define ('LOGIN', true);
 define ('FORCE_PHASE', true);
 require_once ('../includes/notextinc.php');
 
+$Fight = $Character->getFightData();
+$Mob = $Fight->getMob();
+
 if (isset ($_POST['back_to_map'])) {
-	// they can only be on this page if they're in a position to return to the page, fyi.
+	// if the mob won, they'll need respawning
+	if ($Fight->getStage() == "mob win") {
+		$Character->respawn ();
+	}
+	
+	// they can only be on this page if they're in a position to return to the map, fyi.
 	$Character->getMapData()->setDetail ('phase', 'map');
 	header ('Location: '.relroot.'/map.php');
 }
 
 $ext_css[] = "fight.css";
-
-$Fight = $Character->getFightData();
-$Mob = $Fight->getMob();
 
 // what condition are we in?
 if ($Fight->getStage() == "player flee success") {

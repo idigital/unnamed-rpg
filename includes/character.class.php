@@ -120,7 +120,8 @@ class Character extends StandardObject {
 		$map_data->setDetail ('map_id', $respawn_at->getDetail ('map_id'));
 		$map_data->setDetail ('x_co', $respawn_at->getDetail ('x_co'));
 		$map_data->setDetail ('y_co', $respawn_at->getDetail ('y_co'));
-		$map_data->setDetail ('phase', 'map');
+		
+		// we don't set the phase back to "map" here. that's handled in where this function is being called.
 		
 		$this->setDetail ('remaining_hp', $this->getMaxHealth());
 		

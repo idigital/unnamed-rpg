@@ -46,7 +46,7 @@ class Mob extends StandardObject {
 			$new_health = $Character->getDetail ('remaining_hp')-$attack;
 			$new_health = ($new_health < 0) ? 0 : $new_health;
 			
-			// if it's zero, the mob won
+			// if it's zero, the mob won. XP is not deducted in here.
 			if ($new_health == 0) $Character->getFightData()->setDetail ('stage', 'mob win');
 			
 			$Character->setDetail ('remaining_hp', $new_health);
@@ -56,6 +56,37 @@ class Mob extends StandardObject {
 		}
 		
 		return $r;
+	}
+	
+	/**
+	* When losing a fight against this mob the Character will loss a set of XP, to be worked out here.
+	*
+	* Does not deduct the XP. Just works it out.
+	* 
+	* Algorithm makes it so that if you lose a higher level mob, you lose less XP than if you lose to the same
+	* mob at a higher level. (Lose to weaker mob, lose more points.) Will never return a number higher than the
+	* current Character's XP.
+	*
+	* If no character is given, just does a getDetail().
+	*
+	* @param Character
+	* @return int
+	*/
+	public function getXPLoss (Character $Character = null) {
+		$loss = $this->getDetail ('xp_loss');
+		
+		if (is_object ($Character)) {
+			// create a percent based on the player and mob's level difference.
+			$percent_loss = (100 + (($this->getDetail ('level') - $Character->getLevel()) * 10)) / 100;
+			
+			// user will lose $percent_loss of $loss
+			$loss = $loss * $percent_loss;
+			
+			// no higher than the users actual XP for this level. (never make the user drop a level)
+			if ($Character->xpIntoLevel() < $loss) $loss = $Character->xpIntoLevel();
+		}
+		
+		return (int) $loss;
 	}
 	
 	/**

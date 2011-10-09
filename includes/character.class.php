@@ -58,6 +58,17 @@ class Character extends StandardObject {
 	}
 	
 	/**
+	* Works out how much XP the user is currently into their level
+	*
+	* @return int
+	*/
+	public function xpIntoLevel () {
+		$level_start = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` = ".$this->getLevel());
+		
+		return $this->getDetail ('experience') - $level_start;
+	}
+	
+	/**
 	* Figures, based on the level, what the current max health is
 	*
 	* @return int

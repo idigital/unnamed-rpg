@@ -8,18 +8,18 @@ However, Neopets will likely not be very happy with me doing this. I have a few 
 they just wouldn't care about this though:
 
 * NeoQuest is a very old game now. I can't find an exact date, but I definitely remember playing it in
-the early 2000's. Neopet's has been around since 1999, so it may have been in existance since then.
+the early 2000's. Neopet's has been around since 1999, so it may have been in existence since then.
 * They have NeoQuest 2 out now, but that's also a very, very old game.
 * NeoQuest is no longer in the popular games list, and I doubt many people even know about it anymore.
 * Since I'm reverse engineering the game, I'll miss a number of the quirks of the game, meaning you
 should probably go and play the original if you're serious about playing it.
 * I've no interest in making money out of this. I just felt like making an open game, and don't have
-much imaginiation.
+much imagination.
 * I doubt they'll even notice.
 * I like asparagus too.
 
 Despite all that, the assets, and text, and story line, and names, and pretty much everything that is
-not code all belong to Neopets. I'm well aware that I'm flagrantly disgregarding copyright laws. If
+not code all belong to Neopets. I'm well aware that I'm flagrantly disregarding copyright laws. If
 someone from Neopets every gets in touch with me ( neoquest AT leafcanvas.com )  to ask, I will
 immediately switch this repository to a private one.
 
@@ -36,6 +36,19 @@ game.
 
 Of course, you *MUST* remove all Neopets related assets before you can even run a free game. That means
 every image and piece of user-facing text that is in this repository.
+
+# Notable differences
+
+I want to make the clone be as true to the appearance, and storyline of the game that I can. This is
+mostly just so that I know I have all the features in this software that make a game. The game
+mechanics are all the same, the map will be identical, the mobs, and the speech will be the same too.
+
+To make it more modern though, some things have been changed:
+
+* The map is based around AJAX drawing it now, so there's no need for a page reload every move
+* Fighting is managed with AJAX too, so no page reloads there either
+* Bits of jQuery have made the UI prettier (animated loss of health in fights)
+* It's hard for me to work out their algorithms for attack and the like, so I'm making my own up
 
 # Minimum requirements:
 
@@ -83,6 +96,6 @@ config.js is much simpler:
 	relroot = "/unnamed-rpg";
 
 There's an SQL file which I keep updated too, which will have the most up-to-date schema and
-the data that I'm using for testing. This is the most ineligant part of the installation, since
+the data that I'm using for testing. This is the most inelegant part of the installation, since
 it means your data will be overwritten when I update it. That's the risk you take for using this
 install, I guess. Maybe fork the project if it's an issue.

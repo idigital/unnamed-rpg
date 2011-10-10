@@ -57,13 +57,19 @@ class Character extends StandardObject {
 		return $this->nextLevelAt() - $this->getDetail ('experience');
 	}
 	
+	public function levelStartAt () {
+		$level_start = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` = ".$this->getLevel());
+	
+		return $level_start;
+	}
+	
 	/**
 	* Works out how much XP the user is currently into their level
 	*
 	* @return int
 	*/
 	public function xpIntoLevel () {
-		$level_start = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` = ".$this->getLevel());
+		$level_start = $this->levelStartAt();
 		
 		return $this->getDetail ('experience') - $level_start;
 	}

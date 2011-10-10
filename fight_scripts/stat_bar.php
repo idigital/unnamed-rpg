@@ -18,7 +18,12 @@ $health_bar .= "<span class=\"char_health_bar\" style=\"display: inline-block; w
 $health_bar .= "</span>\n";
 
 $experience_bar = "<span class=\"stat_bar\">";
-$percent_exp = $Character->getDetail ('experience') > 0 ? ($Character->getDetail ('experience')/$Character->nextLevelAt ()) * 100 : 0;
+
+// work out the percent that we're into this level. we first need to find how much XP is in this level,
+// or rather the difference between this and the next level
+$difference = $Character->nextLevelAt () - $Character->levelStartAt ();
+
+$percent_exp = $Character->getDetail ('experience') > 0 ? ($Character->xpIntoLevel()/$difference) * 100 : 0;
 $experience_bar .= "<span class=\"char_xp_bar\" style=\"display: inline-block; width: ".$percent_exp."px; background-color: rgb(255, 221, 0);\">&nbsp;</span>";
 $experience_bar .= "</span>";
 

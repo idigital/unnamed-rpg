@@ -90,6 +90,32 @@ class Mob extends StandardObject {
 	}
 	
 	/**
+	* Based largely on getXPLoss, works out how much XP a user gains when beating a Mob
+	*
+	* Does not add the XP, only returns the amount that should be gained.
+	*
+	* Inverse algorithm to getXPLoss.
+	*
+	* If no character is given, just does a getDetail
+	*
+	* @param Character
+	* @return int
+	*/
+	public function getXPGain (Character $Character = null) {
+		$gain = $this->getDetail ('xp_gain');
+		
+		if (is_object ($Character)) {
+			// create a percent based on the player and mob's level difference.
+			$percent_gain = (100 + (($Character->getLevel() - $this->getDetail ('level')) * 10)) / 100;
+			
+			// user will lose $percent_loss of $loss
+			$gain = $gain * $percent_gain;
+		}
+		
+		return $gain;
+	}
+	
+	/**
 	* Gets a well formatted name of the mob.
 	*
 	* Specifcally useful if we need "(a|an) mob". There's no capitalisation done in here, unless the mob's name has

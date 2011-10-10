@@ -22,7 +22,7 @@ $percent_exp = $Character->getDetail ('experience') > 0 ? ($Character->getDetail
 $experience_bar .= "<span class=\"char_xp_bar\" style=\"display: inline-block; width: ".$percent_exp."px; background-color: rgb(255, 221, 0);\">&nbsp;</span>";
 $experience_bar .= "</span>";
 
-echo "<p>Name: <strong>".$User->getDetail ('username')."</strong> | Level: <strong>".$Character->getLevel ()."</strong> | Health: <strong class=\"char_health\">".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
+echo "<p>Name: <strong>".$User->getDetail ('username')."</strong> | Level: <strong class=\"char_level\">".$Character->getLevel ()."</strong> | Health: <strong class=\"char_health\">".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
 echo "<p>Experience: <strong class=\"char_xp\">".$Character->getDetail ('experience')."</strong> ".$experience_bar."</p>\n";
 echo "</div>\n";
 

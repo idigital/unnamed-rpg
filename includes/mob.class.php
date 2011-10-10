@@ -77,7 +77,7 @@ class Mob extends StandardObject {
 		
 		if (is_object ($Character)) {
 			// create a percent based on the player and mob's level difference.
-			$percent_loss = (100 + (($this->getDetail ('level') - $Character->getLevel()) * 10)) / 100;
+			$percent_loss = (100 + (($Character->getLevel() - $this->getDetail ('level')) * 10)) / 100;
 			
 			// user will lose $percent_loss of $loss
 			$loss = $loss * $percent_loss;
@@ -106,7 +106,7 @@ class Mob extends StandardObject {
 		
 		if (is_object ($Character)) {
 			// create a percent based on the player and mob's level difference.
-			$percent_gain = (100 + (($Character->getLevel() - $this->getDetail ('level')) * 10)) / 100;
+			$percent_gain = (100 + (($this->getDetail ('level') - $Character->getLevel()) * 10)) / 100;
 			
 			// user will lose $percent_loss of $loss
 			$gain = $gain * $percent_gain;

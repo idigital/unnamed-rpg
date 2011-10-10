@@ -19,33 +19,8 @@ class Character extends StandardObject {
 		);
 		
 		parent::__construct ($config);
-	}
-	
-	/**
-	* Gets the current level of the character, based on their character.
-	*
-	* We store the accumulative experience gained for the character, and not their level. The level
-	* can be worked out since we have the experience brackets in a table.
-	*
-	* @return int
-	*/
-	public function getLevel () {
-		$current_level = $this->getDatabase()->getSingleValue ("SELECT `level` FROM `stats_base` WHERE `experience_required` <= ".$this->getDetail ('experience')." ORDER BY `level` DESC LIMIT 1");
 		
-		return $current_level;
-	}
-	
-	/**
-	* Finds out how much experience is needed for the next level.
-	*
-	* This isn't "how much more experience". Use this::nextLevelIn for that.
-	*
-	* @return int
-	*/
-	public function nextLevelAt () {
-		$next_level_at = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` > ".$this->getLevel ()." ORDER BY `level` ASC LIMIT 1");
-		
-		return $next_level_at;
+		$this->BaseStats = BaseStats::byXP ($this->getDetail ('experience'));
 	}
 	
 	/**
@@ -54,13 +29,7 @@ class Character extends StandardObject {
 	* @return int
 	*/
 	public function nextLevelIn () {
-		return $this->nextLevelAt() - $this->getDetail ('experience');
-	}
-	
-	public function levelStartAt () {
-		$level_start = $this->getDatabase()->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` = ".$this->getLevel());
-	
-		return $level_start;
+		return $this->getBaseStats()->nextLevelAt() - $this->getDetail ('experience');
 	}
 	
 	/**
@@ -69,9 +38,20 @@ class Character extends StandardObject {
 	* @return int
 	*/
 	public function xpIntoLevel () {
-		$level_start = $this->levelStartAt();
+		$level_start = $this->getBaseStats()->getDetail ('experience_required');
 		
 		return $this->getDetail ('experience') - $level_start;
+	}
+	
+	/**
+	* Finds how far into the current level a user is in
+	*
+	* @return in 0 - 99.999
+	*/
+	public function percentIntoLevel () {
+		$percent = ($this->xpIntoLevel()/$this->getBaseStats()->xpRequiredToDing()) * 100;
+		
+		return $percent;
 	}
 	
 	/**
@@ -80,11 +60,9 @@ class Character extends StandardObject {
 	* @return int
 	*/
 	public function getMaxHealth () {
-		// I could have reused the SQL from this::getLevel, which is a fairly quick statement rather than using getLevel (which means we're doing
-		// two database calls), however there may be things other than the experience which affects the level, so we have to use getLevel().
-		$max_hp = $this->getDatabase()->getSingleValue ("SELECT `hp` FROM `stats_base` WHERE `level` = ".$this->getLevel()." LIMIT 1");
-		
-		return $max_hp;
+		// one liner at the moment, but later armor and the like may change this figure, so it needs to be here for easy
+		// forwards compatibility.
+		return $this->getBaseStats()->getDetail ('hp');
 	}
 	
 	/**
@@ -147,6 +125,8 @@ class Character extends StandardObject {
 	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
+	public function getBaseStats () { return $this->BaseStats; }
+	public function getLevel () { return $this->getBaseStats()->getLevel();	}
 }
 
 ?>

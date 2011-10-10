@@ -63,26 +63,29 @@ if ($Fight->getStage() == "player flee success") {
 	
 	// will this XP gain push us up to another level?
 	if ($Character->nextLevelIn() <= $xp_gain) {
-		echo "<script type=\"text/javascript\">\n";
+		echo "<script type=\"text/javascript\">";
 		// yes, we're gaining a new level. the javascript to update the UI needs to know what percentage we're into the new level.
-		// since they're not in the new level yet, we'll need to do a few database calls.
+
+		// here's the data on the new level!
+		$next_Level = new BaseStats ($Character->getLevel ()+1);
+		
 		// how much XP will the player be into this new level?
-		$into_level = $new_xp - $Character->nextLevelAt();
-		
-		// and what's the *next* XP requirement for the next level?
-		$next_require_xp = $Database->getSingleValue ("SELECT `experience_required` FROM `stats_base` WHERE `level` > ".($Character->getLevel ()+1)." ORDER BY `level` ASC LIMIT 1");
-		// how much is the difference between the "current" level and that next level?
-		$difference = $next_require_xp - $Character->nextLevelAt();
-		
-		$new_percent_exp = ($into_level/$difference) * 100;
-		echo "levelUp (".($Character->getLevel()+1).", ".$new_xp.", ".$new_percent_exp.");\n";
+		$next_require_xp = $next_Level->getDetail ('experience_required');
+		$into_level = $new_xp - $next_require_xp;
+
+		$new_percent_exp = ($into_level/$next_Level->xpRequiredToDing()) * 100;
+		echo "levelUp (".($next_Level->getLevel()).", ".$new_xp.", ".$new_percent_exp.");";
 		echo "</script>\n";
 	} else {
 		// we don't reach a new level, so just fill up the bar easily
 		
-		// animate the experience bar filling. what percent is it at now?
-		$new_percent_exp = $new_xp > 0 ? ($new_xp/$Character->nextLevelAt ()) * 100 : 0;
-		echo "<script type=\"text/javascript\">changeXP (".$new_xp.", ".$new_percent_exp.")</script>\n";
+		// animate the experience bar filling.
+		
+		// how much are we into this level? (we need this to create a percentage)
+		$into_level = $new_xp - $Character->getBaseStats()->getDetail ('experience_required');
+		
+		$new_percent_exp = ($into_level > 0) ? ($into_level/$Character->getBaseStats()->xpRequiredToDing()) * 100 : 0;
+		echo "<script type=\"text/javascript\">changeXP (".$new_xp.", ".$new_percent_exp.");</script>\n";
 	}
 	
 	echo "<p>You defeated ".$Mob->getName (true)."!</p>\n";
@@ -105,9 +108,13 @@ if ($Fight->getStage() == "player flee success") {
 	
 	$xp_loss = $Mob->getXPLoss ($Character);
 	$new_xp = $Character->getDetail ('experience') - $xp_loss;
-	// animate the experience bar falling. what percent is it at now?
-	$new_percent_exp = $new_xp > 0 ? ($new_xp/$Character->nextLevelAt ()) * 100 : 0;
-	echo "<script type=\"text/javascript\">changeXP (".$new_xp.", ".$new_percent_exp.")</script>\n";
+	// animate the experience bar falling.
+	
+	// how much are we into this level? (we need this to create a percentage)
+	$into_level = $new_xp - $Character->getBaseStats()->getDetail ('experience_required');
+	
+	$new_percent_exp = ($into_level > 0) ? ($into_level/$Character->getBaseStats()->xpRequiredToDing()) * 100 : 0;
+	echo "<script type=\"text/javascript\">changeXP (".$new_xp.", ".$new_percent_exp.");</script>\n";
 	
 	echo "<p>You were defeated by ".$Mob->getName (true)."!</p>\n";
 	echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/lupe_lose.gif\" /> <img src=\"".relroot."/images/fight/mobs/".$Mob->getDetail ('image')."\" /></div>\n";

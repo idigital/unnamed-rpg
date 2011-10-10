@@ -112,5 +112,5 @@ function changeHP (who, amount) {
 	// what percent is amount of the full health?
 	percent_health = (game_state[subject]['hp']/game_state[subject]['max_hp']) * 100;
 	
-	$('.'+subject+'_health_bar').animate ({width: percent_health+"px"});
+	$('.'+subject+'_health_bar').animate ({width: percent_health+"px"}).css('overflow', 'visible');
 }

@@ -44,7 +44,7 @@ if (isset ($Character) && defined ('FORCE_PHASE')) {
 	$current_page = basename ($_SERVER['PHP_SELF']);
 	
 	// this if branch will just get skipped over if they are on the correct page.
-	if ($current_page != "map.php" && $current_phase == 'map') {
+	if (($current_page != "map.php" && $current_page != "items.php") && $current_phase == 'map') {
 		header ('Location: '.relroot.'/map.php');
 	} elseif ($current_phase == 'fight') {
 		// they're in some sort of fight page

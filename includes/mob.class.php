@@ -116,6 +116,16 @@ class Mob extends StandardObject {
 	}
 	
 	/**
+	* Works out the mob's speed.
+	*
+	* @return int
+	*/
+	public function getSpeed () {
+		# dev art
+		return 2;
+	}
+	
+	/**
 	* Gets a well formatted name of the mob.
 	*
 	* Specifcally useful if we need "(a|an) mob". There's no capitalisation done in here, unless the mob's name has

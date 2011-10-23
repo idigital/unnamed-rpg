@@ -5,6 +5,13 @@
 	font-size: 9pt;
 }
 
+h1, h2, h3 {
+	font-weight: bold;
+	text-align: center;
+	
+	margin: 15px;
+}
+
 p {
 	margin: 5px;
 	line-height: 15px;
@@ -14,7 +21,7 @@ strong {
 	font-weight: bold;
 }
 
-a:visted, a:active, a {
+a:visited, a:active, a {
 	color: rgb(35, 87, 147);
 	text-decoration: none;
 }
@@ -28,6 +35,12 @@ a:hover, .link:hover {
 	
 	cursor: pointer;
 	cursor: hand;
+	
+	text-decoration: none;
+}
+
+th {
+	font-weight: bold;
 }
 
 #character_data {

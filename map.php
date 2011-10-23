@@ -30,7 +30,7 @@ if ($move_type == "hunt") {
 } elseif ($move_type == "sneak") {
 	$move_sneak = "class=\"move\" style=\"font-weight: bold\"";
 }
-echo "<p>Movement Type: <span ".$move_normal.">Normal</span> | <span ".$move_hunting.">Hunting</span> | <span ".$move_sneaking.">Sneaking</span></p>\n";
+echo "<p><a href=\"items.php\">View Items</a> | Movement Type: <span ".$move_normal.">Normal</span> | <span ".$move_hunting.">Hunting</span> | <span ".$move_sneaking.">Sneaking</span></p>\n";
 echo "</div>\n";
 
 echo "<div id=\"map\"><div>\n<div id=\"map_table\">\n";
@@ -58,7 +58,6 @@ echo "<div id=\"mapnav\">\n";
 echo "</div>\n";
 
 echo "</div>\n";
-
 
 require_once ('includes/footer.php');
 ?>

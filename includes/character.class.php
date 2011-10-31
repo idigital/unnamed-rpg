@@ -123,6 +123,18 @@ class Character extends StandardObject {
 		return;
 	}
 	
+	/**
+	* Checks and returns how many of an item the user has.
+	*
+	* @return int
+	*/
+	public function hasQtyItem (Item $Item) {
+		// cast this to an int, so that even if it returns a null (the user has never had this item), it'll still give the correct answer
+		$qty = (int) $this->getDatabase()->getSingleValue ("SELECT `qty` FROM `user_item` WHERE `item_id` = ".$Item->getId()." AND `user_id` = ".$this->getId());
+		
+		return $qty;
+	}
+	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
 	public function getBaseStats () { return $this->BaseStats; }

@@ -11,6 +11,7 @@ require_once ('StandardObject.class.php');
 
 require_once ('database.php');
 require_once ('common.php');
+require_once ('iterable.class.php');
 
 require_once ('user.class.php');
 

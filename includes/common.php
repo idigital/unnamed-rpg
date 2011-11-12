@@ -229,4 +229,22 @@ function minipage ($page_title, $page_body, $wheresincludes) {
 	exit;
 }
 
+/**
+* Returns the indefinite article of a noun, based on it's initial letter.
+*
+* @param string
+* @return string
+*/
+function indef_article ($noun) {	
+	// do we need "a" or "an"?
+	$fc = $noun[0];
+	if ($fc == "a" || $fc == "e" || $fc == "i" || $fc == "o" || $fc == "u") {
+		$phrase = "an ".$noun;
+	} else {
+		$phrase = "a ".$noun;
+	}
+	
+	return $phrase;
+}
+
 ?>

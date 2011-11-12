@@ -137,15 +137,7 @@ class Mob extends StandardObject {
 		// work out how to format their name, with "an" or "a"?
 		$mob_name = $this->getDetail ('name');
 		
-		if ($with_indef_art && $this->getDetail ('requires_indef_art')) {
-			// do we need "a" or "an"?
-			$fc = $mob_name[0];
-			if ($fc == "a" || $fc == "e" || $fc == "i" || $fc == "o" || $fc == "u") {
-				$mob_name = "an ".$mob_name;
-			} else {
-				$mob_name = "a ".$mob_name;
-			}
-		}
+		if ($with_indef_art && $this->getDetail ('requires_indef_art')) $mob_name = indef_article ($mob_name);
 		
 		return $mob_name;
 	}

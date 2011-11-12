@@ -135,6 +135,10 @@ class Character extends StandardObject {
 		return $qty;
 	}
 	
+	public function getInventory () {
+		return new Inventory ($this->getId());
+	}
+	
 	public function getMapData () { return new CharacterMap ($this->getId()); }
 	public function getUser () { return new User ($user_id); }
 	public function getBaseStats () { return $this->BaseStats; }

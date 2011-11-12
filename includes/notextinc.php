@@ -17,9 +17,12 @@ require_once ('user.class.php');
 
 require_once ('fightmessage.class.php');
 
+require_once ('item.class.php');
+
 require_once ('character.class.php');
 require_once ('character.map.class.php');
 require_once ('character.fight.class.php');
+require_once ('character.invent.class.php');
 
 require_once ('basestats.class.php');
 

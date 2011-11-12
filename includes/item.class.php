@@ -19,7 +19,15 @@ class Item extends StandardObject {
 		parent::__construct ($config);
 	}
 	
-	public function getName ($require_def) {
+	/**
+	* Gets the name of the object.
+	*
+	* Also lets you ask for the "a" or "an" part to be added to the name.
+	*
+	* @param bool If true, (a|an) will be prepended as appropriate.
+	* @return string
+	*/
+	public function getName ($require_def=false) {
 		// work out how to format the name, with "an" or "a"?
 		$name = $this->getDetail ('name');
 		

@@ -9,7 +9,7 @@ abstract class Iterable implements Iterator {
 	
         $this->position = 0;
 		
-		$elements = $this->getElements();
+		$this->elements = $this->getElements();
     }
 
     function rewind() {
@@ -29,8 +29,12 @@ abstract class Iterable implements Iterator {
     }
 	
 	function count () {
-		return count ($elements);
+		return count ($this->elements);
 	}
+	
+    function valid() {
+        return isset($this->elements[$this->position]);
+    }
 	
 	abstract protected function getElements();
 	

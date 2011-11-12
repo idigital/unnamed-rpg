@@ -18,6 +18,19 @@ class Item extends StandardObject {
 		
 		parent::__construct ($config);
 	}
+	
+	public function getName ($require_def) {
+		// work out how to format the name, with "an" or "a"?
+		$name = $this->getDetail ('name');
+		
+		if ($with_indef_art) $name = indef_article ($name);
+		
+		return $name;
+	}
+	
+	public function getMaxQty () {
+		return $this->getDetail ('max_quantity');
+	}
 }
 
 ?>

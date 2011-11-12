@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2011 at 01:41 PM
+-- Generation Time: Nov 12, 2011 at 08:40 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=365 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=370 ;
 
 -- --------------------------------------------------------
 
@@ -106,12 +106,12 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn_message_var` (
 
 CREATE TABLE IF NOT EXISTS `item` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` int(11) NOT NULL,
+  `name` varchar(23) NOT NULL,
   `type` enum('Healing Potion','Fire Weapons','Energy Armour','Misc. Item') NOT NULL,
   `max_quantity` int(3) NOT NULL,
   `modifier` int(11) DEFAULT NULL,
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `complete` tinyint(1) NOT NULL DEFAULT '0',
   `start_time` int(11) NOT NULL,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
 
 -- --------------------------------------------------------
 

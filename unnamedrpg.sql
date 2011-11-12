@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 31, 2011 at 01:41 PM
+-- Generation Time: Nov 12, 2011 at 08:39 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
 --
 
 INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 771, 22);
+(1, 843, 14);
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=365 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=370 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -444,7 +444,12 @@ INSERT INTO `fightmessage_turn` (`turn_id`, `fight_id`) VALUES
 (361, 69),
 (362, 69),
 (363, 69),
-(364, 69);
+(364, 69),
+(365, 70),
+(366, 70),
+(367, 70),
+(368, 70),
+(369, 70);
 
 -- --------------------------------------------------------
 
@@ -1150,7 +1155,17 @@ INSERT INTO `fightmessage_turn_message` (`turn_id`, `msg_id`, `order`) VALUES
 (363, 7, 1),
 (363, 4, 2),
 (364, 3, 1),
-(364, 6, 2);
+(364, 6, 2),
+(365, 3, 1),
+(365, 2, 2),
+(366, 3, 1),
+(366, 2, 2),
+(367, 7, 1),
+(367, 2, 2),
+(368, 3, 1),
+(368, 2, 2),
+(369, 3, 1),
+(369, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -1540,7 +1555,19 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 (361, 2, 1, '2'),
 (362, 2, 1, '2'),
 (364, 3, 1, '1'),
-(364, 3, 2, '3');
+(364, 3, 2, '3'),
+(365, 3, 1, '1'),
+(365, 3, 2, '3'),
+(365, 2, 1, '2'),
+(366, 3, 1, '1'),
+(366, 3, 2, '3'),
+(366, 2, 1, '2'),
+(367, 2, 1, '2'),
+(368, 3, 1, '1'),
+(368, 3, 2, '3'),
+(368, 2, 1, '2'),
+(369, 3, 1, '1'),
+(369, 3, 2, '3');
 
 -- --------------------------------------------------------
 
@@ -1550,17 +1577,25 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 
 CREATE TABLE IF NOT EXISTS `item` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` int(11) NOT NULL,
+  `name` varchar(23) NOT NULL,
   `type` enum('Healing Potion','Fire Weapons','Energy Armour','Misc. Item') NOT NULL,
   `max_quantity` int(3) NOT NULL,
   `modifier` int(11) DEFAULT NULL,
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `item`
 --
 
+INSERT INTO `item` (`item_id`, `name`, `type`, `max_quantity`, `modifier`) VALUES
+(1, 'Weak Healing Potion', 'Healing Potion', 30, 10),
+(2, 'Red Wand', 'Fire Weapons', 1, 3),
+(3, 'Energy Shield', 'Energy Armour', 1, 3),
+(4, 'glowing stone', 'Misc. Item', 20, NULL),
+(5, 'chunk of metal', 'Misc. Item', 1, NULL),
+(6, 'grizzly bearog tooth', 'Misc. Item', 5, NULL),
+(7, 'small yellow gem', 'Misc. Item', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -14247,7 +14282,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `complete` tinyint(1) NOT NULL DEFAULT '0',
   `start_time` int(11) NOT NULL,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `user_fight`
@@ -14288,7 +14323,8 @@ INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`
 (66, 1, 1, 0, 'player win', 1, 1318285839),
 (67, 1, 1, 0, 'player win', 1, 1318286067),
 (68, 1, 1, 4, 'mob win', 1, 1318286088),
-(69, 1, 1, 0, 'player win', 1, 1318286379);
+(69, 1, 1, 0, 'player win', 1, 1318286379),
+(70, 1, 1, 0, 'player win', 1, 1321130027);
 
 -- --------------------------------------------------------
 
@@ -14329,4 +14365,4 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
-(1, 1, 13, 6, 'map', 'hunt');
+(1, 1, 15, 7, 'map', 'hunt');

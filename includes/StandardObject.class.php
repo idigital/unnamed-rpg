@@ -205,7 +205,7 @@ abstract class StandardObject {
 		return $this->___config['primary_sql'];
 	}
 	
-	protected function getDatabase () { return $this->___Database; }
+	public function getDatabase () { return $this->___Database; }
 }
 
 ?>

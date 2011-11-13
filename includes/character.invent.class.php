@@ -16,14 +16,26 @@ class Inventory {
 		return new InventoryIterator ($this->getCharacter());
 	}
 	
-	public function canHoldMore (Item $Item) {
+	/**
+	* Checks if the character will be able to hold $qty more of this item.
+	*
+	* Each item has a `max_quantity` which is the most of the item a single character can carry.
+	*
+	* @param Item Item to check against
+	* @param int Number to try to add
+	* @return bool
+	*/
+	public function canHoldMore (Item $Item, $qty = 1) {
 		$currently_holding = $this->numberHolding ($Item);
 		$max_holding = $Item->getMaxQty ();
 		
-		return (bool) $max_holding - $currently_holding;
+		return (($max_holding - $currently_holding) > 0);
 	}
 	
 	/**
+	* Finds out how many of an item the character is currently in posession of.
+	*
+	* @param Item Which item you're looking up
 	* @return int
 	*/
 	public function numHolding (Item $Item) {
@@ -34,6 +46,10 @@ class Inventory {
 	public function getCharacter () { return $this->Character; }
 }
 
+/**
+* Iterator to get all the items which the user has. It will return an array for each item with an 'Item' element,
+* and a 'qty' element.
+*/
 class InventoryIterator extends Iterable {
 	private $Char;
 	

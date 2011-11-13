@@ -1,6 +1,7 @@
 <?php
 
 define ('LOGIN', 1);
+define ('FORCE_PHASE', true);
 
 require_once ('includes/notextinc.php');
 $ext_title = "Homepage";

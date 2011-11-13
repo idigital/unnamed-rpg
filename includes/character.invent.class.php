@@ -17,6 +17,32 @@ class Inventory {
 	}
 	
 	/**
+	* Adds or removes, based on $qty, a number of $Items
+	*
+	* Never allows quantity to drop below zero (you can't have minus one potion). But will
+	* throw an exception if you attempt to add a quantity which will give them more than the
+	* max amount allowed.
+	*
+	* @param Item
+	* @param int Signed.
+	* @return void
+	*/
+	public function alterBy (Item $Item, $qty) {
+		if ($qty == 0) return;
+	
+		$currently_have = $this->numHolding ($Item);
+		
+		// don't let the qty drop below zero
+		if ($qty < 0 && abs ($qty) > $currently_have) $qty = -$currently_have;
+		
+		// don't allow them to have too many
+		if (!$this->canHoldMore ($Item, $qty)) throw new Exception ('Attempted to give player too many '.$Item->getName());
+
+		// if we've got to here, everything is dandy. update their counts
+		$this->getDatabase()->query ("INSERT INTO `user_item` SET `user_id` = ".$this->getId().", `item_id` = ".$Item->getId().", `qty` = ".(int) $qty." ON DUPLICATE KEY UPDATE `qty` = `qty` + ".(int) $qty);
+	}
+	
+	/**
 	* Checks if the character will be able to hold $qty more of this item.
 	*
 	* Each item has a `max_quantity` which is the most of the item a single character can carry.
@@ -26,10 +52,10 @@ class Inventory {
 	* @return bool
 	*/
 	public function canHoldMore (Item $Item, $qty = 1) {
-		$currently_holding = $this->numberHolding ($Item);
+		$currently_holding = $this->numHolding ($Item);
 		$max_holding = $Item->getMaxQty ();
 		
-		return (($max_holding - $currently_holding) > 0);
+		return (($max_holding - ($currently_holding + $qty)) > 0);
 	}
 	
 	/**
@@ -44,6 +70,7 @@ class Inventory {
 	
 	public function getId () { return $this->char_id; }
 	public function getCharacter () { return $this->Character; }
+	public function getDatabase() { return $this->getCharacter()->getDatabase(); }
 }
 
 /**

@@ -9,6 +9,8 @@ echo "<script src=\"".relroot."/js/config.js\" type=\"text/javascript\"></script
 echo "<script src=\"".relroot."/js/jquery.js\" type=\"text/javascript\"></script>\n";
 if (is_array ($ext_js)) foreach ($ext_js as $js) echo "<script src=\"".$js."\" type=\"text/javascript\"></script>\n";
 
+echo "<link rel=\"shortcut icon\" href=\"".relroot."/favicon.ico\" type=\"image/x-icon\" />\n";
+
 echo "</head>\n<body>\n<div id=\"container\">\n";
 
 ?>

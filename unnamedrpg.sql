@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2011 at 08:39 PM
+-- Generation Time: Nov 14, 2011 at 09:47 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
 --
 
 INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 843, 14);
+(1, 915, 8);
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=370 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=375 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -449,7 +449,12 @@ INSERT INTO `fightmessage_turn` (`turn_id`, `fight_id`) VALUES
 (366, 70),
 (367, 70),
 (368, 70),
-(369, 70);
+(369, 70),
+(370, 71),
+(371, 71),
+(372, 71),
+(373, 71),
+(374, 71);
 
 -- --------------------------------------------------------
 
@@ -1165,7 +1170,17 @@ INSERT INTO `fightmessage_turn_message` (`turn_id`, `msg_id`, `order`) VALUES
 (368, 3, 1),
 (368, 2, 2),
 (369, 3, 1),
-(369, 6, 2);
+(369, 6, 2),
+(370, 3, 1),
+(370, 4, 2),
+(371, 3, 1),
+(371, 2, 2),
+(372, 7, 1),
+(372, 2, 2),
+(373, 3, 1),
+(373, 2, 2),
+(374, 3, 1),
+(374, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -1567,7 +1582,18 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 (368, 3, 2, '3'),
 (368, 2, 1, '2'),
 (369, 3, 1, '1'),
-(369, 3, 2, '3');
+(369, 3, 2, '3'),
+(370, 3, 1, '1'),
+(370, 3, 2, '3'),
+(371, 3, 1, '1'),
+(371, 3, 2, '3'),
+(371, 2, 1, '2'),
+(372, 2, 1, '2'),
+(373, 3, 1, '1'),
+(373, 3, 2, '3'),
+(373, 2, 1, '2'),
+(374, 3, 1, '1'),
+(374, 3, 2, '3');
 
 -- --------------------------------------------------------
 
@@ -14265,7 +14291,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `role`) VALUES
-(1, 'shamess', 'd7daa3fda44b795442405b431ed14883', 'admin');
+(1, 'shane', '696d29e0940a4957748fe3fc9efd22a3', 'admin');
 
 -- --------------------------------------------------------
 
@@ -14282,7 +14308,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `complete` tinyint(1) NOT NULL DEFAULT '0',
   `start_time` int(11) NOT NULL,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data for table `user_fight`
@@ -14324,7 +14350,8 @@ INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`
 (67, 1, 1, 0, 'player win', 1, 1318286067),
 (68, 1, 1, 4, 'mob win', 1, 1318286088),
 (69, 1, 1, 0, 'player win', 1, 1318286379),
-(70, 1, 1, 0, 'player win', 1, 1321130027);
+(70, 1, 1, 0, 'player win', 1, 1321130027),
+(71, 1, 1, 0, 'player win', 1, 1321130751);
 
 -- --------------------------------------------------------
 
@@ -14343,6 +14370,8 @@ CREATE TABLE IF NOT EXISTS `user_item` (
 -- Dumping data for table `user_item`
 --
 
+INSERT INTO `user_item` (`user_id`, `item_id`, `qty`) VALUES
+(1, 6, 9);
 
 -- --------------------------------------------------------
 
@@ -14365,4 +14394,4 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
-(1, 1, 15, 7, 'map', 'hunt');
+(1, 1, 12, 6, 'map', 'hunt');

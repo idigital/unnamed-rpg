@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 14, 2011 at 10:05 PM
+-- Generation Time: Nov 14, 2011 at 11:14 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=375 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=386 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -434,7 +434,18 @@ INSERT INTO `fightmessage_turn` (`turn_id`, `fight_id`) VALUES
 (371, 71),
 (372, 71),
 (373, 71),
-(374, 71);
+(374, 71),
+(375, 72),
+(376, 72),
+(377, 72),
+(378, 72),
+(379, 72),
+(380, 73),
+(381, 73),
+(382, 73),
+(383, 73),
+(384, 73),
+(385, 73);
 
 -- --------------------------------------------------------
 
@@ -1160,7 +1171,30 @@ INSERT INTO `fightmessage_turn_message` (`turn_id`, `msg_id`, `order`) VALUES
 (373, 3, 1),
 (373, 2, 2),
 (374, 3, 1),
-(374, 6, 2);
+(374, 6, 2),
+(375, 3, 1),
+(375, 2, 2),
+(376, 3, 1),
+(376, 4, 2),
+(377, 7, 1),
+(377, 2, 2),
+(378, 3, 1),
+(378, 2, 2),
+(379, 7, 1),
+(379, 2, 2),
+(379, 9, 3),
+(380, 7, 1),
+(380, 2, 2),
+(381, 7, 1),
+(381, 2, 2),
+(382, 3, 1),
+(382, 4, 2),
+(383, 3, 1),
+(383, 4, 2),
+(384, 3, 1),
+(384, 4, 2),
+(385, 3, 1),
+(385, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -1573,7 +1607,27 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 (373, 3, 2, '3'),
 (373, 2, 1, '2'),
 (374, 3, 1, '1'),
-(374, 3, 2, '3');
+(374, 3, 2, '3'),
+(375, 3, 1, '1'),
+(375, 3, 2, '3'),
+(375, 2, 1, '2'),
+(376, 3, 1, '1'),
+(376, 3, 2, '3'),
+(377, 2, 1, '2'),
+(378, 3, 1, '1'),
+(378, 3, 2, '3'),
+(378, 2, 1, '2'),
+(379, 2, 1, '2'),
+(380, 2, 1, '2'),
+(381, 2, 1, '2'),
+(382, 3, 1, '1'),
+(382, 3, 2, '3'),
+(383, 3, 1, '1'),
+(383, 3, 2, '3'),
+(384, 3, 1, '1'),
+(384, 3, 2, '3'),
+(385, 3, 1, '1'),
+(385, 3, 2, '3');
 
 -- --------------------------------------------------------
 
@@ -14231,6 +14285,26 @@ INSERT INTO `mob` (`mob_id`, `name`, `requires_indef_art`, `image`, `hp`, `level
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mob_drop`
+--
+
+CREATE TABLE IF NOT EXISTS `mob_drop` (
+  `mob_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `frequency` int(3) NOT NULL,
+  PRIMARY KEY (`mob_id`,`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mob_drop`
+--
+
+INSERT INTO `mob_drop` (`mob_id`, `item_id`, `frequency`) VALUES
+(1, 5, 100);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `stats_base`
 --
 
@@ -14287,51 +14361,54 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `stage` enum('current','player win','mob win','player flee success') NOT NULL DEFAULT 'current',
   `complete` tinyint(1) NOT NULL DEFAULT '0',
   `start_time` int(11) NOT NULL,
+  `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
 
 --
 -- Dumping data for table `user_fight`
 --
 
-INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`, `complete`, `start_time`) VALUES
-(61, 1, 1, 10, 'mob win', 1, 1318284236),
-(60, 1, 1, 0, 'player win', 1, 1318283081),
-(59, 1, 1, 0, 'player win', 1, 1318283021),
-(58, 1, 1, 10, 'mob win', 1, 1318280041),
-(57, 1, 1, 1, 'player flee success', 1, 1318280018),
-(56, 1, 1, 0, 'player win', 1, 1318279929),
-(55, 1, 1, 4, 'mob win', 1, 1318279847),
-(54, 1, 1, 10, 'player flee success', 1, 1318279836),
-(53, 1, 1, 0, 'player win', 1, 1318279259),
-(52, 1, 1, 0, 'player win', 1, 1318279189),
-(51, 1, 1, 0, 'player win', 1, 1318159052),
-(50, 1, 1, 0, 'player win', 1, 1318158896),
-(49, 1, 1, 20, 'player flee success', 1, 1318120833),
-(48, 1, 1, 20, 'mob win', 1, 1318120533),
-(47, 1, 1, 20, 'mob win', 1, 1318120098),
-(46, 1, 1, 20, 'mob win', 1, 1318119478),
-(45, 1, 1, 20, 'mob win', 1, 1318117173),
-(44, 1, 1, 20, 'mob win', 1, 1318116985),
-(43, 1, 1, 20, 'mob win', 1, 1318116912),
-(42, 1, 1, 20, 'mob win', 1, 1318115902),
-(41, 1, 1, 11, 'mob win', 1, 1318115250),
-(40, 1, 1, 20, 'mob win', 1, 1318115215),
-(39, 1, 1, 20, 'mob win', 1, 1318114854),
-(38, 1, 1, 20, 'player flee success', 1, 1318114843),
-(37, 1, 1, 20, 'mob win', 1, 1317772551),
-(36, 1, 1, 0, 'player win', 1, 1317772163),
-(35, 1, 1, 0, 'player win', 1, 1317741447),
-(62, 1, 1, 10, 'mob win', 1, 1318284581),
-(63, 1, 1, 4, 'mob win', 1, 1318284657),
-(64, 1, 1, 1, 'mob win', 1, 1318284967),
-(65, 1, 1, 10, 'mob win', 1, 1318285394),
-(66, 1, 1, 0, 'player win', 1, 1318285839),
-(67, 1, 1, 0, 'player win', 1, 1318286067),
-(68, 1, 1, 4, 'mob win', 1, 1318286088),
-(69, 1, 1, 0, 'player win', 1, 1318286379),
-(70, 1, 1, 0, 'player win', 1, 1321130027),
-(71, 1, 1, 0, 'player win', 1, 1321130751);
+INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`, `complete`, `start_time`, `reward`) VALUES
+(61, 1, 1, 10, 'mob win', 1, 1318284236, ''),
+(60, 1, 1, 0, 'player win', 1, 1318283081, ''),
+(59, 1, 1, 0, 'player win', 1, 1318283021, ''),
+(58, 1, 1, 10, 'mob win', 1, 1318280041, ''),
+(57, 1, 1, 1, 'player flee success', 1, 1318280018, ''),
+(56, 1, 1, 0, 'player win', 1, 1318279929, ''),
+(55, 1, 1, 4, 'mob win', 1, 1318279847, ''),
+(54, 1, 1, 10, 'player flee success', 1, 1318279836, ''),
+(53, 1, 1, 0, 'player win', 1, 1318279259, ''),
+(52, 1, 1, 0, 'player win', 1, 1318279189, ''),
+(51, 1, 1, 0, 'player win', 1, 1318159052, ''),
+(50, 1, 1, 0, 'player win', 1, 1318158896, ''),
+(49, 1, 1, 20, 'player flee success', 1, 1318120833, ''),
+(48, 1, 1, 20, 'mob win', 1, 1318120533, ''),
+(47, 1, 1, 20, 'mob win', 1, 1318120098, ''),
+(46, 1, 1, 20, 'mob win', 1, 1318119478, ''),
+(45, 1, 1, 20, 'mob win', 1, 1318117173, ''),
+(44, 1, 1, 20, 'mob win', 1, 1318116985, ''),
+(43, 1, 1, 20, 'mob win', 1, 1318116912, ''),
+(42, 1, 1, 20, 'mob win', 1, 1318115902, ''),
+(41, 1, 1, 11, 'mob win', 1, 1318115250, ''),
+(40, 1, 1, 20, 'mob win', 1, 1318115215, ''),
+(39, 1, 1, 20, 'mob win', 1, 1318114854, ''),
+(38, 1, 1, 20, 'player flee success', 1, 1318114843, ''),
+(37, 1, 1, 20, 'mob win', 1, 1317772551, ''),
+(36, 1, 1, 0, 'player win', 1, 1317772163, ''),
+(35, 1, 1, 0, 'player win', 1, 1317741447, ''),
+(62, 1, 1, 10, 'mob win', 1, 1318284581, ''),
+(63, 1, 1, 4, 'mob win', 1, 1318284657, ''),
+(64, 1, 1, 1, 'mob win', 1, 1318284967, ''),
+(65, 1, 1, 10, 'mob win', 1, 1318285394, ''),
+(66, 1, 1, 0, 'player win', 1, 1318285839, ''),
+(67, 1, 1, 0, 'player win', 1, 1318286067, ''),
+(68, 1, 1, 4, 'mob win', 1, 1318286088, ''),
+(69, 1, 1, 0, 'player win', 1, 1318286379, ''),
+(70, 1, 1, 0, 'player win', 1, 1321130027, ''),
+(71, 1, 1, 0, 'player win', 1, 1321130751, ''),
+(72, 1, 1, 1, 'mob win', 1, 1321311284, NULL),
+(73, 1, 1, 0, 'player win', 1, 1321311311, 'a:1:{i:0;s:1:"5";}');
 
 -- --------------------------------------------------------
 
@@ -14350,8 +14427,6 @@ CREATE TABLE IF NOT EXISTS `user_item` (
 -- Dumping data for table `user_item`
 --
 
-INSERT INTO `user_item` (`user_id`, `item_id`, `qty`) VALUES
-(1, 6, 9);
 
 -- --------------------------------------------------------
 
@@ -14374,7 +14449,7 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
-(1, 1, 12, 6, 'map', 'hunt');
+(1, 1, 13, 6, 'fight', 'hunt');
 
 -- --------------------------------------------------------
 
@@ -14394,4 +14469,4 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
 --
 
 INSERT INTO `user_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 915, 8);
+(1, 838, 26);

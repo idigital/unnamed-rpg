@@ -21,7 +21,7 @@ if ($Items->count()) {
 	echo "<tr><th>Name</th><th>Quantity</th><th>Type</th><th>Actions</th></tr>\n";
 	foreach ($Items as $Il) {
 		echo "<tr>";
-		echo "<td>".$Il['Item']->getName ()."</td>";
+		echo "<td>". ucfirst ($Il['Item']->getName ()) ."</td>";
 		echo "<td>".$Il['qty']."</td>";
 		echo "<td>".$Il['Item']->getDetail ('type')."</td>";
 		echo "</tr>\n";

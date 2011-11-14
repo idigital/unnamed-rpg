@@ -141,6 +141,45 @@ class Mob extends StandardObject {
 		
 		return $mob_name;
 	}
+	
+	/**
+	* Figure which items a user should get at the end of a fight.
+	*
+	* The mob has a selection of items it could drop in `mob_drop`. It can drop zero, one, or many.
+	* The chance of a particular item dropping depends on the `frequency`, which is a number out
+	* of zero. An item with a frequency of 5 will have a 5% of dropping.
+	*
+	* The liklihood of a second item dropping is 1/2 of it's frequency. A third item is 1/3. An nth
+	* item is 1/n.
+	*
+	* The user may not get these items though - a second check to make sure they have enough invent
+	* space will have to be done before giving these items.
+	*
+	* @return array Array of items
+	*/
+	public function getDrops () {
+		// which items can the mob drop?
+		$qry_candrop = $this->getDatabase()->query ("SELECT * FROM `mob_drop` WHERE `mob_id` = ".$this->getId());
+		
+		if (mysql_num_rows ($qry_candrop)) {
+			$drops = array ();
+			$num_dropped = 1; // starts at one, since 5/1 = 1
+		
+			while ($drop = mysql_fetch_assoc ($qry_candrop)) {
+				$die_roll = rand (1, 100);
+				
+				if ($die_roll <= (int) ($drop['frequency'] / $num_dropped)) {
+					$drops[] = new Item ($drop['item_id']);
+				
+					$num_dropped++;
+				}
+			}
+			
+			return $drops;
+		} else {
+			return array ();
+		}
+	}
 }
 
 ?>

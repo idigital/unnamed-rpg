@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 14, 2011 at 09:47 PM
+-- Generation Time: Nov 14, 2011 at 10:05 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -18,26 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `unnamedrpg`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `character_stats`
---
-
-CREATE TABLE IF NOT EXISTS `character_stats` (
-  `user_id` int(11) NOT NULL,
-  `experience` int(11) NOT NULL,
-  `remaining_hp` int(5) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `character_stats`
---
-
-INSERT INTO `character_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 915, 8);
 
 -- --------------------------------------------------------
 
@@ -14395,3 +14375,23 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
 (1, 1, 12, 6, 'map', 'hunt');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_stats`
+--
+
+CREATE TABLE IF NOT EXISTS `user_stats` (
+  `user_id` int(11) NOT NULL,
+  `experience` int(11) NOT NULL,
+  `remaining_hp` int(5) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_stats`
+--
+
+INSERT INTO `user_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
+(1, 915, 8);

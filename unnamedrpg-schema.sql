@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 14, 2011 at 09:48 PM
+-- Generation Time: Nov 14, 2011 at 10:05 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -18,19 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `unnamedrpg`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `character_stats`
---
-
-CREATE TABLE IF NOT EXISTS `character_stats` (
-  `user_id` int(11) NOT NULL,
-  `experience` int(11) NOT NULL,
-  `remaining_hp` int(5) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -256,5 +243,18 @@ CREATE TABLE IF NOT EXISTS `user_map` (
   `y_co` int(11) NOT NULL,
   `phase` enum('map','fight','special') NOT NULL DEFAULT 'map',
   `move_type` enum('sneak','normal','hunt') NOT NULL DEFAULT 'normal',
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_stats`
+--
+
+CREATE TABLE IF NOT EXISTS `user_stats` (
+  `user_id` int(11) NOT NULL,
+  `experience` int(11) NOT NULL,
+  `remaining_hp` int(5) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

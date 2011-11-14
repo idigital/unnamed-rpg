@@ -12,7 +12,7 @@ class Character extends StandardObject {
 		$Database = new Database (database_server, database_user, database_password, database_name);
 	
 		$config = array (
-			'table' => "character_stats",
+			'table' => "user_stats",
 			'database' => $Database,
 			'item_id' => $user_id,
 			'primary_key' => "user_id"

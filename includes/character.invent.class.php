@@ -55,7 +55,7 @@ class Inventory {
 		$currently_holding = $this->numHolding ($Item);
 		$max_holding = $Item->getMaxQty ();
 		
-		return (($max_holding - ($currently_holding + $qty)) > 0);
+		return (($max_holding - ($currently_holding + $qty)) >= 0);
 	}
 	
 	/**

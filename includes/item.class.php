@@ -31,7 +31,7 @@ class Item extends StandardObject {
 		// work out how to format the name, with "an" or "a"?
 		$name = $this->getDetail ('name');
 		
-		if ($with_indef_art) $name = indef_article ($name);
+		if ($require_def) $name = indef_article ($name);
 		
 		return $name;
 	}

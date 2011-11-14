@@ -135,7 +135,57 @@ class CharacterFight extends StandardObject {
 		return 2;
 	}
 	
-	public function getCharacter () { return new Character ($this->getId()); }
+	/**
+	* Checks what the user has won, but doesn't give it to them just yet.
+	*
+	* Adds the loot the user has won into the database, unless it's already been added. Safe to
+	* call repeatedly.
+	*
+	* If it has already been decided, then each item_id being given will be stored in a serialized
+	* array, under `reward`. Despite that, the function will return an array of Item elements.
+	*
+	* @retur array Of Items the user has won
+	*/
+	public function discoverLoot () {
+		// have we already decided what we're going to win?
+		$stored = $this->getDetail ('reward');
+		
+		if ($stored == null) {
+			// we've not, so we need to decide, and add that to the database now
+			$drops = $this->getMob()->getDrops();
+			
+			if ($drops) {
+				$won = array ();
+				
+				foreach ($drops as $Item) {
+					if ($this->getCharacter()->getInventory()->canHoldMore ($Item)) {
+						$won[] = $Item;
+						$won_ids[] = $Item->getId();
+					}
+				}
+				
+				$this->setDetail ('reward', serialize ($won_ids));
+				
+				return $won;
+			} else {
+				$this->setDetail ('reward', "a:0:{}");
+			
+				return array ();
+			}
+		} else {
+			$won = unserialize ($this->getDetail ('reward'));
+			
+			$loot = array ();
+			
+			foreach ($won as $item_id) {
+				$loot[] = new Item ($item_id);
+			}
+			
+			return $loot;
+		}
+	}
+	
+	public function getCharacter () { return new Character ($this->getDetail('user_id')); }
 
 	/**
 	* Gets the static data about the mob the user is currently up against.

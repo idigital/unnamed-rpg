@@ -91,6 +91,14 @@ if ($Fight->getStage() == "player flee success") {
 	echo "<p>You defeated ".$Mob->getName (true)."!</p>\n";
 	echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/lupe_win.gif\" /></div>\n";
 	echo "<p>".ucfirst ($Mob->getName (true))." cries in pain as it falls to the ground, defeated!</p>\n";
+	
+	// what loot did we get?
+	$loot = $Fight->discoverLoot();
+
+	foreach ($loot as $Item) {
+		echo "<p>".ucfirst ($Mob->getName (true))." was carrying <strong>".$Item->getName (true)."</strong>!</p>\n";
+	}
+	
 	echo "<p>You gain <b>".$Mob->getXPGain ($Character)." experience points</b> for defeating this creature!</p>\n";
 	
 	echo "<form method=\"post\" action=\"\">\n";

@@ -108,6 +108,14 @@ class CharacterFight extends StandardObject {
 		return $stage;
 	}
 	
+	/**
+	* Gets the message which were created within the last turn.
+	*
+	* The messages will be sent as a FightMessage, so you can get the actual text of the message with
+	* $FightMessage->getString().
+	*
+	* @return array
+	*/
 	public function getPreviousTurnMessages () {
 		$last_turn_id = $this->getDatabase()->getSingleValue ("SELECT `turn_id` FROM `fightmessage_turn` WHERE `fight_id` = ".$this->getId()." ORDER BY `turn_id` DESC LIMIT 1");
 	

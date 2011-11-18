@@ -193,6 +193,31 @@ class CharacterFight extends StandardObject {
 		}
 	}
 	
+	/**
+	* Actually gives the user the loot which they get from this fight.
+	*
+	* Doesn't check if the fight is finished, so only do this if you're sure it has.
+	*
+	* @return array Items given
+	*/
+	public function takeLoot () {
+		$to_take = $this->discoverLoot ();
+		
+		$taken = array ();
+		
+		foreach ($to_take as $Item) {
+			// make sure they can hold it again. I don't know why this would have changed between the discovering
+			// and now, but make sure.
+			if ($this->getCharacter()->getInventory()->canHoldMore ($Item)) {
+				$this->getCharacter()->getInventory()->alterBy ($Item, 1);
+				
+				$taken[] = $Item;
+			}
+		}
+		
+		return $taken;
+	}
+	
 	public function getCharacter () { return new Character ($this->getDetail('user_id')); }
 
 	/**

@@ -22,6 +22,8 @@ if (isset ($_POST['back_to_map'])) {
 	} elseif ($Fight->getStage() == "player win") {
 		// give them their xp
 		$Character->setDetail ('experience', $Character->getDetail ('experience') + $Mob->getXPGain ($Character));
+		// and give them their loot!
+		$Fight->takeLoot ();
 	}
 	
 	// they can only be on this page if they're in a position to return to the map, fyi.

@@ -36,8 +36,26 @@ class Item extends StandardObject {
 		return $name;
 	}
 	
+	/**
+	* Finds what the maximum amount a user can carry of this item.
+	*
+	* @return int
+	*/
 	public function getMaxQty () {
 		return $this->getDetail ('max_quantity');
+	}
+	
+	/**
+	* Returns the modifier for the item.
+	*
+	* Most items have a non-null value for their modifier, which affects a certain statistic depending
+	* on what type of item it is. For instance, an item of type 'Healing Potion's' modifier will be the
+	* amount of HP healed. On a weapon, like 'Fire Weapons', it signifies the weapon's strength.
+	*
+	* @return int
+	*/
+	public function getModifier () {
+		return $this->getDetail ('modifier');
 	}
 }
 

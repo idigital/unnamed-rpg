@@ -25,16 +25,26 @@ echo "<div class=\"clear\">&nbsp;</div>\n";
 $Items = $Character->getInventory()->getItems();
 
 if ($Items->count()) {
-	echo "<h2>Inventory</h2>\n";
-	echo "<ul id=\"items\">\n";
+	echo "<div id=\"invent\">\n";
+
+	echo "<div id=\"item-details\">\n";
+	echo "<h2 class=\"item-name\">Inventory</h2>\n";
+	echo "<div class=\"item-details\"><p>Click on an item to see more data about it.</p></div>\n";
+	echo "</div>\n";
+	
+	echo "<div id=\"items\"><ul id=\"items-list\">\n";
 	foreach ($Items as $Il) {
-		echo "<li class=\"item\">";
-		echo ucfirst ($Il['Item']->getName ());
+		echo "<li class=\"item itemid".$Il['Item']->getId()."\">";
+		echo ucfirst ($Il['Item']->getName ()) . " (x<strong>".$Il['qty']."</strong>/".$Il['Item']->getMaxQty().")";
 		echo "</li>\n";
 	}
 	echo "</ul>\n";
+	echo "<div class=\"clear\">&nbsp;</div>\n";
+	echo "</div>\n";
 	
 	echo "<div class=\"clear\">&nbsp;</div>\n";
+	
+	echo "</div>\n";
 } else {
 	echo "<p>You don't have any items to use.</p>\n";
 }

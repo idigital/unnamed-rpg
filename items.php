@@ -4,8 +4,9 @@ define ('LOGIN', 1);
 define ('FORCE_PHASE', true);
 
 require_once ('includes/notextinc.php');
-$ext_title = "Invetory";
+$ext_title = "Inventory";
 $ext_css[] = "items.css";
+$ext_js[] = relroot."/js/items.js";
 include_once ('includes/header.php');
 
 include ('fight_scripts/stat_bar.php');
@@ -29,12 +30,12 @@ if ($Items->count()) {
 
 	echo "<div id=\"item-details\">\n";
 	echo "<h2 class=\"item-name\">Inventory</h2>\n";
-	echo "<div class=\"item-details\"><p>Click on an item to see more data about it.</p></div>\n";
+	echo "<div class=\"item-description\"><p>Click on an item to see more data about it.</p></div>\n";
 	echo "</div>\n";
 	
 	echo "<div id=\"items\"><ul id=\"items-list\">\n";
 	foreach ($Items as $Il) {
-		echo "<li class=\"item itemid".$Il['Item']->getId()."\">";
+		echo "<li class=\"item\" id=\"itemid".$Il['Item']->getId()."\">";
 		echo ucfirst ($Il['Item']->getName ()) . " (x<strong>".$Il['qty']."</strong>/".$Il['Item']->getMaxQty().")";
 		echo "</li>\n";
 	}

@@ -37,7 +37,7 @@ class Database {
 			//  driven site, we should do a fatal error, not just the warning that we usually get.
 			if ($this->connection == false) {
 				$this->SQLDebug();
-				trigger_error ("Database connection could not be established", E_USER_ERROR);
+				throw new DatabaseNoConnectException ("Database connection could not be established");
 			}
 			
 			mysql_select_db ($this->database);
@@ -124,6 +124,12 @@ class Database {
 		echo "</ul>\n";
 		
 		echo "</div>\n";
+	}
+}
+
+class DatabaseNoConnectException extends Exception {
+	public function __toString () {
+		return "Invalid database credentials caused failure to connect";
 	}
 }
 

@@ -22,7 +22,7 @@ if ($Items->count()) {
 	foreach ($Items as $Il) {
 		echo "<tr>";
 		echo "<td>". ucfirst ($Il['Item']->getName ()) ."</td>";
-		echo "<td>".$Il['qty']."</td>";
+		echo "<td><b>".$Il['qty']."</b>/".$Il['Item']->getMaxQty()."</td>";
 		echo "<td>".$Il['Item']->getDetail ('type')."</td>";
 		echo "</tr>\n";
 	}

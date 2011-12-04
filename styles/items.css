@@ -45,3 +45,7 @@
 	width: 35%;
 	float: right;
 }
+
+#item-details>.item-actions li {
+	padding: 10px;
+}

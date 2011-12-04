@@ -31,6 +31,7 @@ if ($Items->count()) {
 	echo "<div id=\"item-details\">\n";
 	echo "<h2 class=\"item-name\">Inventory</h2>\n";
 	echo "<div class=\"item-description\"><p>Click on an item to see more data about it.</p></div>\n";
+	echo "<div class=\"item-actions\"></div>\n";
 	echo "</div>\n";
 	
 	echo "<div id=\"items\"><ul id=\"items-list\">\n";

@@ -123,6 +123,18 @@ class Character extends StandardObject {
 		return;
 	}
 	
+	public function heal ($amount) {
+		$amount = (int) $amount;
+	
+		if ($this->getDetail ('remaining_hp') + $amount > $this->getMaxHealth()) {
+			$this->setDetail ('remaining_hp', $this->getMaxHealth());
+		} else {
+			$this->setDetail ('remaining_hp', $this->getDetail ('remaining_hp') + $amount);
+		}
+		
+		return;
+	}
+	
 	/**
 	* Checks and returns how many of an item the user has.
 	*

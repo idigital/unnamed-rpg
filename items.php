@@ -37,7 +37,8 @@ if ($Items->count()) {
 	echo "<div id=\"items\"><ul id=\"items-list\">\n";
 	foreach ($Items as $Il) {
 		echo "<li class=\"item\" id=\"itemid".$Il['Item']->getId()."\">";
-		echo ucfirst ($Il['Item']->getName ()) . " (x<strong>".$Il['qty']."</strong>/".$Il['Item']->getMaxQty().")";
+		echo "<img src=\"asdfd\" alt=\"".ucfirst ($Il['Item']->getName ())."\" />";
+		echo "<span class=\"qty\">".$Il['qty']."</span>";
 		echo "</li>\n";
 	}
 	echo "</ul>\n";

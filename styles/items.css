@@ -37,8 +37,15 @@
 	float: left;
 	width: 50px;
 	height: 50px;
-	border: 1px solid black;
 	margin: 5px;
+	
+	position: relative;
+}
+
+#items-list>.item>.qty {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
 }
 
 #item-details {

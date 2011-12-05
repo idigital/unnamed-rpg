@@ -29,7 +29,24 @@ function handleItemOnClick () {
 }
 
 function handleActionClick () {
-	$.get ('items/use-item.php', { 'item_id': $('#item-details').data ('item_id'), 'action': $(this).html() }, function () {
-		console.log ("action triggered and done.");
+	action = $(this).html();
+	item_li = '#itemid'+$('#item-details').data ('item_id');
+
+	$.get ('items/use-item.php', { 'item_id': $('#item-details').data ('item_id'), 'action': action }, function (data) {
+		if (data == 'true') {
+			if (action == "Destroy") {
+				qty = parseInt ($(item_li).children ('.qty').html(), 10);
+				
+				if (qty == 1) {
+					$(item_li).remove();
+				} else {
+					--qty;
+					
+					$(item_li).children ('.qty').html ((qty));
+				}
+			}
+		} else {
+			alert ("Something happened which meant your action failed.");
+		}
 	});
 }

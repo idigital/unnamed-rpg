@@ -48,7 +48,7 @@ class FightMessage extends StandardObject {
 				if ($var_type == "mob_name") {
 					// this is different to [a_mob_name] since this could be the name of *any mob* not just the one we're fighting.
 					// this is a little bit legacy, since [a_mob_name] didn't used to exist, and we'd put it in this varible, and so
-					// is fairly useless. but we'll keep it becuase it's functionality can still be kept around without harming, or
+					// is fairly useless. but we'll keep it because its functionality can still be kept around without harming, or
 					// slowing anything down.
 					
 					$Mob = new Mob ($var['value']);

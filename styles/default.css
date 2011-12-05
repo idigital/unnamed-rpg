@@ -56,6 +56,9 @@ th {
 	display: inline-block;
 	text-align: left;
 }
+.stat_bar>span {
+	display: inline-block;
+}
 
 .clear {
 	height: 1px;

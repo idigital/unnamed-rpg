@@ -65,6 +65,16 @@ class Character extends StandardObject {
 		return $this->getBaseStats()->getDetail ('hp');
 	}
 	
+	public function getHealth () {
+		$this->getDetail ('remaining_hp');
+		return $this->getDetail ('remaining_hp');
+	}
+	
+	public function getPercentHealth () {
+		$this->getHealth() / $this->getMaxHealth();
+		return (int) (($this->getHealth() / $this->getMaxHealth()) * 100);
+	}
+	
 	/**
 	* Gets the data about the fight a user has fought, or is fighting.
 	*

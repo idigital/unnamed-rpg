@@ -33,9 +33,20 @@ function handleActionClick () {
 	item_li = '#itemid'+$('#item-details').data ('item_id');
 
 	$.get ('items/use-item.php', { 'item_id': $('#item-details').data ('item_id'), 'action': action }, function (data) {
-		if (data == 'true') {
-			if (action == "Destroy") {
-				qty = parseInt ($(item_li).children ('.qty').html(), 10);
+		qty = parseInt ($(item_li).children ('.qty').html(), 10);
+
+		if (data['success'] == true) {
+			if (data['action'] == "destroy") {
+				if (qty == 1) {
+					$(item_li).remove();
+				} else {
+					--qty;
+					
+					$(item_li).children ('.qty').html ((qty));
+				}
+			} else if (data['action'] == "heal") {
+				$('.char_health').html (data['current_health']);
+				$('.char_health_bar').animate ({'width': data['current_health_percent']+'px'});
 				
 				if (qty == 1) {
 					$(item_li).remove();
@@ -48,5 +59,5 @@ function handleActionClick () {
 		} else {
 			alert ("Something happened which meant your action failed.");
 		}
-	});
+	}, "json");
 }

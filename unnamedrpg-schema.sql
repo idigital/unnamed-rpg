@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 14, 2011 at 11:14 PM
+-- Generation Time: Dec 06, 2011 at 12:39 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=386 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=466 ;
 
 -- --------------------------------------------------------
 
@@ -96,9 +96,22 @@ CREATE TABLE IF NOT EXISTS `item` (
   `name` varchar(23) NOT NULL,
   `type` enum('Healing Potion','Fire Weapons','Energy Armour','Misc. Item') NOT NULL,
   `max_quantity` int(3) NOT NULL,
-  `modifier` int(11) DEFAULT NULL,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_action`
+--
+
+CREATE TABLE IF NOT EXISTS `item_action` (
+  `item_id` int(11) NOT NULL,
+  `action_type` enum('Drink','Destroy','Equip') NOT NULL,
+  `modifier` int(3) DEFAULT NULL,
+  `in_fight` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`item_id`,`action_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -229,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
 
 -- --------------------------------------------------------
 

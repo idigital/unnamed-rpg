@@ -42,7 +42,7 @@ echo "<p class=\"name\">".ucfirst ($Mob->getName (true))."</p>\n";
 $mob_health_bar = "<span class=\"stat_bar\">";
 // what percent of health does the user have left?
 $mob_percent_health = ($Fight->getDetail ('mob_health')/$Mob->getDetail ('hp')) * 100;
-$mob_health_bar .= "<span class=\"mob_health_bar\" style=\"display: inline-block; width: ".$mob_percent_health."px; background-color: rgb(0, 255, 0);\">&nbsp;</span>";
+$mob_health_bar .= "<span class=\"mob_health_bar\" style=\"width: ".$mob_percent_health."px;\">&nbsp;</span>";
 $mob_health_bar .= "</span>\n";
 echo "<p>Health: <strong class=\"mob_health\">".$Fight->getDetail ('mob_health')."</strong>/".$Mob->getDetail ('hp')." ".$mob_health_bar."</p>\n";
 

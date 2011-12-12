@@ -81,6 +81,9 @@ if ($Fight->getStage() == "mob win") {
 	echo "<p><a href=\"?complete=true\"><strong>Click here</strong> to see what happened...</a></p>";
 } else {
 	echo "<p><span id=\"act_attack\" class=\"link\">Attack</span></p>\n";
+	
+	echo "<div id=\"act_actions\"></div>\n";
+	
 	echo "<p style=\"padding-top: 20px;\"><span id=\"act_flee\" class=\"link\">Flee</span></p>\n";
 	echo "<p><span id=\"act_nothing\" class=\"link\">Do nothing</span></p>\n";
 }

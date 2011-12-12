@@ -4,7 +4,46 @@ $(function () {
 	$('#act_attack').click (handleAttackClick);
 	$('#act_nothing').click (handleDoNothingClick);
 	$('#act_flee').click (handleFleeClick);
+	
+	loadActions ();
 });
+
+function loadActions() {
+	$.ajax ({
+		cache: false,
+		success: function (data) {
+			if (data['status'] == 'success') {
+				// clear the actions box of whatever it currently has
+				$(this).html ('');
+			
+				for (i = 0; i < data['actions'].length; i++) {
+					p = $("<p class=\"link\"></p>");
+					
+					p.append (data['actions'][i]['string']);
+					
+					p.data ('item_id', data['actions'][i]['item_id']);
+					p.data ('action_type', data['actions'][i]['action_type']);
+					
+					p.click (handleActionClick);
+					
+					$(this).append (p);
+				}
+			} else {
+				alert ('Something bad happened with loading actions. Try refreshing?');
+			}
+		},
+		error: function () {
+			alert ('Something bad happened with loading actions. Try refreshing?');
+		},
+		context: $('#act_actions'),
+		dataType: 'json',
+		url: relroot + '/fight_scripts/get_item_actions.php'
+	});
+}
+
+function handleActionClick () {
+	console.log ($(this).data ('item_id'), $(this).data ('action_type'));
+}
 
 function handleAttackClick () {
 	$.post (relroot+'/fight_scripts/attack.php', function (json) {

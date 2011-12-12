@@ -11,18 +11,18 @@ $(function () {
 function loadActions() {
 	$.ajax ({
 		cache: false,
-		success: function (data) {
-			if (data['status'] == 'success') {
+		success: function (json) {
+			if (json['status'] == 'success') {
 				// clear the actions box of whatever it currently has
 				$(this).html ('');
 			
-				for (i = 0; i < data['actions'].length; i++) {
+				for (i = 0; i < json['actions'].length; i++) {
 					p = $("<p class=\"link\"></p>");
 					
-					p.append (data['actions'][i]['string']);
+					p.append (json['actions'][i]['string']);
 					
-					p.data ('item_id', data['actions'][i]['item_id']);
-					p.data ('action_type', data['actions'][i]['action_type']);
+					p.data ('item_id', json['actions'][i]['item_id']);
+					p.data ('action_type', json['actions'][i]['action_type']);
 					
 					p.click (handleActionClick);
 					
@@ -42,7 +42,33 @@ function loadActions() {
 }
 
 function handleActionClick () {
-	console.log ($(this).data ('item_id'), $(this).data ('action_type'));
+	action = $(this).data ('action_type');
+	item_id = $(this).data ('item_id');
+	
+	clearHistory ();
+
+	$.get (relroot + '/fight_scripts/use_item.php', { 'item_id': item_id, 'action': action }, function (json) {
+		if (json['status'] == "success") {
+			if (json['item_use'] == true) {
+				if (json['action'] == "heal") {
+					changeHP ("char", json['current_health']);
+					
+				}
+
+				doMobAction (json);
+				
+				for (i=0;i<json['message'].length;i++) {
+					addHistory (json['message'][i]['msg'], json['message'][i]['type']);
+				}
+			} else {
+				addHistory ("You tried to use an item... but you couldn't. Try refreshing?", "#FF9999");
+			}
+		} else {
+			alert ("Something happened which meant your action failed. Try refreshing the page?");
+		}
+
+		loadActions();
+	}, "json");
 }
 
 function handleAttackClick () {

@@ -159,10 +159,13 @@ class Character extends StandardObject {
 	* @return void
 	*/
 	public function respawn () {
-		// for now, the spawning grid is grid_id 131
-		$respawn_at = new MapGrid (131);
-		
 		$map_data = $this->getMapData();
+		
+		// what's the respawn point here?
+		// there's no object or method to get map meta data, so we do the "hard" way.
+		$respawn_id = $this->getDatabase()->getSingleValue ("SELECT `respawn_on` FROM `map_data` WHERE `map_id` = ".$map_data->getDetail ('map_id'));
+		$respawn_at = new MapGrid ($respawn_id);
+		
 		$map_data->setDetail ('map_id', $respawn_at->getDetail ('map_id'));
 		$map_data->setDetail ('x_co', $respawn_at->getDetail ('x_co'));
 		$map_data->setDetail ('y_co', $respawn_at->getDetail ('y_co'));

@@ -17,12 +17,17 @@ $r = array ();
 
 $turn_id = FightMessage::createTurnId ($Fight->getId());
 
-$Message = FightMessage::addMessage ($turn_id, 1);
-$r['message'][] = $Message->getMessageArray ();
+// the character needs to be in a fight to be here
+if ($Character->getMapData()->getDetail ('phase') != "fight") {
+	$r['status'] = "bad phase";
+} else {
+	$Message = FightMessage::addMessage ($turn_id, 1);
+	$r['message'][] = $Message->getMessageArray ();
 
-$Fight->doNothing ();
+	$Fight->doNothing ();
 
-include ('mob_action.php');
+	include ('mob_action.php');
+}
 
 $r['fight_stage'] = $Fight->getStage();
 

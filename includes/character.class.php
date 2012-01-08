@@ -76,6 +76,15 @@ class Character extends StandardObject {
 	}
 	
 	/**
+	* Works out the player's speed.
+	*
+	* @return int
+	*/
+	public function getSpeed () {
+		return $this->getBaseStats()->getDetail ('speed');
+	}
+	
+	/**
 	* Gets the data about the fight a user has fought, or is fighting.
 	*
 	* If "current" or no param is passed, then the function will figure out what the current fight is.

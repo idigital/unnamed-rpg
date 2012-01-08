@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2011 at 12:39 AM
+-- Generation Time: Jan 08, 2012 at 10:08 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_text` (
   `num_vars` smallint(6) NOT NULL,
   `rgb_colour` varchar(18) NOT NULL,
   PRIMARY KEY (`msg_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `fightmessage_text`
@@ -46,7 +46,8 @@ INSERT INTO `fightmessage_text` (`msg_id`, `text`, `num_vars`, `rgb_colour`) VAL
 (6, '<strong>You defeated [a_mob_name]!</strong>', 0, 'rgb(0, 255, 0)'),
 (7, 'You attack [a_mob_name], but miss!', 0, 'rgb(0, 255, 0)'),
 (8, 'You succeeded in escaping from [a_mob_name]!', 0, 'rgb(0, 255, 0)'),
-(9, '[a_mob_name] defeated you!', 0, 'rgb(255, 153, 153)');
+(9, '[a_mob_name] defeated you!', 0, 'rgb(255, 153, 153)'),
+(10, 'You used a healing potion and healed <strong>[1]<strong> damage!', 1, 'rgb(0, 255, 0)');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,8 @@ CREATE TABLE IF NOT EXISTS `fightmessage_text_var` (
 
 INSERT INTO `fightmessage_text_var` (`msg_id`, `var_num`, `var_type`) VALUES
 (2, 1, 'text'),
-(3, 1, 'text');
+(3, 1, 'text'),
+(10, 1, 'text');
 
 -- --------------------------------------------------------
 
@@ -79,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=466 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=531 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -525,7 +527,72 @@ INSERT INTO `fightmessage_turn` (`turn_id`, `fight_id`) VALUES
 (462, 84),
 (463, 84),
 (464, 84),
-(465, 84);
+(465, 84),
+(466, 85),
+(467, 85),
+(468, 85),
+(469, 85),
+(470, 85),
+(471, 85),
+(472, 85),
+(473, 85),
+(474, 85),
+(475, 85),
+(476, 85),
+(477, 85),
+(478, 85),
+(479, 85),
+(480, 85),
+(481, 85),
+(482, 85),
+(483, 85),
+(484, 85),
+(485, 85),
+(486, 85),
+(487, 85),
+(488, 85),
+(489, 85),
+(490, 85),
+(491, 85),
+(492, 85),
+(493, 85),
+(494, 85),
+(495, 85),
+(496, 85),
+(497, 85),
+(498, 85),
+(499, 85),
+(500, 85),
+(501, 85),
+(502, 85),
+(503, 85),
+(504, 85),
+(505, 85),
+(506, 86),
+(507, 86),
+(508, 86),
+(509, 86),
+(510, 86),
+(511, 86),
+(512, 86),
+(513, 86),
+(514, 86),
+(515, 86),
+(516, 86),
+(517, 86),
+(518, 86),
+(519, 87),
+(520, 87),
+(521, 87),
+(522, 87),
+(523, 87),
+(524, 87),
+(525, 87),
+(526, 87),
+(527, 88),
+(528, 88),
+(529, 88),
+(530, 88);
 
 -- --------------------------------------------------------
 
@@ -1434,7 +1501,135 @@ INSERT INTO `fightmessage_turn_message` (`turn_id`, `msg_id`, `order`) VALUES
 (464, 7, 1),
 (464, 4, 2),
 (465, 3, 1),
-(465, 6, 2);
+(465, 6, 2),
+(466, 3, 1),
+(466, 2, 2),
+(467, 10, 1),
+(467, 4, 2),
+(468, 3, 1),
+(468, 2, 2),
+(469, 3, 1),
+(469, 4, 2),
+(470, 10, 1),
+(470, 4, 2),
+(471, 10, 1),
+(471, 2, 2),
+(472, 10, 1),
+(472, 4, 2),
+(473, 10, 1),
+(473, 2, 2),
+(474, 10, 1),
+(474, 2, 2),
+(475, 10, 1),
+(475, 2, 2),
+(476, 10, 1),
+(476, 2, 2),
+(477, 10, 1),
+(477, 4, 2),
+(478, 1, 1),
+(478, 2, 2),
+(479, 1, 1),
+(479, 2, 2),
+(480, 1, 1),
+(480, 2, 2),
+(481, 1, 1),
+(481, 4, 2),
+(482, 1, 1),
+(482, 4, 2),
+(483, 1, 1),
+(483, 2, 2),
+(484, 1, 1),
+(484, 4, 2),
+(485, 1, 1),
+(485, 2, 2),
+(486, 1, 1),
+(486, 4, 2),
+(487, 1, 1),
+(487, 4, 2),
+(488, 10, 1),
+(488, 4, 2),
+(489, 10, 1),
+(489, 4, 2),
+(490, 10, 1),
+(490, 2, 2),
+(491, 1, 1),
+(491, 2, 2),
+(492, 1, 1),
+(492, 2, 2),
+(493, 1, 1),
+(493, 4, 2),
+(494, 10, 1),
+(494, 4, 2),
+(495, 1, 1),
+(495, 2, 2),
+(496, 1, 1),
+(496, 4, 2),
+(497, 1, 1),
+(497, 4, 2),
+(498, 1, 1),
+(498, 4, 2),
+(499, 1, 1),
+(499, 2, 2),
+(500, 1, 1),
+(500, 4, 2),
+(501, 1, 1),
+(501, 4, 2),
+(502, 1, 1),
+(502, 4, 2),
+(503, 10, 1),
+(503, 2, 2),
+(504, 7, 1),
+(504, 2, 2),
+(505, 3, 1),
+(505, 6, 2),
+(506, 1, 1),
+(506, 2, 2),
+(507, 1, 1),
+(507, 2, 2),
+(508, 1, 1),
+(508, 2, 2),
+(509, 1, 1),
+(509, 2, 2),
+(510, 10, 1),
+(510, 2, 2),
+(511, 7, 1),
+(511, 4, 2),
+(512, 3, 1),
+(512, 4, 2),
+(513, 7, 1),
+(513, 2, 2),
+(514, 7, 1),
+(514, 2, 2),
+(515, 7, 1),
+(515, 4, 2),
+(516, 3, 1),
+(516, 2, 2),
+(517, 3, 1),
+(517, 2, 2),
+(518, 3, 1),
+(518, 6, 2),
+(519, 7, 1),
+(519, 2, 2),
+(520, 7, 1),
+(520, 4, 2),
+(521, 1, 1),
+(521, 2, 2),
+(522, 5, 1),
+(522, 4, 2),
+(523, 5, 1),
+(523, 2, 2),
+(524, 5, 1),
+(524, 2, 2),
+(525, 5, 1),
+(525, 2, 2),
+(526, 8, 1),
+(527, 3, 1),
+(527, 4, 2),
+(528, 3, 1),
+(528, 2, 2),
+(529, 1, 1),
+(529, 2, 2),
+(530, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -1963,7 +2158,67 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 (461, 2, 1, '2'),
 (462, 3, 1, '3'),
 (463, 2, 1, '2'),
-(465, 3, 1, '3');
+(465, 3, 1, '3'),
+(466, 3, 1, '3'),
+(466, 2, 1, '2'),
+(467, 10, 1, '35'),
+(468, 3, 1, '3'),
+(468, 2, 1, '2'),
+(469, 3, 1, '3'),
+(470, 10, 1, '33'),
+(471, 10, 1, '0'),
+(471, 2, 1, '2'),
+(472, 10, 1, '-2'),
+(473, 10, 1, '0'),
+(473, 2, 1, '2'),
+(474, 10, 1, '-2'),
+(474, 2, 1, '2'),
+(475, 10, 1, '-2'),
+(475, 2, 1, '2'),
+(476, 10, 1, '-2'),
+(476, 2, 1, '2'),
+(477, 10, 1, '-2'),
+(478, 2, 1, '2'),
+(479, 2, 1, '2'),
+(480, 2, 1, '2'),
+(483, 2, 1, '2'),
+(485, 2, 1, '2'),
+(488, 10, 1, '-10'),
+(489, 10, 1, '0'),
+(490, 10, 1, '0'),
+(490, 2, 1, '2'),
+(491, 2, 1, '2'),
+(492, 2, 1, '2'),
+(494, 10, 1, '6'),
+(495, 2, 1, '2'),
+(499, 2, 1, '2'),
+(503, 10, 1, '4'),
+(503, 2, 1, '2'),
+(504, 2, 1, '2'),
+(505, 3, 1, '3'),
+(506, 2, 1, '2'),
+(507, 2, 1, '2'),
+(508, 2, 1, '2'),
+(509, 2, 1, '2'),
+(510, 10, 1, '8'),
+(510, 2, 1, '2'),
+(512, 3, 1, '3'),
+(513, 2, 1, '2'),
+(514, 2, 1, '2'),
+(516, 3, 1, '3'),
+(516, 2, 1, '2'),
+(517, 3, 1, '3'),
+(517, 2, 1, '2'),
+(518, 3, 1, '3'),
+(519, 2, 1, '2'),
+(521, 2, 1, '2'),
+(523, 2, 1, '2'),
+(524, 2, 1, '2'),
+(525, 2, 1, '2'),
+(527, 3, 1, '3'),
+(528, 3, 1, '3'),
+(528, 2, 1, '2'),
+(529, 2, 1, '2');
 
 -- --------------------------------------------------------
 
@@ -14626,6 +14881,7 @@ CREATE TABLE IF NOT EXISTS `mob` (
   `requires_indef_art` tinyint(1) NOT NULL DEFAULT '1',
   `image` varchar(50) NOT NULL,
   `hp` int(3) NOT NULL,
+  `speed` int(3) NOT NULL,
   `level` int(2) NOT NULL,
   `xp_loss` int(5) NOT NULL,
   `xp_gain` int(5) NOT NULL,
@@ -14636,8 +14892,8 @@ CREATE TABLE IF NOT EXISTS `mob` (
 -- Dumping data for table `mob`
 --
 
-INSERT INTO `mob` (`mob_id`, `name`, `requires_indef_art`, `image`, `hp`, `level`, `xp_loss`, `xp_gain`) VALUES
-(1, 'snow imp', 1, '400001_asnowimp.gif', 10, 1, 70, 80);
+INSERT INTO `mob` (`mob_id`, `name`, `requires_indef_art`, `image`, `hp`, `speed`, `level`, `xp_loss`, `xp_gain`) VALUES
+(1, 'snow imp', 1, '400001_asnowimp.gif', 10, 1, 1, 70, 80);
 
 -- --------------------------------------------------------
 
@@ -14669,19 +14925,20 @@ INSERT INTO `mob_drop` (`mob_id`, `item_id`, `frequency`) VALUES
 CREATE TABLE IF NOT EXISTS `stats_base` (
   `level` int(3) NOT NULL,
   `experience_required` int(11) NOT NULL,
-  `hp` int(5) NOT NULL
+  `hp` int(5) NOT NULL,
+  `speed` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stats_base`
 --
 
-INSERT INTO `stats_base` (`level`, `experience_required`, `hp`) VALUES
-(1, 0, 25),
-(2, 600, 30),
-(3, 1400, 35),
-(4, 2400, 40),
-(5, 3400, 45);
+INSERT INTO `stats_base` (`level`, `experience_required`, `hp`, `speed`) VALUES
+(1, 0, 25, 1),
+(2, 600, 30, 1),
+(3, 1400, 35, 2),
+(4, 2400, 40, 2),
+(5, 3400, 45, 2);
 
 -- --------------------------------------------------------
 
@@ -14721,7 +14978,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=89 ;
 
 --
 -- Dumping data for table `user_fight`
@@ -14777,7 +15034,11 @@ INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`
 (81, 1, 1, 4, 'mob win', 1, 1323109928, NULL),
 (82, 1, 1, 0, 'player win', 1, 1323113523, 'N;'),
 (83, 1, 1, 0, 'player win', 1, 1323113863, 'N;'),
-(84, 1, 1, 0, 'player win', 1, 1323114022, 'N;');
+(84, 1, 1, 0, 'player win', 1, 1323114022, 'N;'),
+(85, 1, 1, 0, 'player win', 1, 1323710914, 'N;'),
+(86, 1, 1, 0, 'player win', 1, 1326059178, 'N;'),
+(87, 1, 1, 10, 'player flee success', 1, 1326059454, NULL),
+(88, 1, 1, 4, 'player flee success', 1, 1326060470, NULL);
 
 -- --------------------------------------------------------
 
@@ -14822,7 +15083,7 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
-(1, 1, 13, 6, 'map', 'hunt');
+(1, 1, 12, 6, 'map', 'hunt');
 
 -- --------------------------------------------------------
 
@@ -14842,4 +15103,4 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
 --
 
 INSERT INTO `user_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 1592, 35);
+(1, 1720, 11);

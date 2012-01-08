@@ -78,7 +78,7 @@ class CharacterFight extends StandardObject {
 	public function flee () {
 		# these will be dynamic when we get to dealing with stats proper
 		$mob_speed = $this->getMob()->getSpeed();
-		$user_speed = $this->getSpeed();
+		$user_speed = $this->getCharacter()->getSpeed();
 		
 		$roll = rand (1, ($mob_speed+$user_speed));
 		
@@ -131,16 +131,6 @@ class CharacterFight extends StandardObject {
 		} else {
 			return array ();
 		}
-	}
-	
-	/**
-	* Works out the player's speed.
-	*
-	* @return int
-	*/
-	public function getSpeed () {
-		# dev art
-		return 2;
 	}
 	
 	/**

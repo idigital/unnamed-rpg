@@ -121,8 +121,7 @@ class Mob extends StandardObject {
 	* @return int
 	*/
 	public function getSpeed () {
-		# dev art
-		return 2;
+		return $this->getDetail ('speed');
 	}
 	
 	/**

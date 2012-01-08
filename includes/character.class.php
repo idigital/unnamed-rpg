@@ -146,17 +146,11 @@ class Character extends StandardObject {
 	}
 	
 	/**
-	* Checks and returns how many of an item the user has.
+	* Gets the users' inventory
 	*
-	* @return int
+	* @see Inventory
+	* @return Inventory
 	*/
-	public function hasQtyItem (Item $Item) {
-		// cast this to an int, so that even if it returns a null (the user has never had this item), it'll still give the correct answer
-		$qty = (int) $this->getDatabase()->getSingleValue ("SELECT `qty` FROM `user_item` WHERE `item_id` = ".$Item->getId()." AND `user_id` = ".$this->getId());
-		
-		return $qty;
-	}
-	
 	public function getInventory () {
 		return new Inventory ($this->getId());
 	}

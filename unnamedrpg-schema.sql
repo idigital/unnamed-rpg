@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2012 at 10:08 PM
+-- Generation Time: Jan 08, 2012 at 10:27 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=531 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=536 ;
 
 -- --------------------------------------------------------
 
@@ -181,6 +181,8 @@ CREATE TABLE IF NOT EXISTS `mob` (
   `image` varchar(50) NOT NULL,
   `hp` int(3) NOT NULL,
   `speed` int(3) NOT NULL,
+  `strength` int(3) NOT NULL,
+  `accuracy` int(3) NOT NULL,
   `level` int(2) NOT NULL,
   `xp_loss` int(5) NOT NULL,
   `xp_gain` int(5) NOT NULL,
@@ -210,7 +212,9 @@ CREATE TABLE IF NOT EXISTS `stats_base` (
   `level` int(3) NOT NULL,
   `experience_required` int(11) NOT NULL,
   `hp` int(5) NOT NULL,
-  `speed` int(3) NOT NULL
+  `speed` int(3) NOT NULL,
+  `strength` int(3) NOT NULL,
+  `accuracy` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -244,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=89 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
 
 -- --------------------------------------------------------
 

@@ -30,9 +30,8 @@ class CharacterFight extends StandardObject {
 	* @return array A key-value giving data on result
 	*/
 	public function attack () {
-		# for now lets just make up an attack amount
-		$attack = 3;
-		$accuracy = 40; // percent
+		$attack = $this->getCharacter()->getAttack();
+		$accuracy = $this->getCharacter()->getHitAccuracy(); // percent
 
 		# when this is all working properly, the accuracy will have take into account the mob's evaisiveness
 		// check if the hit
@@ -76,7 +75,6 @@ class CharacterFight extends StandardObject {
 	* @return bool True on success.
 	*/
 	public function flee () {
-		# these will be dynamic when we get to dealing with stats proper
 		$mob_speed = $this->getMob()->getSpeed();
 		$user_speed = $this->getCharacter()->getSpeed();
 		

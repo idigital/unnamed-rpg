@@ -85,6 +85,38 @@ class Character extends StandardObject {
 	}
 	
 	/**
+	* Finds out how much an attack should hit for, before mob resistance.
+	*
+	* This includes modifiers of weapons and such.
+	*
+	* @return int
+	*/
+	public function getAttack () {
+		// attack is largely based on strengh.
+		return $this->getStrength();
+	}
+	
+	/**
+	* Gets the strength of the player.
+	*
+	* Strength is mostly used to calculate attack power, but can be used for other things.
+	*
+	* @return int
+	*/
+	public function getStrength() {
+		return $this->getBaseStats()->getDetail ('strength');
+	}
+	
+	/**
+	* Returns how likely it is for a standard attack to hit.
+	*
+	* @return int This is a percent, between 0-100, but could be higher.
+	*/
+	public function getHitAccuracy () {
+		return $this->getBaseStats()->getDetail ('accuracy');
+	}
+	
+	/**
 	* Gets the data about the fight a user has fought, or is fighting.
 	*
 	* If "current" or no param is passed, then the function will figure out what the current fight is.

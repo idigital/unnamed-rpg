@@ -32,11 +32,9 @@ class Mob extends StandardObject {
 	* @return array A key-value giving data on result
 	*/
 	public function attack (Character $Character) {
-		# for now lets just make up an attack amount
-		$attack = 2;
-		$accuracy = 40; // percent
+		$attack = $this->getDetail ('strength');
+		$accuracy = $this->getDetail ('accuracy'); // percent
 
-		# when this is all working properly, the accuracy will have take into account the mob's evaisiveness
 		// check if the hit
 		if (rand (0, 100) >= $accuracy) {
 			$r['hit'] = true;

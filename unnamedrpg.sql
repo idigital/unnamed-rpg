@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2012 at 10:08 PM
+-- Generation Time: Jan 08, 2012 at 10:27 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=531 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=536 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -592,7 +592,12 @@ INSERT INTO `fightmessage_turn` (`turn_id`, `fight_id`) VALUES
 (527, 88),
 (528, 88),
 (529, 88),
-(530, 88);
+(530, 88),
+(531, 89),
+(532, 89),
+(533, 89),
+(534, 89),
+(535, 89);
 
 -- --------------------------------------------------------
 
@@ -1629,7 +1634,17 @@ INSERT INTO `fightmessage_turn_message` (`turn_id`, `msg_id`, `order`) VALUES
 (528, 2, 2),
 (529, 1, 1),
 (529, 2, 2),
-(530, 8, 1);
+(530, 8, 1),
+(531, 10, 1),
+(531, 2, 2),
+(532, 10, 1),
+(532, 4, 2),
+(533, 3, 1),
+(533, 2, 2),
+(534, 3, 1),
+(534, 2, 2),
+(535, 3, 1),
+(535, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -2218,7 +2233,15 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 (527, 3, 1, '3'),
 (528, 3, 1, '3'),
 (528, 2, 1, '2'),
-(529, 2, 1, '2');
+(529, 2, 1, '2'),
+(531, 10, 1, '10'),
+(531, 2, 1, '2'),
+(532, 10, 1, '10'),
+(533, 3, 1, '4'),
+(533, 2, 1, '2'),
+(534, 3, 1, '4'),
+(534, 2, 1, '2'),
+(535, 3, 1, '4');
 
 -- --------------------------------------------------------
 
@@ -14882,6 +14905,8 @@ CREATE TABLE IF NOT EXISTS `mob` (
   `image` varchar(50) NOT NULL,
   `hp` int(3) NOT NULL,
   `speed` int(3) NOT NULL,
+  `strength` int(3) NOT NULL,
+  `accuracy` int(3) NOT NULL,
   `level` int(2) NOT NULL,
   `xp_loss` int(5) NOT NULL,
   `xp_gain` int(5) NOT NULL,
@@ -14892,8 +14917,8 @@ CREATE TABLE IF NOT EXISTS `mob` (
 -- Dumping data for table `mob`
 --
 
-INSERT INTO `mob` (`mob_id`, `name`, `requires_indef_art`, `image`, `hp`, `speed`, `level`, `xp_loss`, `xp_gain`) VALUES
-(1, 'snow imp', 1, '400001_asnowimp.gif', 10, 1, 1, 70, 80);
+INSERT INTO `mob` (`mob_id`, `name`, `requires_indef_art`, `image`, `hp`, `speed`, `strength`, `accuracy`, `level`, `xp_loss`, `xp_gain`) VALUES
+(1, 'snow imp', 1, '400001_asnowimp.gif', 10, 1, 2, 40, 1, 70, 80);
 
 -- --------------------------------------------------------
 
@@ -14926,19 +14951,21 @@ CREATE TABLE IF NOT EXISTS `stats_base` (
   `level` int(3) NOT NULL,
   `experience_required` int(11) NOT NULL,
   `hp` int(5) NOT NULL,
-  `speed` int(3) NOT NULL
+  `speed` int(3) NOT NULL,
+  `strength` int(3) NOT NULL,
+  `accuracy` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stats_base`
 --
 
-INSERT INTO `stats_base` (`level`, `experience_required`, `hp`, `speed`) VALUES
-(1, 0, 25, 1),
-(2, 600, 30, 1),
-(3, 1400, 35, 2),
-(4, 2400, 40, 2),
-(5, 3400, 45, 2);
+INSERT INTO `stats_base` (`level`, `experience_required`, `hp`, `speed`, `strength`, `accuracy`) VALUES
+(1, 0, 25, 1, 3, 40),
+(2, 600, 30, 1, 4, 45),
+(3, 1400, 35, 2, 4, 52),
+(4, 2400, 40, 2, 4, 60),
+(5, 3400, 45, 2, 5, 45);
 
 -- --------------------------------------------------------
 
@@ -14978,7 +15005,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=89 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
 
 --
 -- Dumping data for table `user_fight`
@@ -15038,7 +15065,8 @@ INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`
 (85, 1, 1, 0, 'player win', 1, 1323710914, 'N;'),
 (86, 1, 1, 0, 'player win', 1, 1326059178, 'N;'),
 (87, 1, 1, 10, 'player flee success', 1, 1326059454, NULL),
-(88, 1, 1, 4, 'player flee success', 1, 1326060470, NULL);
+(88, 1, 1, 4, 'player flee success', 1, 1326060470, NULL),
+(89, 1, 1, 0, 'player win', 1, 1326061605, 'N;');
 
 -- --------------------------------------------------------
 
@@ -15058,7 +15086,7 @@ CREATE TABLE IF NOT EXISTS `user_item` (
 --
 
 INSERT INTO `user_item` (`user_id`, `item_id`, `qty`) VALUES
-(1, 1, 8),
+(1, 1, 6),
 (1, 3, 1),
 (1, 5, 1);
 
@@ -15083,7 +15111,7 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
-(1, 1, 12, 6, 'map', 'hunt');
+(1, 1, 13, 6, 'map', 'hunt');
 
 -- --------------------------------------------------------
 
@@ -15103,4 +15131,4 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
 --
 
 INSERT INTO `user_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 1720, 11);
+(1, 1784, 25);

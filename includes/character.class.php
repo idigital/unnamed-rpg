@@ -174,6 +174,14 @@ class Character extends StandardObject {
 		return;
 	}
 	
+	/**
+	* Increases character's health by $amount.
+	*
+	* Can't go above the level's max health.
+	*
+	* @param int Number of HP to increase by
+	* @return int New amount of HP.
+	*/
 	public function heal ($amount) {
 		$amount = (int) $amount;
 	
@@ -183,7 +191,7 @@ class Character extends StandardObject {
 			$this->setDetail ('remaining_hp', $this->getDetail ('remaining_hp') + $amount);
 		}
 		
-		return;
+		return $this->getDetail ('remaining_hp');
 	}
 	
 	/**

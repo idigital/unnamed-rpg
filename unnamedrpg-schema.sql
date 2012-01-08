@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2012 at 10:27 PM
+-- Generation Time: Jan 08, 2012 at 10:46 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=536 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=561 ;
 
 -- --------------------------------------------------------
 
@@ -140,6 +140,8 @@ CREATE TABLE IF NOT EXISTS `map` (
 CREATE TABLE IF NOT EXISTS `map_data` (
   `map_id` int(11) NOT NULL AUTO_INCREMENT,
   `map_name` varchar(100) NOT NULL,
+  `respawn_on` int(11) NOT NULL,
+  `sight_distance` int(2) NOT NULL,
   PRIMARY KEY (`map_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -248,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
 
 -- --------------------------------------------------------
 

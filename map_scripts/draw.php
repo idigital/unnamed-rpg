@@ -105,8 +105,8 @@ echo "<map_data>";
 // what range do we want to be showing the user? this is also the width and height of the map. Because
 // of that, it makes sense for it to be odd so that there's a centre point to the map, which we can put
 // the user in.
-# for now, we can just set it in here. later I'll think about adding a better place to store this.
-$map_los = 3;
+// no object or method to get meta data yet...
+$map_los = $Database->getSingleValue ("SELECT `sight_distance` FROM `map_data` WHERE `map_id` = ".$CharMap->getId());
 
 // now we can work out what coordinates the user can see
 $x_smallest = $CharMap->getX() - $map_los;

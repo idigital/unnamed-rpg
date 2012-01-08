@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2012 at 10:27 PM
+-- Generation Time: Jan 08, 2012 at 10:46 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=536 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=561 ;
 
 --
 -- Dumping data for table `fightmessage_turn`
@@ -597,7 +597,32 @@ INSERT INTO `fightmessage_turn` (`turn_id`, `fight_id`) VALUES
 (532, 89),
 (533, 89),
 (534, 89),
-(535, 89);
+(535, 89),
+(536, 90),
+(537, 90),
+(538, 90),
+(539, 90),
+(540, 90),
+(541, 90),
+(542, 90),
+(543, 90),
+(544, 90),
+(545, 90),
+(546, 90),
+(547, 90),
+(548, 90),
+(549, 90),
+(550, 90),
+(551, 90),
+(552, 90),
+(553, 90),
+(554, 90),
+(555, 90),
+(556, 90),
+(557, 90),
+(558, 90),
+(559, 90),
+(560, 90);
 
 -- --------------------------------------------------------
 
@@ -1644,7 +1669,58 @@ INSERT INTO `fightmessage_turn_message` (`turn_id`, `msg_id`, `order`) VALUES
 (534, 3, 1),
 (534, 2, 2),
 (535, 3, 1),
-(535, 6, 2);
+(535, 6, 2),
+(536, 1, 1),
+(536, 2, 2),
+(537, 1, 1),
+(537, 4, 2),
+(538, 1, 1),
+(538, 2, 2),
+(539, 1, 1),
+(539, 4, 2),
+(540, 1, 1),
+(540, 4, 2),
+(541, 1, 1),
+(541, 4, 2),
+(542, 1, 1),
+(542, 4, 2),
+(543, 1, 1),
+(543, 2, 2),
+(544, 1, 1),
+(544, 4, 2),
+(545, 1, 1),
+(545, 4, 2),
+(546, 1, 1),
+(546, 2, 2),
+(547, 1, 1),
+(547, 2, 2),
+(548, 1, 1),
+(548, 2, 2),
+(549, 1, 1),
+(549, 4, 2),
+(550, 1, 1),
+(550, 2, 2),
+(551, 1, 1),
+(551, 2, 2),
+(552, 1, 1),
+(552, 4, 2),
+(553, 1, 1),
+(553, 2, 2),
+(554, 1, 1),
+(554, 4, 2),
+(555, 1, 1),
+(555, 4, 2),
+(556, 1, 1),
+(556, 4, 2),
+(557, 1, 1),
+(557, 2, 2),
+(558, 1, 1),
+(558, 2, 2),
+(559, 1, 1),
+(559, 2, 2),
+(560, 1, 1),
+(560, 2, 2),
+(560, 9, 3);
 
 -- --------------------------------------------------------
 
@@ -2241,7 +2317,20 @@ INSERT INTO `fightmessage_turn_message_var` (`turn_id`, `msg_id`, `num`, `value`
 (533, 2, 1, '2'),
 (534, 3, 1, '4'),
 (534, 2, 1, '2'),
-(535, 3, 1, '4');
+(535, 3, 1, '4'),
+(536, 2, 1, '2'),
+(538, 2, 1, '2'),
+(543, 2, 1, '2'),
+(546, 2, 1, '2'),
+(547, 2, 1, '2'),
+(548, 2, 1, '2'),
+(550, 2, 1, '2'),
+(551, 2, 1, '2'),
+(553, 2, 1, '2'),
+(557, 2, 1, '2'),
+(558, 2, 1, '2'),
+(559, 2, 1, '2'),
+(560, 2, 1, '2');
 
 -- --------------------------------------------------------
 
@@ -14839,6 +14928,8 @@ INSERT INTO `map` (`grid_id`, `map_id`, `y_co`, `x_co`, `image`, `type`, `locali
 CREATE TABLE IF NOT EXISTS `map_data` (
   `map_id` int(11) NOT NULL AUTO_INCREMENT,
   `map_name` varchar(100) NOT NULL,
+  `respawn_on` int(11) NOT NULL,
+  `sight_distance` int(2) NOT NULL,
   PRIMARY KEY (`map_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -14846,9 +14937,9 @@ CREATE TABLE IF NOT EXISTS `map_data` (
 -- Dumping data for table `map_data`
 --
 
-INSERT INTO `map_data` (`map_id`, `map_name`) VALUES
-(1, 'Test World'),
-(5, 'Test3');
+INSERT INTO `map_data` (`map_id`, `map_name`, `respawn_on`, `sight_distance`) VALUES
+(1, 'Test World', 131, 3),
+(5, 'Test3', 8, 3);
 
 -- --------------------------------------------------------
 
@@ -15005,7 +15096,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
 
 --
 -- Dumping data for table `user_fight`
@@ -15066,7 +15157,8 @@ INSERT INTO `user_fight` (`fight_id`, `user_id`, `mob_id`, `mob_health`, `stage`
 (86, 1, 1, 0, 'player win', 1, 1326059178, 'N;'),
 (87, 1, 1, 10, 'player flee success', 1, 1326059454, NULL),
 (88, 1, 1, 4, 'player flee success', 1, 1326060470, NULL),
-(89, 1, 1, 0, 'player win', 1, 1326061605, 'N;');
+(89, 1, 1, 0, 'player win', 1, 1326061605, 'N;'),
+(90, 1, 1, 10, 'mob win', 1, 1326062483, NULL);
 
 -- --------------------------------------------------------
 
@@ -15111,7 +15203,7 @@ CREATE TABLE IF NOT EXISTS `user_map` (
 --
 
 INSERT INTO `user_map` (`user_id`, `map_id`, `x_co`, `y_co`, `phase`, `move_type`) VALUES
-(1, 1, 13, 6, 'map', 'hunt');
+(1, 1, 11, 7, 'map', 'hunt');
 
 -- --------------------------------------------------------
 
@@ -15131,4 +15223,4 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
 --
 
 INSERT INTO `user_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 1784, 25);
+(1, 1700, 35);

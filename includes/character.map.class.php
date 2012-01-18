@@ -32,7 +32,7 @@ class CharacterMap extends StandardObject {
 		// are the actually any mobs around here?
 		$mobs = $this->getGrid()->getMobs();
 		if (count ($mobs)) {
-			// pick on!
+			// pick one!
 			$Mob = $mobs[rand (0,count ($mobs)-1)];
 			
 			$dice_roll = rand (1, 100);

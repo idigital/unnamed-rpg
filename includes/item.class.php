@@ -46,6 +46,19 @@ class Item extends StandardObject {
 	}
 	
 	/**
+	* When equiped how much strength does this item give the user?
+	*
+	* This will often return 0 when the item is unequipable.
+	*
+	* @return int
+	*/
+	public function getStrength () {
+		$strength = (int) $this->getDatabase()->getSingleValue ("SELECT `strength_increase` FROM `item_fight` WHERE `item_id` = ".$this->getId());
+		
+		return $strength;
+	}
+	
+	/**
 	* Gets details about possible actions this item has.
 	*
 	* Returns an array copy of the item_action table, which has elements 'item_id', 'action_type', and
@@ -89,6 +102,12 @@ class Item extends StandardObject {
 				$success = true;
 			} elseif ($action == 'Destroy') {
 				$Character->getInventory()->alterBy ($this, -1);
+			} elseif ($action == 'Equip') {
+				// Right hand is the only equipable place at the moment. Unequip whatever is there.
+				$Character->unequipRightHand ();
+				
+				$Character->equipRightHand ($this);
+				$success = true;
 			}
 		} else {
 			$success = false;

@@ -26,6 +26,8 @@ if ($return['success'] && $_GET['action'] == "Drink" && $Item->getDetail ('type'
 	$return['current_health_percent'] = $Character->getPercentHealth();
 } elseif ($return['success'] && $_GET['action'] == "Destroy") {
 	$return['action'] = "destroy";
+} elseif ($return['success'] && $_GET['action'] == "Equip") {
+	$return['action'] = "equip";
 }
 
 echo json_encode ($return);

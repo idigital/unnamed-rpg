@@ -85,15 +85,29 @@ class Character extends StandardObject {
 	}
 	
 	/**
-	* Finds out how much an attack should hit for, before mob resistance.
+	* Finds out how much an attack should hit for
 	*
 	* This includes modifiers of weapons and such.
 	*
 	* @return int
 	*/
 	public function getAttack () {
-		// attack is largely based on strengh.
-		return $this->getStrength();
+		// attack is largely based on strengh, plus weapon strength
+		return $this->getStrength() + $this->getWeaponStrength();
+	}
+	
+	/**
+	* Based on what the player has equiped, how much stronger are they?
+	*
+	* @return int
+	*/
+	public function getWeaponStrength () {
+		// anything in right hand?
+		if ($this->getRightHandItem()) {
+			return $this->getRightHandItem()->getStrength();
+		}
+	
+		return 0;
 	}
 	
 	/**
@@ -114,6 +128,22 @@ class Character extends StandardObject {
 	*/
 	public function getHitAccuracy () {
 		return $this->getBaseStats()->getDetail ('accuracy');
+	}
+	
+	public function getRightHandItem () {
+		$right_hand_item_id = $this->getDatabase()->getSingleValue ("SELECT `item_id` FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = 'righthand'");
+		
+		return ($right_hand_item_id == 0) ? null : new Item ($right_hand_item_id);
+	}
+	
+	public function unequipRightHand () {
+		$this->getDatabase()->query ("DELETE FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = 'righthand'");
+		
+		return true;
+	}
+	
+	public function equipRightHand (Item $Item) {
+		$this->getDatabase()->query ("INSERT INTO `user_item_equip` SET `user_id` = ".$this->getId().", `position` = 'righthand', `item_id` = ".$Item->getId());
 	}
 	
 	/**

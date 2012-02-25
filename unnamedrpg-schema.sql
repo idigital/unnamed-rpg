@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2012 at 10:46 PM
+-- Generation Time: Feb 25, 2012 at 08:26 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=561 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=588 ;
 
 -- --------------------------------------------------------
 
@@ -111,6 +111,18 @@ CREATE TABLE IF NOT EXISTS `item_action` (
   `modifier` int(3) DEFAULT NULL,
   `in_fight` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_id`,`action_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_fight`
+--
+
+CREATE TABLE IF NOT EXISTS `item_fight` (
+  `item_id` int(11) NOT NULL,
+  `strength_increase` int(3) NOT NULL,
+  PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -250,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
 
 -- --------------------------------------------------------
 
@@ -263,6 +275,19 @@ CREATE TABLE IF NOT EXISTS `user_item` (
   `item_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   PRIMARY KEY (`user_id`,`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_item_equip`
+--
+
+CREATE TABLE IF NOT EXISTS `user_item_equip` (
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `position` enum('righthand') NOT NULL,
+  PRIMARY KEY (`user_id`,`item_id`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

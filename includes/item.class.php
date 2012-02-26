@@ -88,6 +88,8 @@ class Item extends StandardObject {
 	* and must be sent back with the action if it is to be carried out. For instance, the Equip action
 	* requires a position to equip to. Often it's just an empty array though.
 	*
+	* It's possible that this returns an empty array when there are no actions available.
+	*
 	* @param Character Player who will be doing this action
 	* @return array
 	*/
@@ -96,6 +98,12 @@ class Item extends StandardObject {
 		
 		$qry_actions = $this->getDatabase()->query ("SELECT * FROM `item_action` WHERE `item_id` = ".$this->getId());
 		while ($action = mysql_fetch_assoc ($qry_actions)) {
+			// If the Character is in a fight, can we still do this action?
+			if ($Character->getFightData() !== false && $action['in_fight'] == false) {
+				// We can't, so just skip this iteration.
+				continue;
+			}
+		
 			if ($action['action_type'] === "Destroy") {
 				$actions[] = array (
 					'anchor' => "Destroy item",

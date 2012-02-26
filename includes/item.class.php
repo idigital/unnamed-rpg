@@ -105,8 +105,8 @@ class Item extends StandardObject {
 			} elseif ($action == 'Equip') {
 				// Right hand is the only equipable place at the moment. Unequip whatever is there.
 				$Character->unequipItem ('righthand');
-				
 				$Character->equipItem ('righthand', $this);
+				
 				$success = true;
 			}
 		} else {

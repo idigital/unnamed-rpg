@@ -133,17 +133,37 @@ class Character extends StandardObject {
 	public function getEquipedItem ($where) {
 		$item_id = $this->getDatabase()->getSingleValue ("SELECT `item_id` FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
 		
-		return ($right_hand_item_id == 0) ? null : new Item ($right_hand_item_id);
+		return ($item_id == 0) ? null : new Item ($item_id);
 	}
 	
 	public function unequipItem ($where) {
-		$this->getDatabase()->query ("DELETE FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
-		
-		return true;
+		// is there anything equiped..?
+		$Item = $this->getEquipedItem ($where);
+		if ($Item) {
+			// add it back to their inventory
+			$this->getInventory()->alterBy ($Item, 1);
+			
+			$this->getDatabase()->query ("DELETE FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
+			
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public function equipItem ($where, Item $Item) {
-		$this->getDatabase()->query ("INSERT INTO `user_item_equip` SET `user_id` = ".$this->getId().", `position` = '".$where."', `item_id` = ".$Item->getId());
+		// anything already equiped there?
+		$alreadyEquiped = $this->getEquipedItem ($where);
+		if (!$alreadyEquiped) {
+			$this->getDatabase()->query ("INSERT INTO `user_item_equip` SET `user_id` = ".$this->getId().", `position` = '".$where."', `item_id` = ".$Item->getId());
+			
+			// remove from inventory
+			$this->getInventory()->alterBy ($Item, -1);
+			
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**

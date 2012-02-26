@@ -99,7 +99,7 @@ class Item extends StandardObject {
 		$qry_actions = $this->getDatabase()->query ("SELECT * FROM `item_action` WHERE `item_id` = ".$this->getId());
 		while ($action = mysql_fetch_assoc ($qry_actions)) {
 			// If the Character is in a fight, can we still do this action?
-			if ($Character->getFightData() !== false && $action['in_fight'] == false) {
+			if ($Character->getFightData() !== false && (bool) $action['in_fight'] == false) {
 				// We can't, so just skip this iteration.
 				continue;
 			}
@@ -108,7 +108,6 @@ class Item extends StandardObject {
 				$actions[] = array (
 					'anchor' => "Destroy item",
 					'action' => "Destroy",
-					'in_fight' => (bool) $action['in_fight'],
 					'params' => array ()
 				);
 			} elseif ($action['action_type'] === "Drink") {
@@ -119,7 +118,6 @@ class Item extends StandardObject {
 						'anchor' => "Drink to heal ".$action['modifier']." HP.",
 						'action' => "Drink",
 						'heal_by' => $action['modifier'], # I'll be getting rid of the modifier column soon.
-						'in_fight' => (bool) $action['in_fight'],
 						'params' => array ()
 					);
 				}
@@ -137,12 +135,11 @@ class Item extends StandardObject {
 				
 					while ($equippable = mysql_fetch_assoc ($qry_equippable)) {
 						// Does this user already have something equipped in this place?
-						if ($Character->getEquipedItem ($equippable['position']) === null) {
+						if ($Character->getEquippedItem ($equippable['position']) === null) {
 							$actions[] = array (
 								'anchor' => "Equip this to your ".$language[$equippable['position']],
 								'action' => "Equip",
-								'params' => array ('position' => $equippable['position']),
-								'in_fight' => (bool) $action['in_fight']
+								'params' => array ('position' => $equippable['position'])
 							);
 						}
 					}

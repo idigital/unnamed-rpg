@@ -11,64 +11,75 @@ $(function () {
 function loadActions() {
 	$.ajax ({
 		cache: false,
+		dataType: 'json',
+		url: relroot + '/fight_scripts/get_item_actions.php',
 		success: function (json) {
-			if (json['status'] == 'success') {
+			if (json['status'] === 'success') {
 				// clear the actions box of whatever it currently has
-				$(this).html ('');
+				$('#act_actions').empty();
 			
-				for (i = 0; i < json['actions'].length; i++) {
-					p = $("<p class=\"link\"></p>");
-					
-					p.append (json['actions'][i]['string']);
-					
-					p.data ('item_id', json['actions'][i]['item_id']);
-					p.data ('action_type', json['actions'][i]['action_type']);
-					
-					p.click (handleActionClick);
-					
-					$(this).append (p);
+				for (item_index = 0; item_index < json['items'].length; item_index++) {
+					for (action_index = 0; action_index < json['items'][item_index]['actions'].length; action_index++) {
+						jq_p = $("<p class=\"link\"></p>");
+						
+						jq_p.append ('<b>'+json['items'][item_index]['name']+' (x'+json['items'][item_index]['qty']+')</b>: '+json['items'][item_index]['actions'][action_index]['anchor']);
+						
+						jq_p.data ('item_id', json['items'][item_index]['id']);
+						jq_p.data ('action_type', json['items'][item_index]['actions'][action_index]['action']);
+						jq_p.data ('params', json['items'][item_index]['actions'][action_index]['params']);
+						
+						jq_p.click (handleActionClick);
+						
+						$('#act_actions').append (jq_p);
+					}
 				}
 			} else {
-				alert ('Something bad happened with loading actions. Try refreshing?');
+				alert ('Something bad happened with loading actions. The message was:\n'+json['message']);
 			}
 		},
 		error: function () {
 			alert ('Something bad happened with loading actions. Try refreshing?');
-		},
-		context: $('#act_actions'),
-		dataType: 'json',
-		url: relroot + '/fight_scripts/get_item_actions.php'
+		}
 	});
 }
 
 function handleActionClick () {
 	action = $(this).data ('action_type');
 	item_id = $(this).data ('item_id');
+	params = $(this).data ('params');
 	
 	clearHistory ();
 
-	$.get (relroot + '/fight_scripts/use_item.php', { 'item_id': item_id, 'action': action }, function (json) {
-		if (json['status'] == "success") {
-			if (json['item_use'] == true) {
-				if (json['action'] == "heal") {
-					changeHP ("char", json['current_health']);
-					
-				}
+	$.get (
+		relroot + '/fight_scripts/use_item.php',
+		{
+			'item_id': item_id,
+			'action': action,
+			'params': params
+		},
+		function (json) {
+			if (json['status'] == "success") {
+				if (json['use_status'] == "success") {
+					if (json['action'] == "heal") {
+						changeHP ("char", json['current_health']);
+					}
 
-				doMobAction (json);
-				
-				for (i=0;i<json['message'].length;i++) {
-					addHistory (json['message'][i]['msg'], json['message'][i]['type']);
+					doMobAction (json);
+					
+					for (i=0;i<json['message'].length;i++) {
+						addHistory (json['message'][i]['msg'], json['message'][i]['type']);
+					}
+				} else {
+					addHistory ("You tried to use an item... but you couldn't. Try refreshing?", "#FF9999");
 				}
 			} else {
-				addHistory ("You tried to use an item... but you couldn't. Try refreshing?", "#FF9999");
+				alert ("Something happened which meant your action failed. The error message was:\n"+jsons['status_message']);
 			}
-		} else {
-			alert ("Something happened which meant your action failed. Try refreshing the page?");
-		}
 
-		loadActions();
-	}, "json");
+			loadActions();
+		},
+		"json"
+	);
 }
 
 function handleAttackClick () {
@@ -92,6 +103,8 @@ function handleAttackClick () {
 		if (json['fight_stage'] == "player win") {
 			$('#actions').html ("<p><a href=\"?complete=true\"><strong>Click here</strong> to see what you found!</a></p>");
 		}
+		
+		loadActions();
 	}, "json");
 }
 
@@ -105,6 +118,8 @@ function handleDoNothingClick () {
 			addHistory (json['message'][i]['msg'], json['message'][i]['type']);
 		}
 	}, "json");
+	
+	loadActions();
 }
 
 function handleFleeClick () {
@@ -117,6 +132,7 @@ function handleFleeClick () {
 		} else {
 			// only bother with the mob action if they failed running away
 			doMobAction (json);
+			loadActions();
 		}
 		
 		for (i=0;i<json['message'].length;i++) {

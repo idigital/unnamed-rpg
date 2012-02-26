@@ -103,8 +103,8 @@ class Character extends StandardObject {
 	*/
 	public function getWeaponStrength () {
 		// anything in right hand?
-		if ($this->getRightHandItem()) {
-			return $this->getRightHandItem()->getStrength();
+		if ($this->getEquippedItem("righthand")) {
+			return $this->getEquippedItem("righthand")->getStrength();
 		}
 	
 		return 0;
@@ -130,7 +130,7 @@ class Character extends StandardObject {
 		return $this->getBaseStats()->getDetail ('accuracy');
 	}
 	
-	public function getEquipedItem ($where) {
+	public function getEquippedItem ($where) {
 		$item_id = $this->getDatabase()->getSingleValue ("SELECT `item_id` FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
 		
 		return ($item_id == 0) ? null : new Item ($item_id);
@@ -138,7 +138,7 @@ class Character extends StandardObject {
 	
 	public function unequipItem ($where) {
 		// is there anything equiped..?
-		$Item = $this->getEquipedItem ($where);
+		$Item = $this->getEquippedItem ($where);
 		if ($Item) {
 			// add it back to their inventory
 			$this->getInventory()->alterBy ($Item, 1);
@@ -163,7 +163,7 @@ class Character extends StandardObject {
 	*/
 	public function equipItem ($where, Item $Item) {
 		// anything already equipped there?
-		$alreadyEquiped = $this->getEquipedItem ($where);
+		$alreadyEquiped = $this->getEquippedItem ($where);
 		
 		// also need to test if the item is actually equippable to this place
 		$equipPossible = $Item->is_equippable ($where);

@@ -11,7 +11,7 @@ function handleItemOnClick () {
 	item_id = $(this).attr ('id').slice (6);
 	item_clicked = this;
 	
-	$.get (relroot+'/items/load-details.php', { 'item_id': item_id }, function (data) {
+	$.get (relroot+'/items/load_details.php', { 'item_id': item_id }, function (data) {
 		$('#item-details').data ('item_id', data['item']['item_id']);
 		
 		$('#item-details>.item-name').html (data['item']['name']);
@@ -60,7 +60,7 @@ function handleActionClick () {
 	item_li = $(this).data ('item_li');
 	
 	$.get (
-		'items/use-item.php',
+		'items/use_item.php',
 		{
 			'item_id': $('#item-details').data ('item_id'),
 			'action': action,

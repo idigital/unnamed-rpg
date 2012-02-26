@@ -48,7 +48,8 @@ class Item extends StandardObject {
 	/**
 	* When equiped how much strength does this item give the user?
 	*
-	* This will often return 0 when the item is unequipable.
+	* This will often return 0 when the item is unequippable. Zero is also a valid figure. Use
+	* ::is_equippable to test before trying to get strength.
 	*
 	* @return int
 	*/
@@ -56,6 +57,20 @@ class Item extends StandardObject {
 		$strength = (int) $this->getDatabase()->getSingleValue ("SELECT `strength_increase` FROM `item_fight` WHERE `item_id` = ".$this->getId());
 		
 		return $strength;
+	}
+	
+	/**
+	* Declares if an item is equipable or not.
+	*
+	* An item is only equipable if it has an `item_equippable` row, and then it's restricted to
+	* a certain position, which must be passed for $where. If the item isn't equippable in this
+	* place, this function will return false
+	*
+	* @param string Where the item should be equiped to
+	* @return bool
+	*/
+	public function is_equippable ($where) {
+		return (bool) $this->getDatabase()->getSingleValue ("SELECT `item_id` FROM `item_equippable` WHERE `item_id` = ".$this->getId()." AND `position` = '".$this->getDatabase()->escape ($where)."'");
 	}
 	
 	/**

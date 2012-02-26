@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2012 at 08:26 PM
+-- Generation Time: Feb 26, 2012 at 12:45 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -111,6 +111,18 @@ CREATE TABLE IF NOT EXISTS `item_action` (
   `modifier` int(3) DEFAULT NULL,
   `in_fight` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_id`,`action_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_equippable`
+--
+
+CREATE TABLE IF NOT EXISTS `item_equippable` (
+  `item_id` int(11) NOT NULL,
+  `position` enum('righthand','lefthand','head') NOT NULL,
+  PRIMARY KEY (`item_id`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

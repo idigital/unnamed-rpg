@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 25, 2012 at 08:25 PM
+-- Generation Time: Feb 26, 2012 at 12:45 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -2486,6 +2486,23 @@ INSERT INTO `item_action` (`item_id`, `action_type`, `modifier`, `in_fight`) VAL
 (1, 'Drink', 10, 1),
 (1, 'Destroy', NULL, 0),
 (2, 'Equip', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_equippable`
+--
+
+CREATE TABLE IF NOT EXISTS `item_equippable` (
+  `item_id` int(11) NOT NULL,
+  `position` enum('righthand','lefthand','head') NOT NULL,
+  PRIMARY KEY (`item_id`,`position`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `item_equippable`
+--
+
 
 -- --------------------------------------------------------
 
@@ -15328,8 +15345,6 @@ CREATE TABLE IF NOT EXISTS `user_item_equip` (
 -- Dumping data for table `user_item_equip`
 --
 
-INSERT INTO `user_item_equip` (`user_id`, `item_id`, `position`) VALUES
-(1, 2, 'righthand');
 
 -- --------------------------------------------------------
 

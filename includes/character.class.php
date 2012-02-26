@@ -151,10 +151,24 @@ class Character extends StandardObject {
 		}
 	}
 	
+	/**
+	* Equip an item to the character, usually a weapon.
+	*
+	* If the Item is not equipable, this method will return false. It will also return false if there
+	* is already an item equipped in that space.
+	*
+	* @param string Where to be equiped
+	* @param Item Item to equip
+	* @return bool Announcing success
+	*/
 	public function equipItem ($where, Item $Item) {
-		// anything already equiped there?
+		// anything already equipped there?
 		$alreadyEquiped = $this->getEquipedItem ($where);
-		if (!$alreadyEquiped) {
+		
+		// also need to test if the item is actually equippable to this place
+		$equipPossible = $Item->is_equippable ($where);
+		
+		if ($alreadyEquiped === null && $equipPossible === true) {
 			$this->getDatabase()->query ("INSERT INTO `user_item_equip` SET `user_id` = ".$this->getId().", `position` = '".$where."', `item_id` = ".$Item->getId());
 			
 			// remove from inventory

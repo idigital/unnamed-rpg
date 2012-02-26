@@ -130,20 +130,20 @@ class Character extends StandardObject {
 		return $this->getBaseStats()->getDetail ('accuracy');
 	}
 	
-	public function getRightHandItem () {
-		$right_hand_item_id = $this->getDatabase()->getSingleValue ("SELECT `item_id` FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = 'righthand'");
+	public function getEquipedItem ($where) {
+		$item_id = $this->getDatabase()->getSingleValue ("SELECT `item_id` FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
 		
 		return ($right_hand_item_id == 0) ? null : new Item ($right_hand_item_id);
 	}
 	
-	public function unequipRightHand () {
-		$this->getDatabase()->query ("DELETE FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = 'righthand'");
+	public function unequipItem ($where) {
+		$this->getDatabase()->query ("DELETE FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
 		
 		return true;
 	}
 	
-	public function equipRightHand (Item $Item) {
-		$this->getDatabase()->query ("INSERT INTO `user_item_equip` SET `user_id` = ".$this->getId().", `position` = 'righthand', `item_id` = ".$Item->getId());
+	public function equipItem ($where, Item $Item) {
+		$this->getDatabase()->query ("INSERT INTO `user_item_equip` SET `user_id` = ".$this->getId().", `position` = '".$where."', `item_id` = ".$Item->getId());
 	}
 	
 	/**

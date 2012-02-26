@@ -8,6 +8,7 @@
 
 define ('LOGIN', true);
 require_once ('../includes/notextinc.php');
+header('Content-type: application/json');
 
 $Fight = $Character->getFightData();
 $Mob = $Fight->getMob();

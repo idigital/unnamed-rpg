@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Ajax script. Used to trigger an action on an item, pass with $_GET['item_id']).
+* Returns JSON. Used to trigger an action on an item, pass with $_GET['item_id']).
 *
 * Also needs and $_GET['action'], and $_GET['params'].
 */
@@ -11,6 +11,7 @@ define ('LOGIN', 1);
 // item can only be used in a certain phase (ie, in a fight), then check it within the code.
 
 require_once ('../includes/notextinc.php');
+header('Content-type: application/json');
 
 $return = array ();
 $return['status'] = "success"; // optimism

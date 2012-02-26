@@ -13,6 +13,7 @@
 define ('LOGIN', 1);
 
 require_once ('../includes/notextinc.php');
+header('Content-type: application/json');
 
 $r = array ();
 $r['status'] = "success"; // optimism

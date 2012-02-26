@@ -74,53 +74,116 @@ class Item extends StandardObject {
 	}
 	
 	/**
-	* Gets details about possible actions this item has.
+	* Gets details about possible actions a $Character has with this item.
 	*
-	* Returns an array copy of the item_action table, which has elements 'item_id', 'action_type', and
-	* 'modifier'.
+	* Character is passed into this method because we need to know a few things about them before
+	* we can decide if they can do certain actions. For instance, a user shouldn't be able to
+	* drink a health potion whilst already at full health.
 	*
+	* Returns an array of actions that can be done by the Character. Required indexs are 'action_type'
+	* and 'in_fight', which match up to the `item_action` columns of the same name. Also, there's an
+	* 'anchor', which is a human readable description of the action, usually to be output to the user.
+	*
+	* There is always a 'params' index, which contains an array of data specific to that action,
+	* and must be sent back with the action if it is to be carried out. For instance, the Equip action
+	* requires a position to equip to. Often it's just an empty array though.
+	*
+	* @param Character Player who will be doing this action
 	* @return array
 	*/
-	public function getActions () {
+	public function getActions (Character $Character) {
 		$actions = array ();
 		
 		$qry_actions = $this->getDatabase()->query ("SELECT * FROM `item_action` WHERE `item_id` = ".$this->getId());
 		while ($action = mysql_fetch_assoc ($qry_actions)) {
-			$actions[] = $action;
+			if ($action['action_type'] === "Destroy") {
+				$actions[] = array (
+					'anchor' => "Destroy item",
+					'action' => "Destroy",
+					'in_fight' => (bool) $action['in_fight'],
+					'params' => array ()
+				);
+			} elseif ($action['action_type'] === "Drink") {
+				// The only drinks at the moment are healing ones, so only bother letting them use it if they're not
+				// at full health
+				if ($Character->getHealth() < $Character->getMaxHealth()) {
+					$actions[] = array (
+						'anchor' => "Drink to heal ".$action['modifier']." HP.",
+						'action' => "Drink",
+						'heal_by' => $action['modifier'], # I'll be getting rid of the modifier column soon.
+						'in_fight' => (bool) $action['in_fight'],
+						'params' => array ()
+					);
+				}
+			} elseif ($action['action_type'] === "Equip") {
+				// Where can this item be equipped?
+				$qry_equippable = $this->getDatabase()->query ("SELECT `position` FROM `item_equippable` WHERE `item_id` = ".$this->getId());
+				if (mysql_num_rows ($qry_equippable)) {
+					
+					// Define some natural language for the positions
+					$language = array (
+						'righthand' => "right hand",
+						'lefthand' => "left hand",
+						'head' => "head"
+					);
+				
+					while ($equippable = mysql_fetch_assoc ($qry_equippable)) {
+						// Does this user already have something equipped in this place?
+						if ($Character->getEquipedItem ($equippable['position']) === null) {
+							$actions[] = array (
+								'anchor' => "Equip this to your ".$language[$equippable['position']],
+								'action' => "Equip",
+								'params' => array ('position' => $equippable['position']),
+								'in_fight' => (bool) $action['in_fight']
+							);
+						}
+					}
+				}
+			}
 		}
 	
 		return $actions;
 	}
 	
-	public function doAction ($action, Character $Character) {
+	public function doAction ($action, $params, Character $Character) {
 		// pesimism!
 		$success = false;
 		
 		// is this a valid action?
-		foreach ($this->getActions() as $g_action) {
-			if ($g_action['action_type'] == $action) {
-				$success = true;
-				$modifier = $g_action['modifier'];
+		foreach ($this->getActions($Character) as $actions) {
+			// we only care about this action, so skip ahead till we find it...
+			if ($actions['action'] === $action) {
+				// have we been given all the required parameters for this action?
+				if (array_diff (array_keys ($actions['params']), array_keys ($params)) !== array ()) {
+					// we don't have all the same keys in our params, and since they're all required we won't
+					// be able to equip this item.
+					$success = false;
+				} else {
+					$success = true;
+					
+					$action_data = $actions;
+				}
+				
 				break;
 			}
 		}
 		
 		// do they at least one of this item?
-		if ($success && $Character->getInventory()->numHolding($this)) {
+		if ($success && $Character->getInventory()->numHolding($this) > 0) {
 			if ($action == 'Drink' && $this->getDetail ('type') == 'Healing Potion') {
 				// So they want to be healed! Increase their hit points by the modifier
-				$Character->heal ($modifier);
+				$Character->heal ($action_data['heal_by']);
 				
-				// remove the item
+				// remove the item from their inventory
 				$Character->getInventory()->alterBy ($this, -1);
 				
 				$success = true;
 			} elseif ($action == 'Destroy') {
 				$Character->getInventory()->alterBy ($this, -1);
 			} elseif ($action == 'Equip') {
-				// Right hand is the only equipable place at the moment. Unequip whatever is there.
-				$Character->unequipItem ('righthand');
-				$Character->equipItem ('righthand', $this);
+				// Unequip whatever is already there.
+				$Character->unequipItem ($params['position']);
+				$Character->equipItem ($params['position'], $this);
 				
 				$success = true;
 			}

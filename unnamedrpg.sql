@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2012 at 12:45 PM
+-- Generation Time: Feb 26, 2012 at 04:41 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -2485,7 +2485,11 @@ CREATE TABLE IF NOT EXISTS `item_action` (
 INSERT INTO `item_action` (`item_id`, `action_type`, `modifier`, `in_fight`) VALUES
 (1, 'Drink', 10, 1),
 (1, 'Destroy', NULL, 0),
-(2, 'Equip', NULL, 0);
+(2, 'Equip', NULL, 0),
+(3, 'Destroy', NULL, 0),
+(4, 'Destroy', NULL, 0),
+(5, 'Destroy', NULL, 0),
+(6, 'Destroy', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2503,6 +2507,8 @@ CREATE TABLE IF NOT EXISTS `item_equippable` (
 -- Dumping data for table `item_equippable`
 --
 
+INSERT INTO `item_equippable` (`item_id`, `position`) VALUES
+(2, 'righthand');
 
 -- --------------------------------------------------------
 
@@ -15323,10 +15329,10 @@ CREATE TABLE IF NOT EXISTS `user_item` (
 --
 
 INSERT INTO `user_item` (`user_id`, `item_id`, `qty`) VALUES
-(1, 1, 3),
-(1, 2, 1),
-(1, 3, 1),
-(1, 5, 1);
+(1, 1, 0),
+(1, 2, 0),
+(1, 3, 0),
+(1, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -15345,6 +15351,8 @@ CREATE TABLE IF NOT EXISTS `user_item_equip` (
 -- Dumping data for table `user_item_equip`
 --
 
+INSERT INTO `user_item_equip` (`user_id`, `item_id`, `position`) VALUES
+(1, 2, 'righthand');
 
 -- --------------------------------------------------------
 
@@ -15387,4 +15395,4 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
 --
 
 INSERT INTO `user_stats` (`user_id`, `experience`, `remaining_hp`) VALUES
-(1, 1892, 33);
+(1, 1892, 35);

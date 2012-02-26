@@ -1,5 +1,9 @@
 $(function () {
 	$('#items-list>li').click (handleItemOnClick);
+	
+	$('#equipment .lefthand').click ({"where": "lefthand"}, handleEquipmentOnClick);
+	$('#equipment .righthand').click ({"where": "righthand"}, handleEquipmentOnClick);
+	$('#equipment .head').click ({"where": "head"}, handleEquipmentOnClick);
 });
 
 /**
@@ -115,4 +119,30 @@ function handleActionClick () {
 		},
 		"json"
 	);
+}
+
+function handleEquipmentOnClick (event) {
+	$.get (relroot+'/items/equipped_details.php', { 'position': event.data.where }, function (data) {
+		if (data['item_found']) {
+			$('#item-details').data ('item_id', data['item']['id']).data ('position', data['position']);
+			
+			$('#item-details>.item-name').html ('Equiped: '+data['item']['name']);
+			$('#item-details>.item-description').html (data['item']['description']);
+			
+			$('#item-details .item-actions').empty ();
+			
+			jq_unequip = $('<p class="link" onclick="handleUnequipOnClick('+event.data.where+')">Unequip</p>');
+			
+			$('#item-details .item-actions').append (jq_unequip);
+		} else {
+			$('#item-details>.item-name').html ('Equiped: Nothing.');
+			$('#item-details>.item-description').html ("You have nothing equipped to here.");
+			
+			$('#item-details .item-actions').empty ();
+		}
+	}, 'json');
+}
+
+function handleUnequipOnClick () {
+	
 }

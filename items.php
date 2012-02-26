@@ -11,7 +11,7 @@ include_once ('includes/header.php');
 
 include ('fight_scripts/stat_bar.php');
 
-echo "<h1>Your items</h1>\n";
+echo "<p style=\"text-align: center;\"><b>Your items</b> | <span class=\"link\" onclick=\"window.location = 'map.php'\">Back to map</span></p>\n";
 
 echo "<div id=\"characters\">\n";
 echo "<div class=\"player main\">\n";
@@ -19,6 +19,38 @@ echo "<div class=\"portrait\"><img src=\"".relroot."/images/fight/lupe_combat.gi
 echo "<p class=\"name\">".$User->getDetail ('username')."</p>\n";
 // we still have $health_bar set up from the stat_bar we included!
 echo "<p>Health: <strong class=\"char_health\">".$Character->getDetail ('remaining_hp')."</strong>/".$Character->getMaxHealth()." ".$health_bar."</p>\n";
+echo "</div>\n";
+
+echo "<div id=\"equipment\">\n";
+// Show teh images of the equipped items in the relevant boxes
+$ItemOnHead = $Character->getEquippedItem ("head");
+echo "<div class=\"head equip-box\">";
+if ($ItemOnHead) {
+	echo "<img src=\"asdfd\" height=\"50px\" width=\"50px\" alt=\"".ucfirst ($ItemOnHead->getName ())."\" />";
+} else {
+	echo "<p>no item</p>";
+}
+echo "</div>\n";
+
+$ItemInLeftHand = $Character->getEquippedItem ("lefthand");
+echo "<div class=\"lefthand equip-box\">";
+if ($ItemInLeftHand) {
+	echo "<img src=\"asdfd\" height=\"50px\" width=\"50px\" alt=\"".ucfirst ($ItemInLeftHand->getName ())."\" />";
+} else {
+	echo "<p>no item</p>";
+}
+echo "</div>\n";
+
+$ItemInRightHand = $Character->getEquippedItem ("righthand");
+echo "<div class=\"righthand equip-box\">";
+if ($ItemInRightHand) {
+	echo "<img src=\"asdfd\" height=\"50px\" width=\"50px\" alt=\"".ucfirst ($ItemInRightHand->getName ())."\" />";
+} else {
+	echo "<p>no item</p>";
+}
+echo "</div>\n";
+echo "</div>\n";
+
 echo "</div>\n";
 
 echo "<div class=\"clear\">&nbsp;</div>\n";
@@ -37,7 +69,7 @@ if ($Items->count()) {
 	echo "<div id=\"items\"><ul id=\"items-list\">\n";
 	foreach ($Items as $Il) {
 		echo "<li class=\"item\" id=\"itemid".$Il['Item']->getId()."\">";
-		echo "<img src=\"asdfd\" alt=\"".ucfirst ($Il['Item']->getName ())."\" />";
+		echo "<img src=\"asdfd\" height=\"50px\" width=\"50px\" alt=\"".ucfirst ($Il['Item']->getName ())."\" />";
 		echo "<span class=\"qty\">".$Il['qty']."</span>";
 		echo "</li>\n";
 	}
@@ -51,8 +83,6 @@ if ($Items->count()) {
 } else {
 	echo "<p>You don't have any items to use.</p>\n";
 }
-
-echo "<p style=\"text-align: center;\"><input type=\"button\" value=\"Click here to return to the map\" onclick=\"window.location = 'map.php'\" /></p>\n";
 
 include_once ('includes/footer.php');
 ?>

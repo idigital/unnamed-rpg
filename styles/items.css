@@ -24,11 +24,6 @@
 	line-height: 140%;
 }
 
-#invent {
-	min-height: 400px;
-	overflow: auto;
-}
-
 #items {
 	width: 60%;
 }
@@ -55,4 +50,38 @@
 
 #item-details>.item-actions li {
 	padding: 10px;
+}
+
+#equipment {
+	position: relative;
+	margin: 10px 10px 0 0;
+	float: right;
+	width: 131px;
+	height: 180px;
+	
+	background-image: url(../images/knight.png);
+}
+
+#equipment .equip-box {
+	height: 50px;
+	width: 50px;
+	
+	position: absolute;
+	
+	background-color: rgb(211, 205, 205);
+}
+
+#equipment .head {
+	top: 10px;
+	left: 38px;
+}
+
+#equipment .righthand {
+	top: 95px;
+	left: 80px;
+}
+
+#equipment .lefthand {
+	top: 90px;
+	left: 8px;
 }

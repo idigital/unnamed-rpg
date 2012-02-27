@@ -49,6 +49,7 @@ To make it more modern though, some things have been changed:
 * Fighting is managed with AJAX too, so no page reloads there either
 * Bits of jQuery have made the UI prettier (animated loss of health in fights)
 * It's hard for me to work out their algorithms for attack and the like, so I'm making my own up
+* A different UI for displaying how items are equipped
 
 # Minimum requirements:
 

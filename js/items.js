@@ -124,14 +124,14 @@ function handleActionClick () {
 function handleEquipmentOnClick (event) {
 	$.get (relroot+'/items/equipped_details.php', { 'position': event.data.where }, function (data) {
 		if (data['item_found']) {
-			$('#item-details').data ('item_id', data['item']['id']).data ('position', data['position']);
+			$('#item-details').data ('item_id', data['item']['id']).data ('position', data['position']).data ('name', data['item']['name']);
 			
 			$('#item-details>.item-name').html ('Equiped: '+data['item']['name']);
 			$('#item-details>.item-description').html (data['item']['description']);
 			
 			$('#item-details .item-actions').empty ();
 			
-			jq_unequip = $('<p class="link" onclick="handleUnequipOnClick('+event.data.where+')">Unequip</p>');
+			jq_unequip = $('<p class="link" onclick="handleUnequipOnClick(\''+event.data.where+'\')">Unequip</p>');
 			
 			$('#item-details .item-actions').append (jq_unequip);
 		} else {
@@ -144,5 +144,40 @@ function handleEquipmentOnClick (event) {
 }
 
 function handleUnequipOnClick () {
-	
+	$.ajax ({
+		'url': relroot + '/items/unequip.php',
+		'data': {
+			'position': $('#item-details').data ('position')
+		},
+		'success': function (json) {
+			if (json['status'] == "success") {
+				// now we need to increase the number of this item in the items list.
+				// is there already one of these in the item list?
+				if ($('#itemid'+$('#item-details').data ('item_id')).length > 0) {
+					// yes, so we just increase the count by one
+					$('#itemid'+$('#item-details').data ('item_id')).children('.qty').html (parseInt ($('#itemid'+$('#item-details').data ('item_id')).children('.qty'), 10) + 1);
+				} else {
+					// nope. so we have to make it.
+					jq_li = $('<li id="itemid'+$('#item-details').data ('item_id')+'" class="item"><img width="50px" height="50px" alt="'+$('#item-details').data ('name')+'" src="asdfd" /><span class="qty">1</span>');
+					
+					jq_li.click (handleItemOnClick);
+					
+					$('#items-list').append (jq_li);
+				}
+				
+				// now we remove the item data from the equipped UI
+				jq_p = $('<p>no item</p>')
+				$('#equipment .'+$('#item-details').data ('position')).unbind("click").click ({"where": $('#item-details').data ('position')}, handleEquipmentOnClick).empty().append (jq_p);
+				
+				// and now clear the item details.
+				$('#item-details>.item-name').html ('Inventory');
+				$('#item-details>.item-description').html ('Click on an item to see more data about it.');
+				$('#item-details>.item-actions').empty();
+			} else {
+				alert ("An issue occured whilst trying to unequip:\n"+json['status_message']);
+			}
+		},
+		'dataType': 'json',
+		'type': 'GET'
+	});
 }

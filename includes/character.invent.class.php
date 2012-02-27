@@ -36,7 +36,7 @@ class Inventory {
 		if ($qty < 0 && abs ($qty) > $currently_have) $qty = -$currently_have;
 		
 		// don't allow them to have too many
-		if (!$this->canHoldMore ($Item, $qty)) throw new Exception ('Attempted to give player too many '.$Item->getName());
+		if (!$this->canHoldMore ($Item, $qty)) throw new Exception ('Attempted to give player too many '.$Item->getName(), 100);
 
 		// if we've got to here, everything is dandy. update their counts
 		$this->getDatabase()->query ("INSERT INTO `user_item` SET `user_id` = ".$this->getId().", `item_id` = ".$Item->getId().", `qty` = ".(int) $qty." ON DUPLICATE KEY UPDATE `qty` = `qty` + ".(int) $qty);

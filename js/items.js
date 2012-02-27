@@ -17,6 +17,7 @@ function handleItemOnClick () {
 	
 	$.get (relroot+'/items/load_details.php', { 'item_id': item_id }, function (data) {
 		$('#item-details').data ('item_id', data['item']['item_id']);
+		$('#item-details').data ('name', data['item']['name']);
 		
 		$('#item-details>.item-name').html (data['item']['name']);
 		$('#item-details>.item-description').html (data['item']['description']);
@@ -62,6 +63,7 @@ function handleActionClick () {
 	action = $(this).data ('action');
 	params = $(this).data ('params');
 	item_li = $(this).data ('item_li');
+	item_name = $('#item-details').data ('name');
 	
 	$.get (
 		'items/use_item.php',
@@ -106,12 +108,16 @@ function handleActionClick () {
 						$(item_li).remove();
 					} else {
 						$(item_li).children ('.qty').html (--qty);
-						
-						// remove the data about this item
-						$('#item-details>.item-name').html ('Inventory');
-						$('#item-details>.item-description').html ('Click on an item to see more data about it.');
-						$('#item-details>.item-actions').empty();
 					}
+					
+					// add this item to the UI where it was equipped
+					jq_img = '<img src="asdfd" width="50px" height="50px" alt="'+item_name+'" />';
+					$('#equipment .'+params['position']).empty().html (jq_img);
+					
+					// remove the data about this item
+					$('#item-details>.item-name').html ('Inventory');
+					$('#item-details>.item-description').html ('Click on an item to see more data about it.');
+					$('#item-details>.item-actions').empty();
 				}
 			} else {
 				alert ("Something happened which meant your action failed. The error is:\n"+data['message']);
@@ -167,7 +173,7 @@ function handleUnequipOnClick () {
 				
 				// now we remove the item data from the equipped UI
 				jq_p = $('<p>no item</p>')
-				$('#equipment .'+$('#item-details').data ('position')).unbind("click").click ({"where": $('#item-details').data ('position')}, handleEquipmentOnClick).empty().append (jq_p);
+				$('#equipment .'+$('#item-details').data ('position')).empty().append (jq_p);
 				
 				// and now clear the item details.
 				$('#item-details>.item-name').html ('Inventory');

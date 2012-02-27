@@ -140,8 +140,14 @@ class Character extends StandardObject {
 		// is there anything equiped..?
 		$Item = $this->getEquippedItem ($where);
 		if ($Item) {
-			// add it back to their inventory
-			$this->getInventory()->alterBy ($Item, 1);
+			// try add it back to their inventory, if we can't leave it equiped (and throw the exception that we get back)
+			try {
+				$this->getInventory()->alterBy ($Item, 1);
+			} catch (Exception $e) {
+				if ($e->getCode() == 100) { // exception which means "can't hold any more of this item"
+					throw $e;
+				}
+			}
 			
 			$this->getDatabase()->query ("DELETE FROM `user_item_equip` WHERE `user_id` = ".$this->getId()." AND `position` = '".$where."'");
 			
@@ -192,7 +198,7 @@ class Character extends StandardObject {
 	public function getFightData ($fight_id="current") {
 		if ($fight_id == "current") {
 			// just find the last fought fight to return
-			$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `user_fight` WHERE `user_id` = ".$this->getId()." ORDER BY `fight_id` DESC LIMIT 1");
+			$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `user_fight` WHERE `user_id` = ".$this->getId()." AND `stage` = 'current' ORDER BY `fight_id` DESC LIMIT 1");
 			
 			if (empty ($fight_id)) {
 				return false;

@@ -152,6 +152,7 @@ class CharacterFight extends StandardObject {
 			
 			if ($drops) {
 				$won = array ();
+				$no_items_won = false;
 				
 				foreach ($drops as $Item) {
 					if ($this->getCharacter()->getInventory()->canHoldMore ($Item)) {
@@ -160,12 +161,20 @@ class CharacterFight extends StandardObject {
 					}
 				}
 				
-				$this->setDetail ('reward', serialize ($won_ids));
+				// even though we decided that they'll win an item, if they can't hold it we don't bother.
+				if (!isset ($won_ids) || is_empty ($won_ids)) {
+					$no_items_won = true;
+				} else {
+					$this->setDetail ('reward', serialize ($won_ids));
+				}
 				
 				return $won;
 			} else {
-				$this->setDetail ('reward', "a:0:{}");
+				$no_items_won = true;
+			}
 			
+			if ($no_items_won == true) {
+				$this->setDetail ('reward', "a:0:{}");
 				return array ();
 			}
 		} else {

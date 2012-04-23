@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 3.4.10.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2012 at 04:41 PM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Generation Time: Apr 23, 2012 at 05:01 PM
+-- Server version: 5.5.20
+-- PHP Version: 5.3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `fightmessage_turn` (
   `turn_id` int(11) NOT NULL AUTO_INCREMENT,
   `fight_id` int(11) NOT NULL,
   PRIMARY KEY (`turn_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=588 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=607 ;
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `user_fight` (
   `start_time` int(11) NOT NULL,
   `reward` text,
   PRIMARY KEY (`fight_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
 
 -- --------------------------------------------------------
 
@@ -298,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `user_item` (
 CREATE TABLE IF NOT EXISTS `user_item_equip` (
   `user_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `position` enum('righthand') NOT NULL,
+  `position` enum('righthand','lefthand','head') NOT NULL,
   PRIMARY KEY (`user_id`,`item_id`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -330,3 +331,7 @@ CREATE TABLE IF NOT EXISTS `user_stats` (
   `remaining_hp` int(5) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

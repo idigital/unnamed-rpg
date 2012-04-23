@@ -79,8 +79,8 @@ My config.php looks like this:
 	*/
 
 	define ('database_server', 'localhost');
-	define ('database_user', 'root');
-	define ('database_password', '');
+	define ('database_user', 'rpg_user');
+	define ('database_password', 'alfred3329');
 	define ('database_name', 'unnamedrpg');
 
 	define ('tbpfx', '');
@@ -89,6 +89,9 @@ My config.php looks like this:
 	define ('relroot', '/unnamed-rpg');
 	define ('url', 'http://localhost/unnamed-rpg/');
 	define ('sitename', 'NeoQuest Clone');
+	
+	// What's the status of this server? Live or dev?
+	define ('status', 'dev');
 
 	?>
 

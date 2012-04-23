@@ -197,12 +197,12 @@ class Character extends StandardObject {
 	*/
 	public function getFightData ($fight_id="current") {
 		if ($fight_id == "current") {
-			// just find the last fought fight to return
-			$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `user_fight` WHERE `user_id` = ".$this->getId()." AND `stage` = 'current' ORDER BY `fight_id` DESC LIMIT 1");
+			// is there current phase "fight"?
+			$current_phase = $this->getMapData()->getDetail ('phase');
+			if ($current_phase !== "fight") return false;
 			
-			if (empty ($fight_id)) {
-				return false;
-			}
+			// just find the last fought fight to return
+			$fight_id = $this->getDatabase()->getSingleValue ("SELECT `fight_id` FROM `user_fight` WHERE `user_id` = ".$this->getId()." ORDER BY `fight_id` DESC LIMIT 1");
 		}
 	
 		$Fight = new CharacterFight ($fight_id);

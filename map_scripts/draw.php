@@ -207,7 +207,7 @@ echo "</map_data>";
 $nav_data_output = "";
 echo "<navigation_data>";
 
-if ($impassable) $nav_data_output .= "<p class=\"error\">You can't move here.</p>";
+if (isset ($impassable)) $nav_data_output .= "<p class=\"error\">You can't move here.</p>";
 
 $nav_data_output .= "<p>You are in ".$user_MapGrid->getDetail ('locality').".</p>";
 

@@ -36,40 +36,43 @@ $CharMap = $Character->getMapData();
 // Are we moving?
 $old_x = $CharMap->getX();
 $old_y = $CharMap->getY();
-// Sort out user directions
-if ($_POST['move'] == "west") {
-	// work out new location
-	$new_x = $old_x - 1;
-	$new_y = $old_y;
-	$moved = true;
-} elseif ($_POST['move'] == "east") {
-	$new_x = $old_x + 1;
-	$new_y = $old_y;
-	$moved = true;
-} elseif ($_POST['move'] == "north") {
-	$new_x = $old_x;
-	$new_y = $old_y - 1;
-	$moved = true;
-} elseif ($_POST['move'] == "south") {
-	$new_x = $old_x;
-	$new_y = $old_y + 1;
-	$moved = true;
-} elseif ($_POST['move'] == "nw") {
-	$new_x = $old_x - 1;
-	$new_y = $old_y - 1;
-	$moved = true;
-} elseif ($_POST['move'] == "ne") {
-	$new_x = $old_x + 1;
-	$new_y = $old_y - 1;
-	$moved = true;
-} elseif ($_POST['move'] == "sw") {
-	$new_x = $old_x - 1;
-	$new_y = $old_y + 1;
-	$moved = true;
-} elseif ($_POST['move'] == "se") {
-	$new_x = $old_x + 1;
-	$new_y = $old_y + 1;
-	$moved = true;
+// Sort out user directions, if they're moving.
+$moved = false;
+if (isset ($_POST['move'])) {
+	if ($_POST['move'] == "west") {
+		// work out new location
+		$new_x = $old_x - 1;
+		$new_y = $old_y;
+		$moved = true;
+	} elseif ($_POST['move'] == "east") {
+		$new_x = $old_x + 1;
+		$new_y = $old_y;
+		$moved = true;
+	} elseif ($_POST['move'] == "north") {
+		$new_x = $old_x;
+		$new_y = $old_y - 1;
+		$moved = true;
+	} elseif ($_POST['move'] == "south") {
+		$new_x = $old_x;
+		$new_y = $old_y + 1;
+		$moved = true;
+	} elseif ($_POST['move'] == "nw") {
+		$new_x = $old_x - 1;
+		$new_y = $old_y - 1;
+		$moved = true;
+	} elseif ($_POST['move'] == "ne") {
+		$new_x = $old_x + 1;
+		$new_y = $old_y - 1;
+		$moved = true;
+	} elseif ($_POST['move'] == "sw") {
+		$new_x = $old_x - 1;
+		$new_y = $old_y + 1;
+		$moved = true;
+	} elseif ($_POST['move'] == "se") {
+		$new_x = $old_x + 1;
+		$new_y = $old_y + 1;
+		$moved = true;
+	}
 }
 // if user has moved
 if ($moved) {

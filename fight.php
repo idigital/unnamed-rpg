@@ -14,7 +14,7 @@ $Fight = $Character->getFightData();
 $Mob = $Fight->getMob();
 
 // are we done of this page? we may have to just redirect to the aftermath page
-if ($_GET['complete'] == true && $Fight->getStage() != "current") {
+if (isset ($_GET['complete']) && $_GET['complete'] == true && $Fight->getStage() != "current") {
 	$Fight->setDetail ('complete', 1);
 	header ('Location: '.relroot.'/fight_scripts/aftermath.php');
 }

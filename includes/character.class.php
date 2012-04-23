@@ -102,12 +102,19 @@ class Character extends StandardObject {
 	* @return int
 	*/
 	public function getWeaponStrength () {
-		// anything in right hand?
-		if ($this->getEquippedItem("righthand")) {
-			return $this->getEquippedItem("righthand")->getStrength();
+		// default weapon strength
+		$strength = 0;
+		
+		// go through each place where something can be equipped
+		$can_equip = array ('head', 'lefthand', 'righthand');
+		
+		foreach ($can_equip as $position) {
+			if ($this->getEquippedItem($position)) {
+				$strength += $this->getEquippedItem($position)->getStrength();
+			}
 		}
 	
-		return 0;
+		return $strength;
 	}
 	
 	/**
